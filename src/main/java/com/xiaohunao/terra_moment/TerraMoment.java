@@ -37,7 +37,7 @@ public class TerraMoment {
     public static final String MODID = "terra_moment";
     public static final Logger LOGGER = LogUtils.getLogger();
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
-        NeoForge.EVENT_BUS.register(this);
+//        NeoForge.EVENT_BUS.register(this);
     }
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
