@@ -1,6 +1,8 @@
 package com.xiaohunao.terra_moment;
 
 import com.mojang.logging.LogUtils;
+import com.xiaohunao.terra_moment.init.ModMoment;
+import com.xiaohunao.terra_moment.init.ModMomentTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -38,6 +40,8 @@ public class TerraMoment {
     public static final Logger LOGGER = LogUtils.getLogger();
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
 //        NeoForge.EVENT_BUS.register(this);
+        ModMoment.MOMENT.register(modEventBus);
+        ModMomentTypes.MOMENT_TYPE.register(modEventBus);
     }
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
