@@ -2,6 +2,7 @@ package com.xiaohunao.terra_moment.common.data.gen;
 
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.data.gen.provider.ModLanguageProvider;
 import com.xiaohunao.terra_moment.common.data.gen.provider.ModRegistryProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -20,11 +21,13 @@ public class ModDataGenerator {
     public static void onGatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
-
+        boolean server = event.includeServer();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        generator.addProvider(event.includeServer(),new ModRegistryProvider(output, lookupProvider));
+        generator.addProvider(server,new ModRegistryProvider(output, lookupProvider));
+        generator.addProvider(server, new ModLanguageProvider(output, "en_us"));
+        generator.addProvider(server, new ModLanguageProvider(output, "zh_cn"));
     }
 
 }

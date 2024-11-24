@@ -34,6 +34,9 @@ public class TerraMoment {
     public static <T> ResourceKey<Registry<T>> asResourceKey(String path) {
         return ResourceKey.createRegistryKey(HeavenDestinyMoment.asResource(path));
     }
+    public static String asDescriptionId(String path) {
+        return MODID + "." + path;
+    }
 
 
 

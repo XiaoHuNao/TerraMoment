@@ -1,5 +1,7 @@
 package com.xiaohunao.terra_moment.common.init;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentDataContext;
@@ -21,6 +23,9 @@ import org.confluence.terraentity.init.TEEntities;
 import org.confluence.terraentity.init.TETags;
 
 public class ModMoments {
+    public static final BiMap<ResourceKey<Moment>,Moment> MOMENTS = HashBiMap.create();
+
+
     public static final ResourceKey<Moment> SLIME_RAIN = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "slime_rain");
     public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "sandstorm");
     public static final ResourceKey<Moment> BLOOD_MOON = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "blood_moon");
@@ -34,7 +39,7 @@ public class ModMoments {
     public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "lunar_events");
 
     public static void bootstrap(BootstrapContext<Moment> context) {
-        context.register(SLIME_RAIN,new DefaultMoment(
+        register(context,SLIME_RAIN,new DefaultMoment(
                 HeavenDestinyMoment.asResource("terra"),
                 new LocationArea.Builder().build(builder -> builder
                         .setDimension(Level.OVERWORLD)
@@ -72,10 +77,17 @@ public class ModMoments {
                         )
                         .build(),
                 new TipSettingsContext.Builder()
-                        .tooltip(MomentState.READY, "slime_rain")
+                        .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"),0x6d99f9)
                         .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
                         .build(),
                 new ClientSettingsContext.Builder().build()
         ));
     }
+
+    private static void register(BootstrapContext<Moment> context, ResourceKey<Moment> key, Moment value){
+        context.register(key,value);
+        MOMENTS.put(key,value);
+    }
+
+
 }

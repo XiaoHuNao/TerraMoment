@@ -147,7 +147,8 @@
     },
     "texts": {
       "ready": {
-        "translate": "moment.tooltip.text.slime_rain"
+        "color": "#6D99F9",
+        "translate": "moment.tooltip.text.terra_moment.slime_rain"
       }
     }
   }
