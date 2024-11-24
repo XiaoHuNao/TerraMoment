@@ -2,6 +2,7 @@ package com.xiaohunao.terra_moment;
 
 import com.mojang.logging.LogUtils;
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
+import com.xiaohunao.terra_moment.common.init.ModItems;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ public class TerraMoment {
     public static final Logger LOGGER = LogUtils.getLogger();
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
 //        NeoForge.EVENT_BUS.register(this);
+        ModItems.ITEMS.register(modEventBus);
     }
 
     public static ResourceLocation asResource(String path) {

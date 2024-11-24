@@ -132,12 +132,22 @@
           }
         },
         "spawn_category_multiplier": {
-          "monster": 2.0
+          "monster": 1.5
         }
       },
       "spawn_rule": {
         "allow_original_biome_spawn_settings": false,
         "force_surface_spawning": true
+      }
+    }
+  },
+  "tips": {
+    "soundEvents": {
+      "ready": "minecraft:item.goat_horn.sound.2"
+    },
+    "texts": {
+      "ready": {
+        "translate": "moment.tooltip.text.slime_rain"
       }
     }
   }
