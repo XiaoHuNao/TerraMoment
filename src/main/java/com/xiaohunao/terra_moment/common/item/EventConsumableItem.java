@@ -1,4 +1,4 @@
-package com.xiaohunao.terra_moment.common;
+package com.xiaohunao.terra_moment.common.item;
 
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;

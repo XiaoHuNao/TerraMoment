@@ -1,5 +1,5 @@
 {
-  "type": "heaven_destiny_moment:default",
+  "type": "terra_moment:slime_rain",
   "area": {
     "type": "heaven_destiny_moment:location",
     "dimension": [
@@ -19,110 +19,110 @@
             "monster": [
               {
                 "type": "terra_entity:blue_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:green_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:pink_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:corrupted_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:desert_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:jungle_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:evil_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:ice_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:lava_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:luminous_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:crimson_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:purple_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:red_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:tropic_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:yellow_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:honey_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:black_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 20
               },
               {
                 "type": "terra_entity:king_slime",
-                "maxCount": 4,
-                "minCount": 4,
+                "maxCount": 1,
+                "minCount": 1,
                 "weight": 1
               }
             ],

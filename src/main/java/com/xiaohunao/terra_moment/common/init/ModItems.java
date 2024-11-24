@@ -1,15 +1,10 @@
 package com.xiaohunao.terra_moment.common.init;
 
-import com.xiaohunao.heaven_destiny_moment.common.init.MomentRegistries;
-import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.terra_moment.common.EventConsumableItem;
-import net.minecraft.resources.ResourceKey;
+import com.xiaohunao.terra_moment.common.item.EventConsumableItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraMoment.MODID);
