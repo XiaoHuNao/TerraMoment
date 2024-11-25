@@ -6,11 +6,10 @@ import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentDataContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
-import com.xiaohunao.heaven_destiny_moment.common.init.MomentRegistries;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -25,17 +24,17 @@ public class ModMoments {
     public static final BiMap<ResourceKey<Moment>,Moment> MOMENTS = HashBiMap.create();
 
 
-    public static final ResourceKey<Moment> SLIME_RAIN = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "slime_rain");
-    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "sandstorm");
-    public static final ResourceKey<Moment> BLOOD_MOON = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "blood_moon");
-    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "goblin_army");
-    public static final ResourceKey<Moment> FROST_LEGION = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "frost_legion");
-    public static final ResourceKey<Moment> SOLAR_ECLIPSE = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "solar_eclipse");
-    public static final ResourceKey<Moment> PIRATE_INVASION = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "pirate_invasion");
-    public static final ResourceKey<Moment> PUMPKIN_MOON = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "pumpkin_moon");
-    public static final ResourceKey<Moment> FROST_MOON = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "frost_moon");
-    public static final ResourceKey<Moment> MARTIAN_MADNESS = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "martian_madness");
-    public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(MomentRegistries.Keys.MOMENT, "lunar_events");
+    public static final ResourceKey<Moment> SLIME_RAIN = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "slime_rain");
+    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "sandstorm");
+    public static final ResourceKey<Moment> BLOOD_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "blood_moon");
+    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "goblin_army");
+    public static final ResourceKey<Moment> FROST_LEGION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_legion");
+    public static final ResourceKey<Moment> SOLAR_ECLIPSE = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "solar_eclipse");
+    public static final ResourceKey<Moment> PIRATE_INVASION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "pirate_invasion");
+    public static final ResourceKey<Moment> PUMPKIN_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "pumpkin_moon");
+    public static final ResourceKey<Moment> FROST_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_moon");
+    public static final ResourceKey<Moment> MARTIAN_MADNESS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "martian_madness");
+    public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "lunar_events");
 
     public static void bootstrap(BootstrapContext<Moment> context) {
         register(context,SLIME_RAIN,new SlimeRainMoment(
