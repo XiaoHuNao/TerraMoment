@@ -118,12 +118,6 @@
                 "maxCount": 1,
                 "minCount": 1,
                 "weight": 20
-              },
-              {
-                "type": "terra_entity:king_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 1
               }
             ],
             "underground_water_creature": [],
@@ -137,7 +131,8 @@
       },
       "spawn_rule": {
         "allow_original_biome_spawn_settings": false,
-        "force_surface_spawning": true
+        "force_surface_spawning": true,
+        "ignoreDistance": true
       }
     }
   },

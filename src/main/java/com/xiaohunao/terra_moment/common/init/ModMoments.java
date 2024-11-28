@@ -64,13 +64,13 @@ public class ModMoments {
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.YELLOW_SLIME.get(),20,1,1))
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.HONEY_SLIME.get(),20,1,1))
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLACK_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.KING_SLIME.get(),1,1,1))
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER,1.5)
                                 )
                                 .rule(rule -> rule
                                         .allowOriginalBiomeSpawnSettings(false)
                                         .slimesSpawnEverywhere()
+                                        .ignoreDistance()
                                 )
                         )
                         .build(),

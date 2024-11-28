@@ -1,6 +1,7 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationConditionContext;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.terra_moment.common.init.ModMomentTypes;
@@ -9,10 +10,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import org.confluence.terraentity.entity.boss.KingSlime;
 
 import java.util.UUID;
 
 public class SlimeRainInstance extends MomentInstance {
+    public boolean canSpawnSlimeKing;
+
     public SlimeRainInstance(Level level, ResourceKey<Moment> momentKey) {
         super(ModMomentTypes.SLIME_RAIN.get(), level, momentKey);
     }
@@ -33,6 +37,15 @@ public class SlimeRainInstance extends MomentInstance {
             if (locationCondition.matches((ServerLevel) entity.level(),pos)) {
                 entity.setPos(pos.getX(),pos.getY(),pos.getZ());
             }
+        }
+    }
+
+    @Override
+    public void tick() {
+        if (canSpawnSlimeKing){
+            players.stream().findAny().ifPresent(player -> {
+
+            });
         }
     }
 }
