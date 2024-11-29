@@ -131,7 +131,6 @@
       },
       "spawn_rule": {
         "allow_original_biome_spawn_settings": false,
-        "force_surface_spawning": true,
         "ignoreDistance": true
       }
     }

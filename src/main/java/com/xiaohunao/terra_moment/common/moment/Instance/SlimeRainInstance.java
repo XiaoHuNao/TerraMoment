@@ -4,18 +4,25 @@ import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCond
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.heaven_destiny_moment.common.utils.SpawnUtils;
 import com.xiaohunao.terra_moment.common.init.ModMomentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.terraentity.entity.boss.KingSlime;
+import org.confluence.terraentity.init.TEEntities;
 
 import java.util.UUID;
 
 public class SlimeRainInstance extends MomentInstance {
-    public boolean canSpawnSlimeKing;
+    public boolean canSpawnSlimeKing = false;
+    //-1 noExists  0 death  1 Exists
+    private boolean isSlimeKingExists = false;
 
     public SlimeRainInstance(Level level, ResourceKey<Moment> momentKey) {
         super(ModMomentTypes.SLIME_RAIN.get(), level, momentKey);
@@ -44,8 +51,30 @@ public class SlimeRainInstance extends MomentInstance {
     public void tick() {
         if (canSpawnSlimeKing){
             players.stream().findAny().ifPresent(player -> {
-
+                KingSlime kingSlime = TEEntities.KING_SLIME.get().create(level);
+                if (kingSlime != null) {
+                    Vec3 pos = SpawnUtils.spawn(level, player.position(), kingSlime, 10, 32);
+                    if (pos != null) {
+                        kingSlime.moveTo(pos);
+                        kingSlime.setData(HDMAttachments.MOMENT_ENTITY,kingSlime.getData(HDMAttachments.MOMENT_ENTITY).setUid(uuid));
+                        level.addFreshEntity(kingSlime);
+                        isSlimeKingExists = true;
+                        canSpawnSlimeKing = false;
+                    }
+                }
             });
+        }
+
+        if (getData(HDMAttachments.MOMENT_KILL_ENTITY).getCounter() > 1 && !isSlimeKingExists){
+             canSpawnSlimeKing = true;
+        }
+    }
+
+    @Override
+    public void livingDeath(LivingEntity entity) {
+        if (entity instanceof KingSlime) {
+            setState(MomentState.VICTORY);
+            isSlimeKingExists = false;
         }
     }
 }
