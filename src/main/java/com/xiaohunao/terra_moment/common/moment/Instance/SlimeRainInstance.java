@@ -11,13 +11,16 @@ import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.terraentity.entity.boss.KingSlime;
 import org.confluence.terraentity.init.TEEntities;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class SlimeRainInstance extends MomentInstance {
@@ -76,5 +79,10 @@ public class SlimeRainInstance extends MomentInstance {
         if (entity instanceof KingSlime) {
             setState(MomentState.VICTORY);
         }
+    }
+
+    @Override
+    public boolean canCreate(Map<UUID, MomentInstance> runMoments, ServerLevel serverLevel, BlockPos pos, @Nullable ServerPlayer player) {
+        return runMoments.values().stream().noneMatch(instance -> instance instanceof SlimeRainInstance);
     }
 }

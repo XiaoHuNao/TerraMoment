@@ -17,7 +17,7 @@ public class TMItems {
 //    public static final DeferredHolder<Item,Item> SOLAR_ECLIPSE = ITEMS.register("solar_eclipse", () -> new EventConsumableItem(ModMoments.SOLAR_ECLIPSE));
 //    public static final DeferredHolder<Item,Item> PIRATE_INVASION = ITEMS.register("pirate_invasion", () -> new EventConsumableItem(ModMoments.PIRATE_INVASION));
 //    public static final DeferredHolder<Item,Item> PUMPKIN_MOON = ITEMS.register("pumpkin_moon", () -> new EventConsumableItem(ModMoments.PUMPKIN_MOON));
-//    public static final DeferredHolder<Item,Item> FROST_MOON = ITEMS.register("frost_moon", () -> new EventConsumableItem(ModMoments.FROST_MOON));
+//    public static final DeferredHolder<Item,Item> FROST_MOON = ITEMS.register("frost_moon", () -> new EventConsumableItem(ModMoments.FRO'ST_MOON));
 //    public static final DeferredHolder<Item,Item> MARTIAN_MADNESS = ITEMS.register("martian_madness", () -> new EventConsumableItem(ModMoments.MARTIAN_MADNESS));
 //    public static final DeferredHolder<Item,Item> LUNAR_EVENTS = ITEMS.register("lunar_events", () -> new EventConsumableItem(ModMoments.LUNAR_EVENTS));
 
