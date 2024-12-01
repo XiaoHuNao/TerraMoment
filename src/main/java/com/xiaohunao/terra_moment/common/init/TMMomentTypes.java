@@ -8,7 +8,7 @@ import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class ModMomentTypes {
+public class TMMomentTypes {
     public static final DeferredRegister<MomentType<?>> MOMENT_TYPE = DeferredRegister.create(HDMRegistries.MOMENT_TYPE, TerraMoment.MODID);
 
 

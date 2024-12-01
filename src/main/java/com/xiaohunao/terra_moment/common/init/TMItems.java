@@ -6,10 +6,10 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class ModItems {
+public class TMItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraMoment.MODID);
 
-    public static final DeferredHolder<Item,Item> SLIME_RAIN = ITEMS.register("slime_rain", () -> new EventConsumableItem(ModMoments.SLIME_RAIN));
+    public static final DeferredHolder<Item,Item> SLIME_RAIN = ITEMS.register("slime_rain", () -> new EventConsumableItem(TMMoments.SLIME_RAIN));
 //    public static final DeferredHolder<Item,Item> SANDSTORM = ITEMS.register("sandstorm", () -> new EventConsumableItem(ModMoments.SANDSTORM));
 //    public static final DeferredHolder<Item,Item> BLOOD_MOON = ITEMS.register("blood_moon", () -> new EventConsumableItem(ModMoments.BLOOD_MOON));
 //    public static final DeferredHolder<Item,Item> GOBLIN_ARMY = ITEMS.register("goblin_army", () -> new EventConsumableItem(ModMoments.GOBLIN_ARMY));

@@ -5,7 +5,7 @@ import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.terra_moment.common.init.ModMoments;
+import com.xiaohunao.terra_moment.common.init.TMMoments;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -31,14 +31,14 @@ public class ModLanguageProvider extends LanguageProvider {
     }
     @Override
     protected void addTranslations() {
-        momentTooltip(ModMoments.SLIME_RAIN,
+        momentTooltip(TMMoments.SLIME_RAIN,
                 Map.of(MomentState.READY,"Slime is falling from the sky!"),
                 Map.of(MomentState.READY,"史莱姆从天而降!")
         );
     }
 
     private void momentTooltip(ResourceKey<Moment> key, Map<MomentState,String> en, Map<MomentState,String> zh){
-        Moment moment = ModMoments.MOMENTS.getOrDefault(key, null);
+        Moment moment = TMMoments.MOMENTS.getOrDefault(key, null);
         if (moment != null) {
             TipSettingsContext tipSettingsContext = moment.getTipSettingsContext();
             tipSettingsContext.texts().ifPresent(texts -> {

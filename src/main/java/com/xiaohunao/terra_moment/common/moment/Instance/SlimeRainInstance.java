@@ -6,7 +6,8 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.utils.SpawnUtils;
-import com.xiaohunao.terra_moment.common.init.ModMomentTypes;
+import com.xiaohunao.terra_moment.common.init.TMConfig;
+import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -25,11 +26,11 @@ public class SlimeRainInstance extends MomentInstance {
     private boolean isSlimeKingExists = false;
 
     public SlimeRainInstance(Level level, ResourceKey<Moment> momentKey) {
-        super(ModMomentTypes.SLIME_RAIN.get(), level, momentKey);
+        super(TMMomentTypes.SLIME_RAIN.get(), level, momentKey);
     }
 
     public SlimeRainInstance(UUID uuid, Level level, ResourceKey<Moment> momentKey) {
-        super(ModMomentTypes.SLIME_RAIN.get(), uuid, level, momentKey);
+        super(TMMomentTypes.SLIME_RAIN.get(), uuid, level, momentKey);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class SlimeRainInstance extends MomentInstance {
             });
         }
 
-        if (getData(HDMAttachments.MOMENT_KILL_ENTITY).getCounter() > 1 && !isSlimeKingExists){
+        if (getData(HDMAttachments.MOMENT_KILL_ENTITY).getCounter() >= TMConfig.CONFIG.requiredKillsForSlimeKingSpawn.get() && !isSlimeKingExists) {
              canSpawnSlimeKing = true;
         }
     }
@@ -74,7 +75,6 @@ public class SlimeRainInstance extends MomentInstance {
     public void livingDeath(LivingEntity entity) {
         if (entity instanceof KingSlime) {
             setState(MomentState.VICTORY);
-            isSlimeKingExists = false;
         }
     }
 }

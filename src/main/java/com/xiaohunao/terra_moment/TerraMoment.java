@@ -2,9 +2,10 @@ package com.xiaohunao.terra_moment;
 
 import com.mojang.logging.LogUtils;
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
-import com.xiaohunao.terra_moment.common.init.ModContextRegister;
-import com.xiaohunao.terra_moment.common.init.ModItems;
-import com.xiaohunao.terra_moment.common.init.ModMomentTypes;
+import com.xiaohunao.terra_moment.common.init.TMConfig;
+import com.xiaohunao.terra_moment.common.init.TMContextRegister;
+import com.xiaohunao.terra_moment.common.init.TMItems;
+import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +15,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.slf4j.Logger;
 
 @Mod(TerraMoment.MODID)
@@ -23,9 +26,11 @@ public class TerraMoment {
     public static final Logger LOGGER = LogUtils.getLogger();
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
 //        NeoForge.EVENT_BUS.register(this);
-        ModItems.ITEMS.register(modEventBus);
-        ModMomentTypes.MOMENT_TYPE.register(modEventBus);
-        ModContextRegister.MOMENT_CODEC.register(modEventBus);
+        TMItems.ITEMS.register(modEventBus);
+        TMMomentTypes.MOMENT_TYPE.register(modEventBus);
+        TMContextRegister.MOMENT_CODEC.register(modEventBus);
+
+        modContainer.registerConfig(ModConfig.Type.COMMON, TMConfig.CONFIG_SPEC);
     }
 
     public static ResourceLocation asResource(String path) {

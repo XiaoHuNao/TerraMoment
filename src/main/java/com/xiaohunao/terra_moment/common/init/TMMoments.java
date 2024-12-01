@@ -15,13 +15,12 @@ import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.TEEntities;
 
-public class ModMoments {
+public class TMMoments {
     public static final BiMap<ResourceKey<Moment>,Moment> MOMENTS = HashBiMap.create();
 
 
