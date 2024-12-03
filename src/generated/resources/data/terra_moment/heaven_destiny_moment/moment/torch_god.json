@@ -8,5 +8,10 @@
         "min": -64.0
       }
     }
+  },
+  "mixTorchCount": 50,
+  "multiAttackBarrage": {
+    "max": 3,
+    "min": 2
   }
 }

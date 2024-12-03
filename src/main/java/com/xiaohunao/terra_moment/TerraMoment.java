@@ -2,7 +2,6 @@ package com.xiaohunao.terra_moment;
 
 import com.mojang.logging.LogUtils;
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
-import com.xiaohunao.terra_moment.common.init.TMConfig;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.init.TMItems;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
@@ -17,7 +16,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.slf4j.Logger;
 
 @Mod(TerraMoment.MODID)
@@ -30,7 +28,6 @@ public class TerraMoment {
         TMMomentTypes.MOMENT_TYPE.register(modEventBus);
         TMContextRegister.MOMENT_CODEC.register(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, TMConfig.CONFIG_SPEC);
     }
 
     public static ResourceLocation asResource(String path) {

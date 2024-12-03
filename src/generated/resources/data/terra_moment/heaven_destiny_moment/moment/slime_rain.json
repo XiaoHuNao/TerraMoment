@@ -135,6 +135,7 @@
       }
     }
   },
+  "requiredKills": 150,
   "tips": {
     "soundEvents": {
       "ready": "minecraft:item.goat_horn.sound.2"

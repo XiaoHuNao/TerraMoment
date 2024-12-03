@@ -1,13 +1,15 @@
 package com.xiaohunao.terra_moment.common.event;
 
-import com.google.common.collect.Sets;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeConditionContext;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMMomentTypes;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
+import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
-import com.xiaohunao.terra_moment.common.init.TMConfig;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
+import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -20,9 +22,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
+
+import java.util.Map;
 import java.util.Set;
 
 
@@ -51,16 +52,21 @@ public class MomentEventSubscriber {
 
                 Set<BlockPos> torchGroup = TorchGodInstance.updateTorchGroup(startPos, serverLevel);
 
-                if (torchGroup.size() >= TMConfig.CONFIG.requiredTorchCount.get()){
-                    MomentInstance.create(TMMoments.TORCH_GOD,serverLevel,startPos,serverPlayer,instance -> {
-                        if (instance instanceof TorchGodInstance torchGodInstance) {
-                            torchGodInstance.bindTorchGroup(torchGroup);
-                        }
-                    });
-                }
+                Registry<Moment> moments = level.registryAccess().registryOrThrow(HDMRegistries.Keys.MOMENT);
+                moments.entrySet().stream()
+                        .map(Map.Entry::getValue)
+                        .filter(moment -> moment instanceof TorchGodMoment)
+                        .map(moment -> (TorchGodMoment) moment)
+                        .filter(torchGodMoment -> torchGodMoment.mixTorchCount() <= torchGroup.size())
+                        .findFirst()
+                        .ifPresent(torchGodMoment ->  {
+                            MomentInstance.create(TMMoments.TORCH_GOD,serverLevel,startPos,serverPlayer,instance -> {
+                                if (instance instanceof TorchGodInstance torchGodInstance) {
+                                    torchGodInstance.bindTorchGroup(torchGroup);
+                                }
+                            });
+                        });
             }
         }
     }
-
-
 }

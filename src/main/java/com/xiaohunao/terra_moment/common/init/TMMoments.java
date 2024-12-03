@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentDataContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
+import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmountContext;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
@@ -40,7 +41,7 @@ public class TMMoments {
     public static final ResourceKey<Moment> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
 
     public static void bootstrap(BootstrapContext<Moment> context) {
-        register(context, SLIME_RAIN, new SlimeRainMoment()
+        register(context, SLIME_RAIN, new SlimeRainMoment(150)
                 .setArea(new LocationArea.Builder().build(builder -> builder
                         .setDimension(Level.OVERWORLD)
                         .build()
@@ -85,7 +86,7 @@ public class TMMoments {
         );
 
 
-        register(context, TORCH_GOD, new TorchGodMoment()
+        register(context, TORCH_GOD, new TorchGodMoment(50,new RandomAmountContext(2,3))
                 .setArea(new LocationArea.Builder().build(builder -> builder
                                 .setY(MinMaxBounds.Doubles.between(-64, 0))
                                 .build()
