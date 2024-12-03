@@ -40,12 +40,13 @@ public class ModLanguageProvider extends LanguageProvider {
     private void momentTooltip(ResourceKey<Moment> key, Map<MomentState,String> en, Map<MomentState,String> zh){
         Moment moment = TMMoments.MOMENTS.getOrDefault(key, null);
         if (moment != null) {
-            TipSettingsContext tipSettingsContext = moment.getTipSettingsContext();
-            tipSettingsContext.texts().ifPresent(texts -> {
-                texts.forEach(((state, component) -> {
-                    add(component.getString(), en.getOrDefault(state, "null"), zh.getOrDefault(state, null));
-                }));
-            });
+            moment.tipSettingsContext()
+                    .flatMap(TipSettingsContext::texts)
+                    .ifPresent(texts ->{
+                        texts.forEach(((state, component) -> {
+                            add(component.getString(), en.getOrDefault(state, "null"), zh.getOrDefault(state, null));
+                        }));
+                    });
         }
     }
 

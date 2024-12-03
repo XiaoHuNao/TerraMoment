@@ -11,10 +11,15 @@ public class TMConfig {
     public final ModConfigSpec.ConfigValue<Integer> requiredKillsForSlimeKingSpawn;
 //    public final ModConfigSpec.ConfigValue<Integer> afterRequiredForSlimeKingDefeatingKillsSpawn;
 
+    public final ModConfigSpec.ConfigValue<Integer> requiredTorchCount;
+
 
     private TMConfig(ModConfigSpec.Builder builder) {
         requiredKillsForSlimeKingSpawn = builder.define("requiredKillsForSlimeKingSpawn",150);
 //        requiredKillsForSlimeKingSpawn = builder.define("afterRequiredForSlimeKingDefeatingKillsSpawn",75);
+
+
+        requiredTorchCount = builder.define("requiredTorchCount",50);
     }
 
     static {

@@ -1,0 +1,12 @@
+{
+  "type": "terra_moment:torch_god",
+  "area": {
+    "type": "heaven_destiny_moment:location",
+    "position": {
+      "y": {
+        "max": 0.0,
+        "min": -64.0
+      }
+    }
+  }
+}

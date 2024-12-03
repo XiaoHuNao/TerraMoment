@@ -5,6 +5,7 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.MomentType;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
+import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -14,4 +15,7 @@ public class TMMomentTypes {
 
     public static final DeferredHolder<MomentType<?>, MomentType<SlimeRainInstance>> SLIME_RAIN = MOMENT_TYPE.register("slime_rain",
             () -> MomentType.builder(SlimeRainInstance::new, DefaultMoment.class).build());
+
+    public static final DeferredHolder<MomentType<?>, MomentType<TorchGodInstance>> TORCH_GOD = MOMENT_TYPE.register("torch_god",
+            () -> MomentType.builder(TorchGodInstance::new, DefaultMoment.class).build());
 }

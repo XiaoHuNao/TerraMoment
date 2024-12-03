@@ -2,8 +2,6 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
-import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentDataContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
@@ -12,6 +10,8 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
+import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.TEEntities;
 
 public class TMMoments {
-    public static final BiMap<ResourceKey<Moment>,Moment> MOMENTS = HashBiMap.create();
+    public static final BiMap<ResourceKey<Moment>, Moment> MOMENTS = HashBiMap.create();
 
 
     public static final ResourceKey<Moment> SLIME_RAIN = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "slime_rain");
@@ -36,36 +36,38 @@ public class TMMoments {
     public static final ResourceKey<Moment> MARTIAN_MADNESS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "martian_madness");
     public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "lunar_events");
 
+
+    public static final ResourceKey<Moment> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
+
     public static void bootstrap(BootstrapContext<Moment> context) {
-        register(context,SLIME_RAIN,new SlimeRainMoment(
-                HeavenDestinyMoment.asResource("terra"),
-                new LocationArea.Builder().build(builder -> builder
+        register(context, SLIME_RAIN, new SlimeRainMoment()
+                .setArea(new LocationArea.Builder().build(builder -> builder
                         .setDimension(Level.OVERWORLD)
                         .build()
-                ),
-                new MomentDataContext.Builder()
+                ))
+                .setMomentDataContext(new MomentDataContext.Builder()
                         .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLUE_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.GREEN_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.PINK_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.CORRUPTED_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DESERT_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.JUNGLE_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.EVIL_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.ICE_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.LAVA_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.LUMINOUS_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.CRIMSON_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.PURPLE_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.RED_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.TROPIC_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.YELLOW_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.HONEY_SLIME.get(),20,1,1))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLACK_SLIME.get(),20,1,1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLUE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.GREEN_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PINK_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.CORRUPTED_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.DESERT_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.JUNGLE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.EVIL_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.ICE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.LAVA_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.LUMINOUS_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.CRIMSON_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PURPLE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.RED_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.TROPIC_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.YELLOW_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.HONEY_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLACK_SLIME.get(), 20, 1, 1))
                                         )
-                                        .spawnCategoryMultiplier(MobCategory.MONSTER,1.5)
+                                        .spawnCategoryMultiplier(MobCategory.MONSTER, 1.5)
                                 )
                                 .rule(rule -> rule
                                         .allowOriginalBiomeSpawnSettings(false)
@@ -73,18 +75,28 @@ public class TMMoments {
                                         .ignoreDistance()
                                 )
                         )
-                        .build(),
-                new TipSettingsContext.Builder()
-                        .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"),0x6d99f9)
-                        .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
-                        .build(),
-                new ClientSettingsContext.Builder().build()
-        ));
+                        .build()
+                )
+                .setTipSettingsContext(
+                        new TipSettingsContext.Builder()
+                                .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"), 0x6d99f9)
+                                .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
+                                .build())
+        );
+
+
+        register(context, TORCH_GOD, new TorchGodMoment()
+                .setArea(new LocationArea.Builder().build(builder -> builder
+                                .setY(MinMaxBounds.Doubles.between(-64, 0))
+                                .build()
+                        )
+                )
+        );
     }
 
-    private static void register(BootstrapContext<Moment> context, ResourceKey<Moment> key, Moment value){
-        context.register(key,value);
-        MOMENTS.put(key,value);
+    private static void register(BootstrapContext<Moment> context, ResourceKey<Moment> key, Moment value) {
+        context.register(key, value);
+        MOMENTS.put(key, value);
     }
 
 
