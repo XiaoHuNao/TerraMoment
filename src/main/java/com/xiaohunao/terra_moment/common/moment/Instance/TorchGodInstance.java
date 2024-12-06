@@ -8,6 +8,8 @@ import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmountCon
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.terra_moment.common.entity.projectile.TorchGodProjectile;
+import com.xiaohunao.terra_moment.common.init.TMEntities;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
 import net.minecraft.core.BlockPos;
@@ -40,9 +42,9 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
             if (!checkTorchGroup()) setState(MomentState.LOSE);
             Player randomPlayer = getRandomPlayer();
 
-            attackPlayer(randomPlayer);
-
-
+            if(tick % 20 == 0) {
+                attackPlayer(randomPlayer);
+            }
 
         }else {
             setState(MomentState.END);
@@ -71,15 +73,15 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     public void attackPlayer(Player player){
         moment().ifPresent(moment -> {
             int amount = moment.multiAttackBarrage().getAmount();
-            //TODO 火把神弹幕攻击玩家,这里临时用箭代替
-
             ImmutableList<BlockPos> posList = ImmutableList.copyOf(torchGroup);
             for (int i = 0; i < amount; i++) {
-                Vec3 blockPos = posList.get(level.random.nextInt(posList.size())).getCenter();
+                BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
 
-                Arrow arrow = new Arrow(level, blockPos.x, blockPos.y, blockPos.z, Items.ARROW.getDefaultInstance(), null);
-                level.addFreshEntity(arrow);
-                arrow.shoot(player.getX(),player.getY(),player.getZ(),1.0F,1.0F);
+                TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos,level);
+                Vec3 playerPosition = player.position();
+                Vec3 direction = playerPosition.subtract(Vec3.atCenterOf(blockPos)).normalize();
+                torchGodProjectile.setDeltaMovement(direction);
+                level.addFreshEntity(torchGodProjectile);
             }
         });
     }
