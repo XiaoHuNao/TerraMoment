@@ -86,7 +86,7 @@ public class TMMoments {
         );
 
 
-        register(context, TORCH_GOD, new TorchGodMoment(50,new RandomAmountContext(2,3))
+        register(context, TORCH_GOD, new TorchGodMoment(50,100,new RandomAmountContext(2,3))
                 .setArea(new LocationArea.Builder().build(builder -> builder
                                 .setY(MinMaxBounds.Doubles.between(-64, 0))
                                 .build()

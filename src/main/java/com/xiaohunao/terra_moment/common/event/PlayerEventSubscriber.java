@@ -34,14 +34,14 @@ public class PlayerEventSubscriber {
 //                    level.addFreshEntity(torchGodProjectile);
 //                }
 ////
-                BlockPos pos = event.getPos();
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        BlockPos torchPos = pos.offset(i, 0, j); // 使用offset方法根据偏移量计算新的坐标
-//                        serverLevel.setBlock(torchPos, Blocks.TORCH.defaultBlockState(),19); // 设置火把方块
-                        serverLevel.setBlock(torchPos, Blocks.AIR.defaultBlockState(),19); // 设置火把方块
-                    }
-                }
+//                BlockPos pos = event.getPos();
+//                for (int i = 0; i < 5; i++) {
+//                    for (int j = 0; j < 10; j++) {
+//                        BlockPos torchPos = pos.offset(i, 0, j); // 使用offset方法根据偏移量计算新的坐标
+////                        serverLevel.setBlock(torchPos, Blocks.TORCH.defaultBlockState(),19); // 设置火把方块
+//                        serverLevel.setBlock(torchPos, Blocks.AIR.defaultBlockState(),19); // 设置火把方块
+//                    }
+//                }
             }
 
         } else {

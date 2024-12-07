@@ -1,9 +1,6 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-import com.google.common.collect.UnmodifiableIterator;
+import com.google.common.collect.*;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmountContext;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
@@ -19,14 +16,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseTorchBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.*;
 
 public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
+    public final Map<BlockPos,Integer> attackMap = Maps.newHashMap();
+
+    public int totalAttacksNeeded = 0;
+
+    public List<BlockPos> unlit = Lists.newArrayList();
+    public List<BlockPos> lit = Lists.newArrayList();
     public ImmutableSet<BlockPos> torchGroup;
+
+
+
 
     public TorchGodInstance(Level level, ResourceKey<Moment> momentKey) {
         super(TMMomentTypes.TORCH_GOD.get(), level, momentKey);
@@ -39,7 +45,9 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     @Override
     public void tick() {
         if (torchGroup != null) {
-            if (!checkTorchGroup()) setState(MomentState.LOSE);
+            if (!checkTorchGroup()) {
+                setState(MomentState.LOSE);
+            }
             Player randomPlayer = getRandomPlayer();
 
             if(tick % 20 == 0) {
@@ -52,42 +60,76 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     }
 
     private boolean checkTorchGroup(){
-        UnmodifiableIterator<BlockPos> iterator = torchGroup.iterator();
-        if (iterator.hasNext()) {
-            BlockPos next = iterator.next();
-            Set<BlockPos> group = updateTorchGroup(next, level);
+        for (BlockPos pos : torchGroup) {
+            BlockState blockState = level.getBlockState(pos);
+            if (blockState.isAir()) {
+                boolean contains = unlit.contains(pos);
+                if (contains) {
+                    continue;
+                }else {
+                    return false;
+                }
+            }
 
-            return moment().map(torchGodMoment -> {
-                        if (torchGodMoment.mixTorchCount() <= group.size()) {
-                            this.torchGroup = ImmutableSet.copyOf(group);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }).orElse(false);
-
+            return blockState.getBlock() instanceof TorchBlock;
         }
-        return false;
+        return true;
     }
+
 
     public void attackPlayer(Player player){
         moment().ifPresent(moment -> {
-            int amount = moment.multiAttackBarrage().getAmount();
-            ImmutableList<BlockPos> posList = ImmutableList.copyOf(torchGroup);
-            for (int i = 0; i < amount; i++) {
-                BlockPos blockPos = posList.get(level.random.nextInt(posList.size()));
+            int multiAttack = moment.multiAttackBarrage().getAmount();
 
-                TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos,level);
-                Vec3 playerPosition = player.position();
-                Vec3 direction = playerPosition.subtract(Vec3.atCenterOf(blockPos)).normalize();
-                torchGodProjectile.setDeltaMovement(direction);
-                level.addFreshEntity(torchGodProjectile);
+            int totalAttacksNeeded = moment.totalAttacksNeeded();
+
+            if (this.totalAttacksNeeded >= totalAttacksNeeded && unlit.size() == torchGroup.size()) {
+                setState(MomentState.VICTORY);
+                return;
+            }
+
+            int maxAttacksPerPos = totalAttacksNeeded / torchGroup.size();
+            int extraAttacksForLastPos = totalAttacksNeeded % torchGroup.size();
+
+
+            for (int i = 0; i < multiAttack; i++) {
+                if (!lit.isEmpty()){
+                    BlockPos blockPos = lit.get(level.random.nextInt(lit.size()));
+
+                    int attacksCount = attackMap.getOrDefault(blockPos, 0);
+                    attackMap.put(blockPos, ++attacksCount);
+
+                    int maxAttacksForThisPos = maxAttacksPerPos;
+                    if (extraAttacksForLastPos > 0 && lit.indexOf(blockPos) == lit.size() - 1) {
+                        maxAttacksForThisPos += extraAttacksForLastPos;
+                    }
+
+                    TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos, level);
+                    Vec3 direction = player.position().subtract(Vec3.atCenterOf(blockPos)).normalize();
+                    torchGodProjectile.setDeltaMovement(direction);
+                    level.addFreshEntity(torchGodProjectile);
+                    this.totalAttacksNeeded++;
+
+                    if (attacksCount >= maxAttacksForThisPos) {
+                        level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
+                        unlit.add(blockPos);
+                        lit.remove(blockPos);
+                    }
+                }
             }
         });
     }
 
 
-    public static Set<BlockPos> updateTorchGroup(BlockPos startPos,Level level){
+    @Override
+    protected void victory() {
+        super.victory();
+        unlit.forEach(pos -> {
+            level.setBlock(pos,Blocks.TORCH.defaultBlockState(),3);
+        });
+    }
+
+    public static Set<BlockPos> updateTorchGroup(BlockPos startPos, Level level){
         Queue<BlockPos> queue = new LinkedList<>();
         Set<BlockPos> visited = Sets.newHashSet();
         Set<BlockPos> torchGroup = Sets.newHashSet();
@@ -120,5 +162,6 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
 
     public void bindTorchGroup(Set<BlockPos> group){
         this.torchGroup = ImmutableSet.copyOf(group);
+        this.lit =Lists.newArrayList(group);
     }
 }
