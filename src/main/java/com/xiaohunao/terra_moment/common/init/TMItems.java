@@ -9,9 +9,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class TMItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraMoment.MODID);
 
-    public static final DeferredHolder<Item,Item> SLIME_RAIN = ITEMS.register("slime_rain", () -> new EventConsumableItem(TMMoments.SLIME_RAIN));
+    public static final DeferredHolder<Item,EventConsumableItem> SLIME_RAIN = ITEMS.register("slime_rain", () -> new EventConsumableItem(TMMoments.SLIME_RAIN));
+    public static final DeferredHolder<Item,EventConsumableItem> BLOOD_MOON = ITEMS.register("blood_moon", () -> new EventConsumableItem(TMMoments.BLOOD_MOON));
 //    public static final DeferredHolder<Item,Item> SANDSTORM = ITEMS.register("sandstorm", () -> new EventConsumableItem(ModMoments.SANDSTORM));
-//    public static final DeferredHolder<Item,Item> BLOOD_MOON = ITEMS.register("blood_moon", () -> new EventConsumableItem(ModMoments.BLOOD_MOON));
 //    public static final DeferredHolder<Item,Item> GOBLIN_ARMY = ITEMS.register("goblin_army", () -> new EventConsumableItem(ModMoments.GOBLIN_ARMY));
 //    public static final DeferredHolder<Item,Item> FROST_LEGION = ITEMS.register("frost_legion", () -> new EventConsumableItem(ModMoments.FROST_LEGION));
 //    public static final DeferredHolder<Item,Item> SOLAR_ECLIPSE = ITEMS.register("solar_eclipse", () -> new EventConsumableItem(ModMoments.SOLAR_ECLIPSE));

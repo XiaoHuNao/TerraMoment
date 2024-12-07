@@ -1,11 +1,5 @@
 {
   "type": "terra_moment:slime_rain",
-  "area": {
-    "type": "heaven_destiny_moment:location",
-    "dimension": [
-      "minecraft:overworld"
-    ]
-  },
   "moment_data_context": {
     "entity_spawn_settings": {
       "biome_entity_Spawn_settings": {

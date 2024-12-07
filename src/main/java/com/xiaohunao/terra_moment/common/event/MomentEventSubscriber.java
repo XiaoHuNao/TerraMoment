@@ -1,5 +1,6 @@
 package com.xiaohunao.terra_moment.common.event;
 
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationConditionContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeConditionContext;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMMomentTypes;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
@@ -23,6 +24,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,15 +33,33 @@ import java.util.Set;
 public class MomentEventSubscriber {
 
     @SubscribeEvent
-    public static void onLevelTick(LevelTickEvent.Pre event) {
+    public static void slimeRain(LevelTickEvent.Pre event) {
         Level level = event.getLevel();
         if (!level.isClientSide){
             TimeConditionContext between = TimeConditionContext.between(1000, 9000);
-            if (between.matches(level.getDayTime()) && level.random.nextInt(225000) == 0) {
+            if (between.matches(level.getDayTime()) && level.random.nextInt(2250000 * 3) == 0) {
                 MomentInstance.create(TMMoments.SLIME_RAIN, (ServerLevel) level, BlockPos.ZERO,null);
             }
         }
     }
+
+    @SubscribeEvent
+    public static void bloodMoon(LevelTickEvent.Pre event) {
+        Level level = event.getLevel();
+        if (!level.isClientSide){
+
+            List<ServerPlayer> players = ((ServerLevel) level).getPlayers(serverPlayer -> true);
+            if (!players.isEmpty()) {
+                ServerPlayer serverPlayer = players.getFirst();
+                LocationConditionContext locationConditionContext = new LocationConditionContext.Builder().setValidMoonPhases(0).build();
+                TimeConditionContext timeConditionContext = TimeConditionContext.exactly(18000);
+                if (timeConditionContext.matches(level.getDayTime()) && locationConditionContext.matches((ServerLevel) level,serverPlayer.blockPosition()) && level.random.nextInt(9) == 0) {
+                    MomentInstance.create(TMMoments.BLOOD_MOON, (ServerLevel) level, serverPlayer.blockPosition(),null);
+                }
+            }
+        }
+    }
+
 
     @SubscribeEvent
     public static void torchGod(BlockEvent.EntityPlaceEvent event) {

@@ -1,0 +1,64 @@
+{
+  "type": "heaven_destiny_moment:default",
+  "clientSettingsContext": {
+    "clientMoonSettingsContext": {
+      "moon_color": 990000,
+      "moon_texture": "terra_moment:textures/gui/blood_moon.png"
+    },
+    "environmentColor": 990000
+  },
+  "moment_data_context": {
+    "conditions": [
+      {
+        "type": "heaven_destiny_moment:time",
+        "max": 22000,
+        "min": 14000
+      },
+      {
+        "type": "heaven_destiny_moment:location",
+        "validMoonPhases": [
+          0
+        ]
+      }
+    ],
+    "entity_spawn_settings": {
+      "biome_entity_Spawn_settings": {
+        "biome_mob_spawn_settings": {
+          "spawn_costs": {},
+          "spawners": {
+            "ambient": [],
+            "axolotls": [],
+            "creature": [],
+            "misc": [],
+            "monster": [
+              {
+                "type": "terra_entity:drippler",
+                "maxCount": 2,
+                "minCount": 1,
+                "weight": 20
+              }
+            ],
+            "underground_water_creature": [],
+            "water_ambient": [],
+            "water_creature": []
+          }
+        },
+        "spawn_category_multiplier": {
+          "monster": 2.0
+        }
+      },
+      "spawn_rule": {
+        "allow_original_biome_spawn_settings": true,
+        "ignoreLightLevel": true
+      }
+    }
+  },
+  "tips": {
+    "texts": {
+      "ready": {
+        "color": "#0F1B30",
+        "translate": "moment.tooltip.text.terra_moment.blood_moon"
+      }
+    }
+  }
+}

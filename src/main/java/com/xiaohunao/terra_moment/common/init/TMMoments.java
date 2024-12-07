@@ -2,13 +2,17 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentDataContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmountContext;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationConditionContext;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeConditionContext;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
@@ -41,11 +45,43 @@ public class TMMoments {
     public static final ResourceKey<Moment> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
 
     public static void bootstrap(BootstrapContext<Moment> context) {
-        register(context, SLIME_RAIN, new SlimeRainMoment(150)
-                .setArea(new LocationArea.Builder().build(builder -> builder
-                        .setDimension(Level.OVERWORLD)
+        register(context,BLOOD_MOON,new DefaultMoment()
+                .setMomentDataContext(new MomentDataContext.Builder()
+                        .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
+                                .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
+                                        .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),20,1,2)))
+                                                .spawnCategoryMultiplier(MobCategory.MONSTER,2.0D)
+                                )
+                                .rule(rule -> rule
+                                        .allowOriginalBiomeSpawnSettings(true)
+                                        .ignoreLightLevel()
+                                )
+                        )
+                        .addCondition(new LocationConditionContext.Builder()
+                                .setValidMoonPhases(0)
+                                .build(),
+                                TimeConditionContext.between(14000,22000)
+                        )
                         .build()
-                ))
+                )
+                .setClientSettingsContext(new ClientSettingsContext.Builder()
+                        .environmentColor(990000)
+                        .clientMoonSettingsContext(clientMoonSettingsContext -> clientMoonSettingsContext
+                                .moonColor(990000)
+                                .moonTexture(TerraMoment.asResource("textures/gui/blood_moon.png"))
+                        )
+                        .build()
+                )
+                .setTipSettingsContext(new TipSettingsContext.Builder()
+                        .tooltip(MomentState.READY,TerraMoment.asDescriptionId("blood_moon"),990000)
+                        .build()
+                )
+        );
+
+
+
+        register(context, SLIME_RAIN, new SlimeRainMoment(150)
                 .setMomentDataContext(new MomentDataContext.Builder()
                         .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
