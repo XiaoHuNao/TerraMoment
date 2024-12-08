@@ -51,7 +51,7 @@ public class TMMoments {
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),20,1,2)))
-                                                .spawnCategoryMultiplier(MobCategory.MONSTER,2.0D)
+                                                .spawnCategoryMultiplier(MobCategory.MONSTER,5.0D)
                                 )
                                 .rule(rule -> rule
                                         .allowOriginalBiomeSpawnSettings(true)
@@ -66,9 +66,9 @@ public class TMMoments {
                         .build()
                 )
                 .setClientSettingsContext(new ClientSettingsContext.Builder()
-                        .environmentColor(990000)
+                        .environmentColor(0xff0000)
                         .clientMoonSettingsContext(clientMoonSettingsContext -> clientMoonSettingsContext
-                                .moonColor(990000)
+                                .moonSize(40)
                                 .moonTexture(TerraMoment.asResource("textures/gui/blood_moon.png"))
                         )
                         .build()

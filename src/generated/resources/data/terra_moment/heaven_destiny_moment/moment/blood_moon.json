@@ -2,10 +2,10 @@
   "type": "heaven_destiny_moment:default",
   "clientSettingsContext": {
     "clientMoonSettingsContext": {
-      "moon_color": 990000,
+      "moon_size": 40.0,
       "moon_texture": "terra_moment:textures/gui/blood_moon.png"
     },
-    "environmentColor": 990000
+    "environmentColor": 16711680
   },
   "moment_data_context": {
     "conditions": [
@@ -44,7 +44,7 @@
           }
         },
         "spawn_category_multiplier": {
-          "monster": 2.0
+          "monster": 5.0
         }
       },
       "spawn_rule": {
