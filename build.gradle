@@ -121,6 +121,7 @@ dependencies {
 //    implementation files("com.xiaohunao:heaven_destiny_moment:0.0.1")
     implementation project(":HeavenDestinyMoment")
     implementation jarJar(project(":TerraEntity"))
+    implementation jarJar(project(":ParticleStorm"))
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"

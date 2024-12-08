@@ -2,10 +2,10 @@
     "format_version": "1.10.0",
     "particle_effect": {
         "description": {
-            "identifier": "terra_moment:normal_torch_projectile",
+            "identifier": "terra_moment:torch_god",
             "basic_render_parameters": {
-                "material": "particles_blend",
-                "texture": "terra_moment:flame"
+                "material": "particles_add",
+                "texture": "terra_moment:torch_god"
             }
         },
         "components": {
@@ -14,8 +14,8 @@
                 "rotation": false
             },
             "minecraft:emitter_rate_steady": {
-                "spawn_rate": 40,
-                "max_particles": 128
+                "spawn_rate": 90,
+                "max_particles": 200
             },
             "minecraft:emitter_lifetime_expression": {
                 "activation_expression": 1
@@ -28,9 +28,9 @@
                 "max_lifetime": 2
             },
             "minecraft:particle_expire_if_not_in_blocks": ["minecraft:air"],
-            "minecraft:particle_initial_speed": 0.1,
+            "minecraft:particle_initial_speed": "0.8-Math.random(0,1)*0.4",
             "minecraft:particle_motion_dynamic": {
-                "linear_acceleration": ["variable.emitter_random_1 * math.random(-0.5, 0.5)", "variable.emitter_random_2 * math.random(-0.5, 0.5)", "variable.emitter_random_3 * math.random(-0.5, 0.5)"]
+                "linear_drag_coefficient": -1
             },
             "minecraft:particle_appearance_billboard": {
                 "size": ["variable.size", "variable.size"],
@@ -43,7 +43,7 @@
                 }
             },
             "minecraft:particle_appearance_tinting": {
-                "color": [1, 0.66667, 0, 1]
+                "color": [1, 0.50588, 0.06275, 1]
             }
         }
     }
