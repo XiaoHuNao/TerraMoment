@@ -12,6 +12,8 @@ import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.Items;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -104,8 +107,8 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
                         maxAttacksForThisPos += extraAttacksForLastPos;
                     }
 
-                    TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos, level);
-                    Vec3 direction = player.position().subtract(Vec3.atCenterOf(blockPos)).normalize();
+                    TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos.getCenter(), level);
+                    Vec3 direction = player.getEyePosition().subtract(blockPos.getCenter()).normalize();
                     torchGodProjectile.setDeltaMovement(direction);
                     level.addFreshEntity(torchGodProjectile);
                     this.totalAttacksNeeded++;
@@ -163,5 +166,15 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     public void bindTorchGroup(Set<BlockPos> group){
         this.torchGroup = ImmutableSet.copyOf(group);
         this.lit =Lists.newArrayList(group);
+    }
+
+    @Override
+    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, BlockPos pos, @Nullable ServerPlayer player) {
+        return runMoments.values().stream().noneMatch(instance -> {
+            if (instance instanceof TorchGodInstance torchGodInstance) {
+                return !torchGodInstance.torchGroup.contains(pos);
+            }
+            return true;
+        });
     }
 }
