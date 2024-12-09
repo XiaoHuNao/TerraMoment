@@ -75,4 +75,6 @@ public class TorchGodMoment extends Moment {
     public int totalAttacksNeeded() {
         return totalAttacksNeeded;
     }
+
+
 }

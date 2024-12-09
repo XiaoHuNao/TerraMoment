@@ -137,7 +137,7 @@
     "texts": {
       "ready": {
         "color": "#6D99F9",
-        "translate": "moment.tooltip.text.terra_moment.slime_rain"
+        "translate": "moment.tooltip.text.ready.terra_moment.slime_rain"
       }
     }
   }

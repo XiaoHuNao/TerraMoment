@@ -11,7 +11,7 @@ public class TMItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraMoment.MODID);
 
     public static final DeferredHolder<Item,EventConsumableItem> SLIME_RAIN = ITEMS.register("slime_rain", () -> new EventConsumableItem(TMMoments.SLIME_RAIN));
-    public static final DeferredHolder<Item,BloodyTearItem> BLOOD_MOON = ITEMS.register("blood_moon", BloodyTearItem::new);
+    public static final DeferredHolder<Item,BloodyTearItem> BLOOD_TEAR = ITEMS.register("blood_tear", BloodyTearItem::new);
 //    public static final DeferredHolder<Item,Item> SANDSTORM = ITEMS.register("sandstorm", () -> new EventConsumableItem(ModMoments.SANDSTORM));
 //    public static final DeferredHolder<Item,Item> GOBLIN_ARMY = ITEMS.register("goblin_army", () -> new EventConsumableItem(ModMoments.GOBLIN_ARMY));
 //    public static final DeferredHolder<Item,Item> FROST_LEGION = ITEMS.register("frost_legion", () -> new EventConsumableItem(ModMoments.FROST_LEGION));

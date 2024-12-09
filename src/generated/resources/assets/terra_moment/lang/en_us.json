@@ -1,3 +1,6 @@
 {
-  "moment.tooltip.text.terra_moment.slime_rain": "Slime is falling from the sky!"
+  "item.terra_moment.blood_tear": "BloodTear",
+  "item.terra_moment.slime_rain": "SlimeRain",
+  "moment.tooltip.text.ready.terra_moment.blood_moon": "The Blood Moon is rising...",
+  "moment.tooltip.text.ready.terra_moment.slime_rain": "Slime is falling from the sky!"
 }

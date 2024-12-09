@@ -11,10 +11,10 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class ModRegistryProvider extends DatapackBuiltinEntriesProvider {
+public class TMRegistryProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder REGISTRY_SET_BUILDER = new RegistrySetBuilder().add(HDMRegistries.Keys.MOMENT, TMMoments::bootstrap);
 
-    public ModRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public TMRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, REGISTRY_SET_BUILDER, Set.of(TerraMoment.MODID, "minecraft"));
     }
 

@@ -5,11 +5,13 @@ import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.init.TMItems;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,27 +19,35 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
-public class ModLanguageProvider extends LanguageProvider {
+public class TMLanguageProvider extends LanguageProvider {
     private final Map<String, String> enData = new TreeMap<>();
     private final Map<String, String> zhData = new TreeMap<>();
     private final PackOutput output;
     private final String locale;
 
-    public ModLanguageProvider(PackOutput output, String locale) {
+    public TMLanguageProvider(PackOutput output, String locale) {
         super(output, TerraMoment.MODID, locale);
         this.output = output;
         this.locale = locale;
     }
     @Override
     protected void addTranslations() {
-        momentTooltip(TMMoments.SLIME_RAIN,
+        addItem(TMItems.SLIME_RAIN,"SlimeRain","史莱姆雨");
+        addItem(TMItems.BLOOD_TEAR,"BloodTear","血泪");
+
+        addMomentTooltip(TMMoments.BLOOD_MOON,
+                Map.of(MomentState.READY,"The Blood Moon is rising..."),
+                Map.of(MomentState.READY,"血月正在升起……")
+        );
+        addMomentTooltip(TMMoments.SLIME_RAIN,
                 Map.of(MomentState.READY,"Slime is falling from the sky!"),
                 Map.of(MomentState.READY,"史莱姆从天而降!")
         );
     }
 
-    private void momentTooltip(ResourceKey<Moment> key, Map<MomentState,String> en, Map<MomentState,String> zh){
+    private void addMomentTooltip(ResourceKey<Moment> key, Map<MomentState,String> en, Map<MomentState,String> zh){
         Moment moment = TMMoments.MOMENTS.getOrDefault(key, null);
         if (moment != null) {
             moment.tipSettingsContext()
@@ -48,6 +58,9 @@ public class ModLanguageProvider extends LanguageProvider {
                         }));
                     });
         }
+    }
+    private void addItem(Supplier<? extends Item> key, String en, String cn) {
+        this.add(key.get().getDescriptionId(), en, cn);
     }
 
     private void add(String key, String en, String zh) {

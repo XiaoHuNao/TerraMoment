@@ -57,7 +57,7 @@
     "texts": {
       "ready": {
         "color": "#0F1B30",
-        "translate": "moment.tooltip.text.terra_moment.blood_moon"
+        "translate": "moment.tooltip.text.ready.terra_moment.blood_moon"
       }
     }
   }

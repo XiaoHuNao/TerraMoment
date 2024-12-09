@@ -1,9 +1,9 @@
 package com.xiaohunao.terra_moment.common.data.gen;
 
-import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.terra_moment.common.data.gen.provider.ModLanguageProvider;
-import com.xiaohunao.terra_moment.common.data.gen.provider.ModRegistryProvider;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMLanguageProvider;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMRegistryProvider;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMItemModelProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -22,12 +22,15 @@ public class ModDataGenerator {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
         boolean server = event.includeServer();
+        boolean client = event.includeClient();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        generator.addProvider(server,new ModRegistryProvider(output, lookupProvider));
-        generator.addProvider(server, new ModLanguageProvider(output, "en_us"));
-        generator.addProvider(server, new ModLanguageProvider(output, "zh_cn"));
+
+        generator.addProvider(client, new TMItemModelProvider(output, existingFileHelper));
+        generator.addProvider(server, new TMRegistryProvider(output, lookupProvider));
+        generator.addProvider(server, new TMLanguageProvider(output, "en_us"));
+        generator.addProvider(server, new TMLanguageProvider(output, "zh_cn"));
     }
 
 }
