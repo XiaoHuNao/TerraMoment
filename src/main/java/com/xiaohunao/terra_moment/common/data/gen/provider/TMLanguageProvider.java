@@ -11,6 +11,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,8 @@ public class TMLanguageProvider extends LanguageProvider {
     }
     @Override
     protected void addTranslations() {
+        this.add("creative_tab." + TerraMoment.MODID + ".tab", "TerraMoment", "泰拉时刻");
+
         addItem(TMItems.SLIME_RAIN,"SlimeRain","史莱姆雨");
         addItem(TMItems.BLOOD_TEAR,"BloodTear","血泪");
 

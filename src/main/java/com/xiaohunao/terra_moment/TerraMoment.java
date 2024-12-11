@@ -30,6 +30,7 @@ public class TerraMoment {
         TMMomentTypes.MOMENT_TYPE.register(modEventBus);
         TMEntities.ENTITY_TYPE.register(modEventBus);
         TMParticleTypes.PARTICLE_TYPE.register(modEventBus);
+        TMCreativeModeTab.TABS.register(modEventBus);
     }
 
     public static ResourceLocation asResource(String path) {
