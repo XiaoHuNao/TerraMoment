@@ -1,12 +1,13 @@
 {
-  "type": "heaven_destiny_moment:default",
+  "type": "terra_moment:blood_moon",
   "clientSettingsContext": {
     "clientMoonSettingsContext": {
-      "moon_size": 40.0,
+      "moon_size": 25.0,
       "moon_texture": "terra_moment:textures/gui/blood_moon.png"
     },
     "environmentColor": 16711680
   },
+  "isCanSleep": false,
   "moment_data_context": {
     "conditions": [
       {
@@ -44,7 +45,7 @@
           }
         },
         "spawn_category_multiplier": {
-          "monster": 5.0
+          "monster": 3.0
         }
       },
       "spawn_rule": {
@@ -56,7 +57,7 @@
   "tips": {
     "texts": {
       "ready": {
-        "color": "#0F1B30",
+        "color": "#FF0000",
         "translate": "moment.tooltip.text.ready.terra_moment.blood_moon"
       }
     }
