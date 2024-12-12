@@ -1,6 +1,6 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationConditionContext;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
@@ -42,7 +42,7 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
         if (entity.level().isClientSide) return;
 
         BlockPos blockPos = entity.blockPosition();
-        LocationConditionContext locationCondition = LocationConditionContext.Builder.isCanSeeSky(true).build();
+        LocationCondition locationCondition = LocationCondition.Builder.isCanSeeSky(true).build();
 
         for (int i = 0; i < 10; i++) {
             BlockPos pos = blockPos.offset(0, 20, 0);

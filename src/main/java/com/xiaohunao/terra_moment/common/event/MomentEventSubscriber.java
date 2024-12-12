@@ -1,8 +1,7 @@
 package com.xiaohunao.terra_moment.common.event;
 
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationConditionContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeConditionContext;
-import com.xiaohunao.heaven_destiny_moment.common.init.HDMMomentTypes;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
@@ -36,7 +35,7 @@ public class MomentEventSubscriber {
     public static void slimeRain(LevelTickEvent.Pre event) {
         Level level = event.getLevel();
         if (!level.isClientSide){
-            TimeConditionContext between = TimeConditionContext.between(1000, 9000);
+            TimeCondition between = TimeCondition.between(1000, 9000);
             if (between.matches(level.getDayTime()) && level.random.nextInt(2250000 * 3) == 0) {
                 MomentInstance.create(TMMoments.SLIME_RAIN, (ServerLevel) level, BlockPos.ZERO,null);
             }
@@ -51,9 +50,9 @@ public class MomentEventSubscriber {
             List<ServerPlayer> players = ((ServerLevel) level).getPlayers(serverPlayer -> true);
             if (!players.isEmpty()) {
                 ServerPlayer serverPlayer = players.getFirst();
-                LocationConditionContext locationConditionContext = new LocationConditionContext.Builder().setValidMoonPhases(0).build();
-                TimeConditionContext timeConditionContext = TimeConditionContext.exactly(18000);
-                if (timeConditionContext.matches(level.getDayTime()) && locationConditionContext.matches((ServerLevel) level,serverPlayer.blockPosition()) && level.random.nextInt(9) == 0) {
+                LocationCondition locationCondition = new LocationCondition.Builder().setValidMoonPhases(0).build();
+                TimeCondition timeCondition = TimeCondition.exactly(18000);
+                if (timeCondition.matches(level.getDayTime()) && locationCondition.matches((ServerLevel) level,serverPlayer.blockPosition()) && level.random.nextInt(9) == 0) {
                     MomentInstance.create(TMMoments.BLOOD_MOON, (ServerLevel) level, serverPlayer.blockPosition(),null);
                 }
             }

@@ -1,7 +1,7 @@
 package com.xiaohunao.terra_moment.common.data.gen.provider;
 
 import com.google.gson.JsonObject;
-import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
+import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.terra_moment.TerraMoment;
@@ -11,7 +11,6 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +53,7 @@ public class TMLanguageProvider extends LanguageProvider {
         Moment moment = TMMoments.MOMENTS.getOrDefault(key, null);
         if (moment != null) {
             moment.tipSettingsContext()
-                    .flatMap(TipSettingsContext::texts)
+                    .flatMap(TipSettings::texts)
                     .ifPresent(texts ->{
                         texts.forEach(((state, component) -> {
                             add(component.getString(), en.getOrDefault(state, "null"), zh.getOrDefault(state, null));

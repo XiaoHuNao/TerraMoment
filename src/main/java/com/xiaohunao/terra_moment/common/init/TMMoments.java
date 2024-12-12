@@ -2,18 +2,19 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettingsContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.MomentDataContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.TipSettingsContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmountContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationConditionContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeConditionContext;
+import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
+import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
+import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
+import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -21,7 +22,6 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.TEEntities;
 
@@ -45,36 +45,36 @@ public class TMMoments {
     public static final ResourceKey<Moment> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
 
     public static void bootstrap(BootstrapContext<Moment> context) {
-        register(context,BLOOD_MOON,new DefaultMoment()
-                .setMomentDataContext(new MomentDataContext.Builder()
+        register(context,BLOOD_MOON,new BloodMoonMoment(false)
+                .setMomentDataContext(new MomentData.Builder()
                         .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),20,1,2)))
-                                                .spawnCategoryMultiplier(MobCategory.MONSTER,5.0D)
+                                                .spawnCategoryMultiplier(MobCategory.MONSTER,3.0D)
                                 )
                                 .rule(rule -> rule
                                         .allowOriginalBiomeSpawnSettings(true)
                                         .ignoreLightLevel()
                                 )
                         )
-                        .addCondition(new LocationConditionContext.Builder()
+                        .addCondition(new LocationCondition.Builder()
                                 .setValidMoonPhases(0)
                                 .build(),
-                                TimeConditionContext.between(14000,22000)
+                                TimeCondition.between(14000,22000)
                         )
                         .build()
                 )
-                .setClientSettingsContext(new ClientSettingsContext.Builder()
+                .setClientSettingsContext(new ClientSettings.Builder()
                         .environmentColor(0xff0000)
                         .clientMoonSettingsContext(clientMoonSettingsContext -> clientMoonSettingsContext
-                                .moonSize(40)
+                                .moonSize(25)
                                 .moonTexture(TerraMoment.asResource("textures/gui/blood_moon.png"))
                         )
                         .build()
                 )
-                .setTipSettingsContext(new TipSettingsContext.Builder()
-                        .tooltip(MomentState.READY,TerraMoment.asDescriptionId("blood_moon"),990000)
+                .setTipSettingsContext(new TipSettings.Builder()
+                        .tooltip(MomentState.READY,TerraMoment.asDescriptionId("blood_moon"),0xff0000)
                         .build()
                 )
         );
@@ -82,7 +82,7 @@ public class TMMoments {
 
 
         register(context, SLIME_RAIN, new SlimeRainMoment(150)
-                .setMomentDataContext(new MomentDataContext.Builder()
+                .setMomentDataContext(new MomentData.Builder()
                         .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
@@ -115,14 +115,14 @@ public class TMMoments {
                         .build()
                 )
                 .setTipSettingsContext(
-                        new TipSettingsContext.Builder()
+                        new TipSettings.Builder()
                                 .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"), 0x6d99f9)
                                 .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
                                 .build())
         );
 
 
-        register(context, TORCH_GOD, new TorchGodMoment(50,100,new RandomAmountContext(2,3))
+        register(context, TORCH_GOD, new TorchGodMoment(50,100,new RandomAmount(2,3))
                 .setArea(new LocationArea.Builder().build(builder -> builder
                                 .setY(MinMaxBounds.Doubles.between(-64, 0))
                                 .build()
