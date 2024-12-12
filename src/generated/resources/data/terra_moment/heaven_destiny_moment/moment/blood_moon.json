@@ -16,6 +16,9 @@
         "min": 14000
       },
       {
+        "type": "heaven_destiny_moment:world_unique_moment"
+      },
+      {
         "type": "heaven_destiny_moment:location",
         "validMoonPhases": [
           0

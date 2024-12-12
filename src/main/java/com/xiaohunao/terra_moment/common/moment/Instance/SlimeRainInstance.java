@@ -84,9 +84,4 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
             setState(MomentState.VICTORY);
         }
     }
-
-    @Override
-    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, BlockPos pos, @Nullable ServerPlayer player) {
-        return runMoments.values().stream().noneMatch(instance -> instance instanceof SlimeRainInstance);
-    }
 }

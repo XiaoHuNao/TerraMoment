@@ -8,6 +8,7 @@ import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
@@ -61,7 +62,8 @@ public class TMMoments {
                         .addCondition(new LocationCondition.Builder()
                                 .setValidMoonPhases(0)
                                 .build(),
-                                TimeCondition.between(14000,22000)
+                                TimeCondition.between(14000,22000),
+                                WorldUniqueMomentCondition.DEFAULT
                         )
                         .build()
                 )
@@ -111,6 +113,9 @@ public class TMMoments {
                                         .slimesSpawnEverywhere()
                                         .ignoreDistance()
                                 )
+                        )
+                        .addCondition(
+                                WorldUniqueMomentCondition.DEFAULT
                         )
                         .build()
                 )
