@@ -1,11 +1,13 @@
 {
   "type": "terra_moment:slime_rain",
   "moment_data_context": {
-    "conditions": [
-      {
-        "type": "heaven_destiny_moment:world_unique_moment"
-      }
-    ],
+    "conditionGroup": {
+      "create": [
+        {
+          "type": "heaven_destiny_moment:world_unique_moment"
+        }
+      ]
+    },
     "entity_spawn_settings": {
       "biome_entity_Spawn_settings": {
         "biome_mob_spawn_settings": {

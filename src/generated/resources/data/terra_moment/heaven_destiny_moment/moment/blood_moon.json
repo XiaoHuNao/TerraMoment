@@ -9,22 +9,31 @@
   },
   "isCanSleep": false,
   "moment_data_context": {
-    "conditions": [
-      {
-        "type": "heaven_destiny_moment:time",
-        "max": 22000,
-        "min": 14000
-      },
-      {
-        "type": "heaven_destiny_moment:world_unique_moment"
-      },
-      {
-        "type": "heaven_destiny_moment:location",
-        "validMoonPhases": [
-          0
-        ]
-      }
-    ],
+    "conditionGroup": {
+      "create": [
+        {
+          "type": "heaven_destiny_moment:location",
+          "validMoonPhases": [
+            0
+          ]
+        },
+        {
+          "type": "heaven_destiny_moment:time",
+          "max": 22000,
+          "min": 14000
+        },
+        {
+          "type": "heaven_destiny_moment:world_unique_moment"
+        }
+      ],
+      "end": [
+        {
+          "type": "heaven_destiny_moment:time",
+          "max": 11000,
+          "min": 23000
+        }
+      ]
+    },
     "entity_spawn_settings": {
       "biome_entity_Spawn_settings": {
         "biome_mob_spawn_settings": {

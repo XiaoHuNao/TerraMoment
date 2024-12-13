@@ -13,7 +13,6 @@ import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
@@ -31,24 +30,24 @@ public class TMMoments {
 
 
     public static final ResourceKey<Moment> SLIME_RAIN = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "slime_rain");
-    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "sandstorm");
     public static final ResourceKey<Moment> BLOOD_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "blood_moon");
-    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "goblin_army");
-    public static final ResourceKey<Moment> FROST_LEGION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_legion");
-    public static final ResourceKey<Moment> SOLAR_ECLIPSE = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "solar_eclipse");
-    public static final ResourceKey<Moment> PIRATE_INVASION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "pirate_invasion");
-    public static final ResourceKey<Moment> PUMPKIN_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "pumpkin_moon");
-    public static final ResourceKey<Moment> FROST_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_moon");
-    public static final ResourceKey<Moment> MARTIAN_MADNESS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "martian_madness");
-    public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "lunar_events");
+//    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "sandstorm");
+//    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "goblin_army");
+//    public static final ResourceKey<Moment> FROST_LEGION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_legion");
+//    public static final ResourceKey<Moment> SOLAR_ECLIPSE = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "solar_eclipse");
+//    public static final ResourceKey<Moment> PIRATE_INVASION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "pirate_invasion");
+//    public static final ResourceKey<Moment> PUMPKIN_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "pumpkin_moon");
+//    public static final ResourceKey<Moment> FROST_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_moon");
+//    public static final ResourceKey<Moment> MARTIAN_MADNESS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "martian_madness");
+//    public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "lunar_events");
 
 
     public static final ResourceKey<Moment> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
 
     public static void bootstrap(BootstrapContext<Moment> context) {
         register(context,BLOOD_MOON,new BloodMoonMoment(false)
-                .setMomentDataContext(new MomentData.Builder()
-                        .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
+                .setMomentData(new MomentData.Builder()
+                        .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),20,1,2)))
@@ -59,15 +58,21 @@ public class TMMoments {
                                         .ignoreLightLevel()
                                 )
                         )
-                        .addCondition(new LocationCondition.Builder()
-                                .setValidMoonPhases(0)
-                                .build(),
-                                TimeCondition.between(14000,22000),
-                                WorldUniqueMomentCondition.DEFAULT
+                        .conditionGroup(conditionGroup -> conditionGroup
+                                .create(
+                                    new LocationCondition.Builder()
+                                        .setValidMoonPhases(0)
+                                        .build(),
+                                    TimeCondition.between(14000,22000),
+                                    WorldUniqueMomentCondition.DEFAULT
+                                )
+                                .end(
+                                     TimeCondition.between(23000,11000)
+                                )
                         )
                         .build()
                 )
-                .setClientSettingsContext(new ClientSettings.Builder()
+                .setClientSettings(new ClientSettings.Builder()
                         .environmentColor(0xff0000)
                         .clientMoonSettingsContext(clientMoonSettingsContext -> clientMoonSettingsContext
                                 .moonSize(25)
@@ -75,7 +80,7 @@ public class TMMoments {
                         )
                         .build()
                 )
-                .setTipSettingsContext(new TipSettings.Builder()
+                .setTipSettings(new TipSettings.Builder()
                         .tooltip(MomentState.READY,TerraMoment.asDescriptionId("blood_moon"),0xff0000)
                         .build()
                 )
@@ -84,8 +89,8 @@ public class TMMoments {
 
 
         register(context, SLIME_RAIN, new SlimeRainMoment(150)
-                .setMomentDataContext(new MomentData.Builder()
-                        .mobSpawnSettings(mobSpawnSettings -> mobSpawnSettings
+                .setMomentData(new MomentData.Builder()
+                        .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLUE_SLIME.get(), 20, 1, 1))
@@ -114,12 +119,14 @@ public class TMMoments {
                                         .ignoreDistance()
                                 )
                         )
-                        .addCondition(
-                                WorldUniqueMomentCondition.DEFAULT
+                        .conditionGroup(conditionGroup -> conditionGroup
+                                .create(
+                                        WorldUniqueMomentCondition.DEFAULT
+                                )
                         )
                         .build()
                 )
-                .setTipSettingsContext(
+                .setTipSettings(
                         new TipSettings.Builder()
                                 .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"), 0x6d99f9)
                                 .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
