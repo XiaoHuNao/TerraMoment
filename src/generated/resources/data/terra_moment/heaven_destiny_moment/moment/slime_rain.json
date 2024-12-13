@@ -2,11 +2,22 @@
   "type": "terra_moment:slime_rain",
   "moment_data_context": {
     "conditionGroup": {
-      "create": [
-        {
-          "type": "heaven_destiny_moment:world_unique_moment"
-        }
-      ]
+      "create": {
+        "conditions": [
+          {
+            "type": "heaven_destiny_moment:time",
+            "max": 9000,
+            "min": 1000
+          },
+          {
+            "type": "heaven_destiny_moment:auto_probability",
+            "probability": 2250000
+          },
+          {
+            "type": "heaven_destiny_moment:world_unique_moment"
+          }
+        ]
+      }
     },
     "entity_spawn_settings": {
       "biome_entity_Spawn_settings": {
