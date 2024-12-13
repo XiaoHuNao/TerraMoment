@@ -166,7 +166,7 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
 
     @Override
     public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, BlockPos pos, @Nullable ServerPlayer player) {
-        return runMoments.values().stream().noneMatch(instance -> {
+        return runMoments.values().stream().allMatch(instance -> {
             if (instance instanceof TorchGodInstance torchGodInstance) {
                 return !torchGodInstance.torchGroup.contains(pos);
             }
