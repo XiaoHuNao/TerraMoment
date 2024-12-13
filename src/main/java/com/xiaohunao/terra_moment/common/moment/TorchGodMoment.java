@@ -23,9 +23,9 @@ public class TorchGodMoment extends Moment {
     public static final MapCodec<TorchGodMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             HDMRegistries.BAR_RENDER_TYPE.byNameCodec().optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
-            MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentDataContext),
-            TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettingsContext),
-            ClientSettings.CODEC.optionalFieldOf("clientSettingsContext").forGetter(Moment::clientSettingsContext),
+            MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
+            TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
+            ClientSettings.CODEC.optionalFieldOf("clientSettingsContext").forGetter(Moment::clientSettings),
             Codec.INT.fieldOf("mixTorchCount").forGetter(TorchGodMoment::mixTorchCount),
             Codec.INT.fieldOf("totalAttacksNeeded").forGetter(TorchGodMoment::totalAttacksNeeded),
             RandomAmount.CODEC.fieldOf("multiAttackBarrage").forGetter(TorchGodMoment::multiAttackBarrage)
