@@ -6,6 +6,7 @@ import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.AutoProbabilityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.WorldUniqueMomentCondition;
@@ -59,10 +60,11 @@ public class TMMoments {
                                 )
                         )
                         .conditionGroup(conditionGroup -> conditionGroup
-                                .create(
+                                .create(true,
                                     new LocationCondition.Builder()
                                         .setValidMoonPhases(0)
                                         .build(),
+                                    new AutoProbabilityCondition(333),
                                     TimeCondition.between(14000,22000),
                                     WorldUniqueMomentCondition.DEFAULT
                                 )
@@ -120,7 +122,9 @@ public class TMMoments {
                                 )
                         )
                         .conditionGroup(conditionGroup -> conditionGroup
-                                .create(
+                                .create(true,
+                                        TimeCondition.between(1000, 9000),
+                                        new AutoProbabilityCondition(2250000),
                                         WorldUniqueMomentCondition.DEFAULT
                                 )
                         )

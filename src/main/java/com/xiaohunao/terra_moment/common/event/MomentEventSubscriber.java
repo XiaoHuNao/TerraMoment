@@ -32,35 +32,6 @@ import java.util.Set;
 public class MomentEventSubscriber {
 
     @SubscribeEvent
-    public static void slimeRain(LevelTickEvent.Pre event) {
-        Level level = event.getLevel();
-        if (!level.isClientSide){
-            TimeCondition between = TimeCondition.between(1000, 9000);
-            if (between.matches(level.getDayTime()) && level.random.nextInt(2250000 * 3) == 0) {
-                MomentInstance.create(TMMoments.SLIME_RAIN, (ServerLevel) level, BlockPos.ZERO,null);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void bloodMoon(LevelTickEvent.Pre event) {
-        Level level = event.getLevel();
-        if (!level.isClientSide){
-
-            List<ServerPlayer> players = ((ServerLevel) level).getPlayers(serverPlayer -> true);
-            if (!players.isEmpty()) {
-                ServerPlayer serverPlayer = players.getFirst();
-                LocationCondition locationCondition = new LocationCondition.Builder().setValidMoonPhases(0).build();
-                TimeCondition timeCondition = TimeCondition.exactly(18000);
-                if (timeCondition.matches(level.getDayTime()) && locationCondition.matches((ServerLevel) level,serverPlayer.blockPosition()) && level.random.nextInt(9) == 0) {
-                    MomentInstance.create(TMMoments.BLOOD_MOON, (ServerLevel) level, serverPlayer.blockPosition(),null);
-                }
-            }
-        }
-    }
-
-
-    @SubscribeEvent
     public static void torchGod(BlockEvent.EntityPlaceEvent event) {
         LevelAccessor level = event.getLevel();
         Entity entity = event.getEntity();
