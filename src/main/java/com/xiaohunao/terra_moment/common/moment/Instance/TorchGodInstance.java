@@ -128,10 +128,11 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
         });
     }
 
-    public static Set<BlockPos> updateTorchGroup(BlockPos startPos, Level level){
+    public static Set<BlockPos> updateTorchGroup(BlockPos startPos, Level level, int count) {
         Queue<BlockPos> queue = new LinkedList<>();
         Set<BlockPos> visited = Sets.newHashSet();
         Set<BlockPos> torchGroup = Sets.newHashSet();
+
 
         queue.add(startPos);
         visited.add(startPos);
@@ -140,18 +141,30 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
             torchGroup.add(startPos);
         }
 
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+
         while (!queue.isEmpty()) {
             BlockPos currentPos = queue.poll();
 
             if (level.getBlockState(currentPos).getBlock() instanceof BaseTorchBlock) {
                 torchGroup.add(currentPos);
 
-                for (Direction dir : Direction.values()) {
-                    BlockPos neighborPos = currentPos.relative(dir);
+                if (torchGroup.size() >= count) {
+                    return torchGroup;
+                }
 
-                    if (!visited.contains(neighborPos)) {
-                        visited.add(neighborPos);
-                        queue.add(neighborPos);
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dy = -1; dy <= 1; dy++) {
+                        for (int dz = -1; dz <= 1; dz++) {
+                            if (dx == 0 && dy == 0 && dz == 0) continue;
+
+                            mutablePos.set(currentPos.getX() + dx, currentPos.getY() + dy, currentPos.getZ() + dz);
+
+                            if (!visited.contains(mutablePos)) {
+                                visited.add(mutablePos.immutable());
+                                queue.add(mutablePos.immutable());
+                            }
+                        }
                     }
                 }
             }
