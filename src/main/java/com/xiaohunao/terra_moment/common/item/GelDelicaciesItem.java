@@ -12,9 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class BloodyTearItem extends EventConsumableItem{
-    public BloodyTearItem() {
-        super(TMMoments.BLOOD_MOON);
+public class GelDelicaciesItem extends EventConsumableItem{
+    public GelDelicaciesItem() {
+        super(TMMoments.SLIME_RAIN);
     }
 
     @Override
@@ -22,11 +22,9 @@ public class BloodyTearItem extends EventConsumableItem{
         ItemStack itemStack = player.getItemInHand(usedHand);
         if (level instanceof ServerLevel serverLevel){
             long dayTime = serverLevel.getDayTime();
-            int currentMoonPhase = level.getMoonPhase();
-            long cyclesToNextFullMoon = (8 - currentMoonPhase) % 8;
-            long nextFullMoonTime = (dayTime / 24000L) * 24000L + cyclesToNextFullMoon * 24000L + 14000L;
-            serverLevel.setDayTime(nextFullMoonTime);
-            PacketDistributor.sendToPlayersInDimension(serverLevel, new TimeSyncPayload(nextFullMoonTime));
+            long nextTime = dayTime + ((1000 - dayTime % 24000 + 24000) % 24000);
+            serverLevel.setDayTime(nextTime);
+            PacketDistributor.sendToPlayersInDimension(serverLevel, new TimeSyncPayload(nextTime));
             MomentInstance.create(momentResourceKey, serverLevel,player.blockPosition(), (ServerPlayer) player);
             return InteractionResultHolder.consume(itemStack);
         }

@@ -3,6 +3,7 @@
   "moment_data_context": {
     "conditionGroup": {
       "create": {
+        "auto": true,
         "conditions": [
           {
             "type": "heaven_destiny_moment:time",
@@ -149,9 +150,6 @@
   },
   "requiredKills": 150,
   "tips": {
-    "soundEvents": {
-      "ready": "minecraft:item.goat_horn.sound.2"
-    },
     "texts": {
       "ready": {
         "color": "#6D99F9",

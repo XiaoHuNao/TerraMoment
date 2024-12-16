@@ -40,7 +40,7 @@ public class MomentEventSubscriber {
             if (placedBlock.getBlock() instanceof BaseTorchBlock) {
                 BlockPos startPos = event.getPos();
 
-                Set<BlockPos> torchGroup = TorchGodInstance.updateTorchGroup(startPos, serverLevel);
+                Set<BlockPos> torchGroup = TorchGodInstance.updateTorchGroup(startPos, serverLevel,50);
 
                 Registry<Moment> moments = level.registryAccess().registryOrThrow(HDMRegistries.Keys.MOMENT);
                 moments.entrySet().stream()

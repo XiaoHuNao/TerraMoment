@@ -3,6 +3,7 @@ package com.xiaohunao.terra_moment.common.init;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.item.BloodyTearItem;
 import com.xiaohunao.terra_moment.common.item.EventConsumableItem;
+import com.xiaohunao.terra_moment.common.item.GelDelicaciesItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -10,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class TMItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TerraMoment.MODID);
 
-    public static final DeferredHolder<Item,EventConsumableItem> SLIME_RAIN = ITEMS.register("slime_rain", () -> new EventConsumableItem(TMMoments.SLIME_RAIN));
+    public static final DeferredHolder<Item,GelDelicaciesItem> SLIME_RAIN = ITEMS.register("slime_rain", GelDelicaciesItem::new);
     public static final DeferredHolder<Item,BloodyTearItem> BLOOD_TEAR = ITEMS.register("blood_tear", BloodyTearItem::new);
 //    public static final DeferredHolder<Item,Item> SANDSTORM = ITEMS.register("sandstorm", () -> new EventConsumableItem(ModMoments.SANDSTORM));
 //    public static final DeferredHolder<Item,Item> GOBLIN_ARMY = ITEMS.register("goblin_army", () -> new EventConsumableItem(ModMoments.GOBLIN_ARMY));

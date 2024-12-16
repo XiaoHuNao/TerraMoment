@@ -84,6 +84,7 @@ public class TMMoments {
                 )
                 .setTipSettings(new TipSettings.Builder()
                         .tooltip(MomentState.READY,TerraMoment.asDescriptionId("blood_moon"),0xff0000)
+                        .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
                         .build()
                 )
         );
@@ -133,7 +134,6 @@ public class TMMoments {
                 .setTipSettings(
                         new TipSettings.Builder()
                                 .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"), 0x6d99f9)
-                                .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
                                 .build())
         );
 
