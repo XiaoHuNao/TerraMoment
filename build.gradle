@@ -26,6 +26,10 @@ repositories {
             includeGroup "com.github.rtyley"
         }
     }
+
+    maven {
+        url "https://cursemaven.com"
+    }
 }
 
 base {

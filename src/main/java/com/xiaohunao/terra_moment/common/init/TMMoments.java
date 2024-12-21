@@ -47,7 +47,7 @@ public class TMMoments {
 
     public static void bootstrap(BootstrapContext<Moment> context) {
         register(context,BLOOD_MOON,new BloodMoonMoment(false)
-                .setMomentData(new MomentData.Builder()
+                .setMomentData(momentData -> momentData
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
@@ -72,27 +72,24 @@ public class TMMoments {
                                      TimeCondition.between(23000,11000)
                                 )
                         )
-                        .build()
                 )
-                .setClientSettings(new ClientSettings.Builder()
+                .setClientSettings(clientSettings -> clientSettings
                         .environmentColor(0xff0000)
                         .clientMoonSettingsContext(clientMoonSettingsContext -> clientMoonSettingsContext
                                 .moonSize(25)
                                 .moonTexture(TerraMoment.asResource("textures/gui/blood_moon.png"))
                         )
-                        .build()
                 )
-                .setTipSettings(new TipSettings.Builder()
+                .setTipSettings(tipSettings -> tipSettings
                         .tooltip(MomentState.READY,TerraMoment.asDescriptionId("blood_moon"),0xff0000)
                         .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
-                        .build()
                 )
         );
 
 
 
         register(context, SLIME_RAIN, new SlimeRainMoment(150)
-                .setMomentData(new MomentData.Builder()
+                .setMomentData(momentData -> momentData
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
@@ -129,12 +126,10 @@ public class TMMoments {
                                         WorldUniqueMomentCondition.DEFAULT
                                 )
                         )
-                        .build()
                 )
-                .setTipSettings(
-                        new TipSettings.Builder()
+                .setTipSettings(tipSettings -> tipSettings
                                 .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"), 0x6d99f9)
-                                .build())
+                )
         );
 
 
