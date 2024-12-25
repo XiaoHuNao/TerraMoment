@@ -2,6 +2,7 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
@@ -10,10 +11,12 @@ import com.xiaohunao.heaven_destiny_moment.common.context.condition.AutoProbabil
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.WorldUniqueMomentCondition;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMBarRenderTypes;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;

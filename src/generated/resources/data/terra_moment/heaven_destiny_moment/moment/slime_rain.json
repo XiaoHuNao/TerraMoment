@@ -12,7 +12,7 @@
           },
           {
             "type": "heaven_destiny_moment:auto_probability",
-            "probability": 2250000
+            "probability": 6750000
           },
           {
             "type": "heaven_destiny_moment:world_unique_moment"
