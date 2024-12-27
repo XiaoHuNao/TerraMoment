@@ -26,11 +26,11 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
     //-1 noExists  0 death  1 Exists
     private boolean isSlimeKingExists = false;
 
-    public SlimeRainInstance(Level level, ResourceKey<Moment> momentKey) {
+    public SlimeRainInstance(Level level, ResourceKey<Moment<?>> momentKey) {
         super(TMMomentTypes.SLIME_RAIN.get(), level, momentKey);
     }
 
-    public SlimeRainInstance(UUID uuid, Level level, ResourceKey<Moment> momentKey) {
+    public SlimeRainInstance(UUID uuid, Level level, ResourceKey<Moment<?>> momentKey) {
         super(TMMomentTypes.SLIME_RAIN.get(), uuid, level, momentKey);
     }
 

@@ -24,11 +24,11 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.TEEntities;
 
 public class TMMoments {
-    public static final BiMap<ResourceKey<Moment>, Moment> MOMENTS = HashBiMap.create();
+    public static final BiMap<ResourceKey<Moment<?>>, Moment<?>> MOMENTS = HashBiMap.create();
 
 
-    public static final ResourceKey<Moment> SLIME_RAIN = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "slime_rain");
-    public static final ResourceKey<Moment> BLOOD_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "blood_moon");
+    public static final ResourceKey<Moment<?>> SLIME_RAIN = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "slime_rain");
+    public static final ResourceKey<Moment<?>> BLOOD_MOON = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "blood_moon");
 //    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "sandstorm");
 //    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "goblin_army");
 //    public static final ResourceKey<Moment> FROST_LEGION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_legion");
@@ -40,9 +40,9 @@ public class TMMoments {
 //    public static final ResourceKey<Moment> LUNAR_EVENTS = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "lunar_events");
 
 
-    public static final ResourceKey<Moment> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
+    public static final ResourceKey<Moment<?>> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
 
-    public static void bootstrap(BootstrapContext<Moment> context) {
+    public static void bootstrap(BootstrapContext<Moment<?>> context) {
         register(context,BLOOD_MOON,new BloodMoonMoment(false)
                 .setMomentData(momentData -> momentData
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
@@ -139,7 +139,7 @@ public class TMMoments {
         );
     }
 
-    private static void register(BootstrapContext<Moment> context, ResourceKey<Moment> key, Moment value) {
+    private static void register(BootstrapContext<Moment<?>> context, ResourceKey<Moment<?>> key, Moment<?> value) {
         context.register(key, value);
         MOMENTS.put(key, value);
     }

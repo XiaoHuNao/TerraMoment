@@ -12,11 +12,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 
 public class TMContextRegister {
-    public static final DeferredRegister<MapCodec<? extends Moment>> MOMENT_CODEC = DeferredRegister.create(HDMRegistries.Keys.MOMENT_CODEC, TerraMoment.MODID);
+    public static final DeferredRegister<MapCodec<? extends Moment<?>>> MOMENT_CODEC = DeferredRegister.create(HDMRegistries.Keys.MOMENT_CODEC, TerraMoment.MODID);
 
 
-    public static final DeferredHolder<MapCodec<? extends Moment>, MapCodec<? extends Moment>> SLIME_RAIN = MOMENT_CODEC.register("slime_rain", () -> SlimeRainMoment.CODEC);
-    public static final DeferredHolder<MapCodec<? extends Moment>, MapCodec<? extends Moment>> TORCH_GOD = MOMENT_CODEC.register("torch_god", () -> TorchGodMoment.CODEC);
-    public static final DeferredHolder<MapCodec<? extends Moment>, MapCodec<? extends Moment>> BLOOD_MOON = MOMENT_CODEC.register("blood_moon", () -> BloodMoonMoment.CODEC);
+    public static final DeferredHolder<MapCodec<? extends Moment<?>>, MapCodec<SlimeRainMoment>> SLIME_RAIN = MOMENT_CODEC.register("slime_rain", () -> SlimeRainMoment.CODEC);
+    public static final DeferredHolder<MapCodec<? extends Moment<?>>, MapCodec<TorchGodMoment>> TORCH_GOD = MOMENT_CODEC.register("torch_god", () -> TorchGodMoment.CODEC);
+    public static final DeferredHolder<MapCodec<? extends Moment<?>>, MapCodec<BloodMoonMoment>> BLOOD_MOON = MOMENT_CODEC.register("blood_moon", () -> BloodMoonMoment.CODEC);
 
 }

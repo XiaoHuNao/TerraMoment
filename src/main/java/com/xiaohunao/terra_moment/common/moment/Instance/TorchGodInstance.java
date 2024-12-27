@@ -33,11 +33,11 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
 
 
 
-    public TorchGodInstance(Level level, ResourceKey<Moment> momentKey) {
+    public TorchGodInstance(Level level, ResourceKey<Moment<?>> momentKey) {
         super(TMMomentTypes.TORCH_GOD.get(), level, momentKey);
     }
 
-    public TorchGodInstance(UUID uuid, Level level, ResourceKey<Moment> momentKey) {
+    public TorchGodInstance(UUID uuid, Level level, ResourceKey<Moment<?>> momentKey) {
         super(TMMomentTypes.TORCH_GOD.get(), uuid, level, momentKey);
     }
 

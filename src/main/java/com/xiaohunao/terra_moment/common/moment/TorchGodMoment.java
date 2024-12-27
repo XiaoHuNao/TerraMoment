@@ -19,9 +19,9 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public class TorchGodMoment extends Moment {
+public class TorchGodMoment extends Moment<TorchGodMoment> {
     public static final MapCodec<TorchGodMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            HDMRegistries.BAR_RENDER_TYPE.byNameCodec().optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
+            IBarRenderType.CODEC.optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
@@ -51,12 +51,7 @@ public class TorchGodMoment extends Moment {
     }
 
     @Override
-    public MomentInstance<TorchGodMoment> newMomentInstance(Level level, ResourceKey<Moment> momentResourceKey) {
-        return new TorchGodInstance(level,momentResourceKey);
-    }
-
-    @Override
-    public MapCodec<? extends Moment> codec() {
+    public MapCodec<? extends Moment<TorchGodMoment>> codec() {
         return TMContextRegister.TORCH_GOD.get();
     }
 
@@ -72,5 +67,8 @@ public class TorchGodMoment extends Moment {
         return totalAttacksNeeded;
     }
 
-
+    @Override
+    public MomentInstance<?> newMomentInstance(Level level, ResourceKey<Moment<?>> momentResourceKey) {
+        return new TorchGodInstance(level,momentResourceKey);
+    }
 }
