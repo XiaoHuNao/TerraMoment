@@ -1,7 +1,5 @@
 package com.xiaohunao.terra_moment.common.event;
 
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
@@ -13,17 +11,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseTorchBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
