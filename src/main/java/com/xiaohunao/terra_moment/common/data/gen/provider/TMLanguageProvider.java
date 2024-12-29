@@ -49,8 +49,8 @@ public class TMLanguageProvider extends LanguageProvider {
         );
     }
 
-    private void addMomentTooltip(ResourceKey<Moment> key, Map<MomentState,String> en, Map<MomentState,String> zh){
-        Moment moment = TMMoments.MOMENTS.getOrDefault(key, null);
+    private void addMomentTooltip(ResourceKey<Moment<?>> key, Map<MomentState,String> en, Map<MomentState,String> zh){
+        Moment<?> moment = TMMoments.MOMENTS.getOrDefault(key, null);
         if (moment != null) {
             moment.tipSettings()
                     .flatMap(TipSettings::texts)

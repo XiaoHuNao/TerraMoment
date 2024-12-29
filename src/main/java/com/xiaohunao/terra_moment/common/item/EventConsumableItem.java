@@ -13,8 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class EventConsumableItem extends Item {
-    protected ResourceKey<Moment> momentResourceKey;
-    public EventConsumableItem(ResourceKey<Moment> momentResourceKey) {
+    protected ResourceKey<Moment<?>> momentResourceKey;
+    public EventConsumableItem(ResourceKey<Moment<?>> momentResourceKey) {
         super(new Properties());
         this.momentResourceKey = momentResourceKey;
     }

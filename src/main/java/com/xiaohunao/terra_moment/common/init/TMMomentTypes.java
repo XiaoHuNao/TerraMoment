@@ -16,11 +16,11 @@ public class TMMomentTypes {
 
 
     public static final DeferredHolder<MomentType<?>, MomentType<SlimeRainInstance>> SLIME_RAIN = MOMENT_TYPE.register("slime_rain",
-            () -> MomentType.builder(SlimeRainInstance::new, DefaultMoment.class).build());
+            () -> new MomentType.Builder<>(SlimeRainInstance::new).build());
 
     public static final DeferredHolder<MomentType<?>, MomentType<TorchGodInstance>> TORCH_GOD = MOMENT_TYPE.register("torch_god",
-            () -> MomentType.builder(TorchGodInstance::new, DefaultMoment.class).build());
+            () -> new MomentType.Builder<>(TorchGodInstance::new).build());
 
     public static final DeferredHolder<MomentType<?>, MomentType<DefaultInstance>> BLOOD_MOON = MOMENT_TYPE.register("blood_moon",
-            () -> MomentType.builder(DefaultInstance::new, BloodMoonMoment.class).build());
+            () -> new MomentType.Builder<>(DefaultInstance::new).build());
 }
