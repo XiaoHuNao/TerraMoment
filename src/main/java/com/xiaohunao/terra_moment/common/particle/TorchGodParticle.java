@@ -1,9 +1,7 @@
 package com.xiaohunao.terra_moment.common.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.xiaohunao.terra_moment.common.init.ParticleRenderTypes;
 import com.xiaohunao.terra_moment.common.particle.options.TorchGodParticleOptions;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.LightTexture;

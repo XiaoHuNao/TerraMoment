@@ -1,9 +1,7 @@
 package com.xiaohunao.terra_moment.common.init;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.terra_moment.common.particle.TorchGodParticle;
 import com.xiaohunao.terra_moment.common.particle.options.TorchGodParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;

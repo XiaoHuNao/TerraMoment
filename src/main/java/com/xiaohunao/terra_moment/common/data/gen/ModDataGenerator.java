@@ -1,9 +1,9 @@
 package com.xiaohunao.terra_moment.common.data.gen;
 
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMItemModelProvider;
 import com.xiaohunao.terra_moment.common.data.gen.provider.TMLanguageProvider;
 import com.xiaohunao.terra_moment.common.data.gen.provider.TMRegistryProvider;
-import com.xiaohunao.terra_moment.common.data.gen.provider.TMItemModelProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;

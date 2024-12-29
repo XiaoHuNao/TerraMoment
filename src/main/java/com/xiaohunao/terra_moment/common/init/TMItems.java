@@ -2,7 +2,6 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.item.BloodyTearItem;
-import com.xiaohunao.terra_moment.common.item.EventConsumableItem;
 import com.xiaohunao.terra_moment.common.item.GelDelicaciesItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;

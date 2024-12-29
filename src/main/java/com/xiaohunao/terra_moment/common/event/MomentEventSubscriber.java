@@ -18,7 +18,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
-
 import java.util.Map;
 import java.util.Set;
 
