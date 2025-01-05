@@ -46,7 +46,7 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     }
 
     @Override
-    public void tick() {
+    public void ongoing() {
         if (torchGroup != null) {
             if (!checkTorchGroup()) {
                 setState(MomentState.LOSE);
@@ -182,7 +182,7 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, BlockPos pos, @Nullable ServerPlayer player) {
+    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
         return runMoments.values().stream().allMatch(instance -> {
             if (instance instanceof TorchGodInstance torchGodInstance) {
                 return !torchGodInstance.torchGroup.contains(pos);

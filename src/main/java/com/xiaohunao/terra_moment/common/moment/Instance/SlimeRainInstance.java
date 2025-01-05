@@ -5,7 +5,6 @@ import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
-import com.xiaohunao.heaven_destiny_moment.common.utils.SpawnUtils;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.core.BlockPos;
@@ -15,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.NaturalSpawner;
 import org.confluence.terraentity.entity.boss.KingSlime;
 import org.confluence.terraentity.init.TEEntities;
 
@@ -49,21 +48,20 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
         }
     }
 
+
     @Override
-    public void tick() {
+    protected void ongoing() {
         if (canSpawnSlimeKing){
             Player randomPlayer = getRandomPlayer();
             if (randomPlayer != null){
                 KingSlime kingSlime = TEEntities.KING_SLIME.get().create(level);
                 if (kingSlime != null) {
-                    Vec3 pos = SpawnUtils.spawn(level, randomPlayer.position(), kingSlime, 10, 32);
-                    if (pos != null) {
-                        kingSlime.moveTo(pos);
-                        kingSlime.setData(HDMAttachments.MOMENT_ENTITY,kingSlime.getData(HDMAttachments.MOMENT_ENTITY).setUid(uuid));
-                        level.addFreshEntity(kingSlime);
-                        isSlimeKingExists = true;
-                        canSpawnSlimeKing = false;
-                    }
+                    BlockPos pos = NaturalSpawner.getRandomPosWithin(level, level.getChunkAt(randomPlayer.blockPosition()));
+                    kingSlime.setPos(pos.getX(),pos.getY(),pos.getZ());
+                    kingSlime.setData(HDMAttachments.MOMENT_ENTITY,kingSlime.getData(HDMAttachments.MOMENT_ENTITY).setUid(uuid));
+                    level.addFreshEntity(kingSlime);
+                    isSlimeKingExists = true;
+                    canSpawnSlimeKing = false;
                 }
             }
         }
