@@ -56,6 +56,12 @@
                 "maxCount": 2,
                 "minCount": 1,
                 "weight": 20
+              },
+              {
+                "type": "terra_entity:blood_zombie",
+                "maxCount": 2,
+                "minCount": 1,
+                "weight": 20
               }
             ],
             "underground_water_creature": [],
@@ -66,6 +72,11 @@
         "spawn_category_multiplier": {
           "monster": 3.0
         }
+      },
+      "spawn_algorithm": {
+        "type": "heaven_destiny_moment:open_area",
+        "attempt": 10,
+        "spawnRange": 32
       },
       "spawn_rule": {
         "allow_original_biome_spawn_settings": true,

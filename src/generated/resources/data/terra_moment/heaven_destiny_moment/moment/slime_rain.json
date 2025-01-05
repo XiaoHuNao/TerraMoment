@@ -49,12 +49,6 @@
                 "weight": 20
               },
               {
-                "type": "terra_entity:corrupted_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 20
-              },
-              {
                 "type": "terra_entity:desert_slime",
                 "maxCount": 1,
                 "minCount": 1,
@@ -62,30 +56,6 @@
               },
               {
                 "type": "terra_entity:jungle_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 20
-              },
-              {
-                "type": "terra_entity:evil_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 20
-              },
-              {
-                "type": "terra_entity:ice_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 20
-              },
-              {
-                "type": "terra_entity:lava_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 20
-              },
-              {
-                "type": "terra_entity:luminous_slime",
                 "maxCount": 1,
                 "minCount": 1,
                 "weight": 20
@@ -121,12 +91,6 @@
                 "weight": 20
               },
               {
-                "type": "terra_entity:honey_slime",
-                "maxCount": 1,
-                "minCount": 1,
-                "weight": 20
-              },
-              {
                 "type": "terra_entity:black_slime",
                 "maxCount": 1,
                 "minCount": 1,
@@ -141,6 +105,11 @@
         "spawn_category_multiplier": {
           "monster": 1.5
         }
+      },
+      "spawn_algorithm": {
+        "type": "heaven_destiny_moment:open_area",
+        "attempt": 10,
+        "spawnRange": 32
       },
       "spawn_rule": {
         "allow_original_biome_spawn_settings": false,
