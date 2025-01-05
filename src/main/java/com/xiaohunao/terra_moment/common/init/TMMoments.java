@@ -48,8 +48,8 @@ public class TMMoments {
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),20,1,2))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLOOD_ZOMBIE.get(),20,1,2))
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),240,1,2))
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLOOD_ZOMBIE.get(),240,1,2))
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER,3.0D)
                                 )
@@ -94,10 +94,9 @@ public class TMMoments {
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLUE_SLIME.get(), 20, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.GREEN_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PINK_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PINK_SLIME.get(), 1, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.DESERT_SLIME.get(), 20, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.JUNGLE_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.CRIMSON_SLIME.get(), 20, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PURPLE_SLIME.get(), 20, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.RED_SLIME.get(), 20, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.TROPIC_SLIME.get(), 20, 1, 1))
