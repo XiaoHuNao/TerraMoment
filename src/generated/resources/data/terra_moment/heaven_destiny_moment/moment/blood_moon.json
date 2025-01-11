@@ -55,13 +55,13 @@
                 "type": "terra_entity:drippler",
                 "maxCount": 2,
                 "minCount": 1,
-                "weight": 20
+                "weight": 240
               },
               {
                 "type": "terra_entity:blood_zombie",
                 "maxCount": 2,
                 "minCount": 1,
-                "weight": 20
+                "weight": 240
               }
             ],
             "underground_water_creature": [],
@@ -70,13 +70,15 @@
           }
         },
         "spawn_category_multiplier": {
-          "monster": 3.0
+          "monster": {
+            "amount": 3.0,
+            "id": "terra_moment:blood_moon",
+            "operation": "add_multiplied_total"
+          }
         }
       },
       "spawn_algorithm": {
-        "type": "heaven_destiny_moment:open_area",
-        "attempt": 10,
-        "spawnRange": 32
+        "type": "heaven_destiny_moment:open_area"
       },
       "spawn_rule": {
         "allow_original_biome_spawn_settings": true,

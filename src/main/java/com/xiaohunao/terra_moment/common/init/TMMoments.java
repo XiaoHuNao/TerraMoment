@@ -2,6 +2,7 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.AutoProbabilityCondition;
@@ -51,7 +52,7 @@ public class TMMoments {
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),240,1,2))
                                                 .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLOOD_ZOMBIE.get(),240,1,2))
                                         )
-                                        .spawnCategoryMultiplier(MobCategory.MONSTER,3.0D)
+                                        .spawnCategoryMultiplier(MobCategory.MONSTER,new SpawnCategoryMultiplierModifier(TerraMoment.asResource("blood_moon"),3.0, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
                                 .rule(rule -> rule
                                         .allowOriginalBiomeSpawnSettings(true)
@@ -103,7 +104,7 @@ public class TMMoments {
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.YELLOW_SLIME.get(), 20, 1, 1))
                                                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLACK_SLIME.get(), 20, 1, 1))
                                         )
-                                        .spawnCategoryMultiplier(MobCategory.MONSTER, 1.5)
+                                        .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("slime_rain"),1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
                                 .rule(rule -> rule
                                         .allowOriginalBiomeSpawnSettings(false)
