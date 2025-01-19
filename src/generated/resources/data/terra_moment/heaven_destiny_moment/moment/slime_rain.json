@@ -100,7 +100,7 @@
           "monster": {
             "amount": 1.5,
             "id": "terra_moment:slime_rain",
-            "operation": "add_multiplied_total"
+            "operation": "add_multiplied_base"
           }
         }
       },

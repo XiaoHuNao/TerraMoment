@@ -27,10 +27,10 @@ public class ModDataGenerator {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
 
+        CompletableFuture<HolderLookup.Provider> registryProvider = generator.addProvider(server, new TMRegistryProvider(output, lookupProvider)).getRegistryProvider();
         generator.addProvider(client, new TMItemModelProvider(output, existingFileHelper));
-        generator.addProvider(server, new TMRegistryProvider(output, lookupProvider));
-        generator.addProvider(server, new TMLanguageProvider(output, "en_us"));
-        generator.addProvider(server, new TMLanguageProvider(output, "zh_cn"));
+        generator.addProvider(server, new TMLanguageProvider(output, registryProvider,"en_us"));
+        generator.addProvider(server, new TMLanguageProvider(output, registryProvider,"zh_cn"));
     }
 
 }

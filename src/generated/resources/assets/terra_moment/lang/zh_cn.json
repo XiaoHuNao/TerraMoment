@@ -2,6 +2,6 @@
   "creative_tab.terra_moment.tab": "泰拉时刻",
   "item.terra_moment.blood_tear": "血泪",
   "item.terra_moment.slime_rain": "史莱姆雨",
-  "moment.tooltip.text.ready.terra_moment.blood_moon": "血月正在升起……",
-  "moment.tooltip.text.ready.terra_moment.slime_rain": "史莱姆从天而降!"
+  "translation{key='moment.tooltip.text.ready.terra_moment.blood_moon', args=[]}[style={color=#FF0000}]": "血月正在升起……",
+  "translation{key='moment.tooltip.text.ready.terra_moment.slime_rain', args=[]}[style={color=#6D99F9}]": "史莱姆从天而降!"
 }

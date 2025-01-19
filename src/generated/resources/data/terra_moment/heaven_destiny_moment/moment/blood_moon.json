@@ -73,7 +73,7 @@
           "monster": {
             "amount": 3.0,
             "id": "terra_moment:blood_moon",
-            "operation": "add_multiplied_total"
+            "operation": "add_multiplied_base"
           }
         }
       },
