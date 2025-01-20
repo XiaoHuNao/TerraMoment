@@ -30,6 +30,8 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+
+    maven { url "https://maven.architectury.dev/" }
 }
 
 base {
