@@ -42,6 +42,7 @@ public class TMMoments {
 
 
     public static final ResourceKey<Moment<?>> TORCH_GOD = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "torch_god");
+    public static final ResourceKey<Moment<?>> TEST = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "test");
 
     public static void bootstrap(BootstrapContext<Moment<?>> context) {
         register(context,BLOOD_MOON,new BloodMoonMoment(false)
@@ -75,7 +76,7 @@ public class TMMoments {
                 )
                 .setClientSettings(clientSettings -> clientSettings
                         .environmentColor(0xff0000)
-                        .clientMoonSettingsContext(clientMoonSettingsContext -> clientMoonSettingsContext
+                        .clientMoonSettings(clientMoonSettings -> clientMoonSettings
                                 .moonSize(25)
                                 .moonTexture(TerraMoment.asResource("textures/gui/blood_moon.png"))
                         )
@@ -133,6 +134,27 @@ public class TMMoments {
                         )
                 )
         );
+
+//        register(context,TEST,new DefaultMoment()
+//                .setMomentData(momentData -> momentData
+//                        .addReward(
+//                                new EffectReward.Builder()
+//                                        .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED))
+////                                        .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,10),10)
+////                                        .addEffect(new MobEffectInstance(MobEffects.BAD_OMEN,10),40)
+////                                        .addEffect(new MobEffectInstance(MobEffects.GLOWING,10),5)
+//                                        .createReward(((reward, instance, player) -> {
+//                                            if (player.level().isClientSide()) {
+//                                                player.sendSystemMessage(Component.literal("test"));
+//                                            }
+//                                        }))
+//                                        .build()
+//                        )
+//                        .conditionGroup(conditionGroup -> conditionGroup
+//                                .victory(DifficultyCondition.EASY)
+//                        )
+//                )
+//        );
     }
 
     private static void register(BootstrapContext<Moment<?>> context, ResourceKey<Moment<?>> key, Moment<?> value) {

@@ -1,7 +1,7 @@
 {
   "type": "terra_moment:blood_moon",
-  "clientSettingsContext": {
-    "clientMoonSettingsContext": {
+  "clientSettings": {
+    "clientMoonSettings": {
       "moon_size": 25.0,
       "moon_texture": "terra_moment:textures/gui/blood_moon.png"
     },

@@ -23,7 +23,7 @@ public class BloodMoonMoment extends Moment<BloodMoonMoment> {
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
-            ClientSettings.CODEC.optionalFieldOf("clientSettingsContext").forGetter(Moment::clientSettings),
+            ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
             Codec.BOOL.fieldOf("isCanSleep").forGetter(BloodMoonMoment::isCanSleep)
     ).apply(instance, BloodMoonMoment::new));
 
@@ -33,8 +33,8 @@ public class BloodMoonMoment extends Moment<BloodMoonMoment> {
         this.isCanSleep = isCanSleep;
     }
 
-    public BloodMoonMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettingsContext, boolean canSleep) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettingsContext);
+    public BloodMoonMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, boolean canSleep) {
+        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings);
         this.isCanSleep = canSleep;
     }
 

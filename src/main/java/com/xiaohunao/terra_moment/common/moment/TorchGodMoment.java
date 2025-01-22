@@ -24,7 +24,7 @@ public class TorchGodMoment extends Moment<TorchGodMoment> {
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
-            ClientSettings.CODEC.optionalFieldOf("clientSettingsContext").forGetter(Moment::clientSettings),
+            ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
             Codec.INT.fieldOf("mixTorchCount").forGetter(TorchGodMoment::mixTorchCount),
             Codec.INT.fieldOf("totalAttacksNeeded").forGetter(TorchGodMoment::totalAttacksNeeded),
             RandomAmount.CODEC.fieldOf("multiAttackBarrage").forGetter(TorchGodMoment::multiAttackBarrage)
@@ -42,8 +42,8 @@ public class TorchGodMoment extends Moment<TorchGodMoment> {
         this.multiAttackBarrage = multiAttackBarrage;
     }
 
-    public TorchGodMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettingsContext, int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettingsContext);
+    public TorchGodMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
+        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings);
         this.mixTorchCount = mixTorchCount;
         this.totalAttacksNeeded = totalAttacksNeeded;
         this.multiAttackBarrage = multiAttackBarrage;

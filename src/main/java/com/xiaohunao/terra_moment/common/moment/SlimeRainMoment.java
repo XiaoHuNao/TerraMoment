@@ -23,7 +23,7 @@ public class SlimeRainMoment extends Moment<SlimeRainMoment> {
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
-            ClientSettings.CODEC.optionalFieldOf("clientSettingsContext").forGetter(Moment::clientSettings),
+            ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
             Codec.INT.fieldOf("requiredKills").forGetter(SlimeRainMoment::requiredKills)
     ).apply(instance, SlimeRainMoment::new));
 
@@ -35,8 +35,8 @@ public class SlimeRainMoment extends Moment<SlimeRainMoment> {
         this.requiredKills = requiredKills;
     }
 
-    public SlimeRainMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettingsContext, int requiredKills) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettingsContext);
+    public SlimeRainMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, int requiredKills) {
+        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings);
         this.requiredKills = requiredKills;
     }
 
