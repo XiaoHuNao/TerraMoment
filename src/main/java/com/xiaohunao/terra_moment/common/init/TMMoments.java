@@ -3,15 +3,22 @@ package com.xiaohunao.terra_moment.common.init;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
+import com.xiaohunao.heaven_destiny_moment.common.context.Weighted;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.LevelCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.AutoProbabilityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.reward.AttributeReward;
+import com.xiaohunao.heaven_destiny_moment.common.context.reward.EffectReward;
+import com.xiaohunao.heaven_destiny_moment.common.context.reward.ItemReward;
+import com.xiaohunao.heaven_destiny_moment.common.context.reward.XpReward;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.LocationArea;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
@@ -20,7 +27,13 @@ import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.TEEntities;
 
@@ -63,10 +76,12 @@ public class TMMoments {
                         .conditionGroup(conditionGroup -> conditionGroup
                                 .create(true,
                                     new LocationCondition.Builder()
-                                        .setValidMoonPhases(0)
                                         .build(),
                                     new AutoProbabilityCondition(2250000 * 3),
                                     TimeCondition.between(14000,22000),
+                                    new LevelCondition.Builder()
+                                            .setValidMoonPhases(0)
+                                            .build(),
                                     WorldUniqueMomentCondition.DEFAULT
                                 )
                                 .end(
@@ -139,19 +154,15 @@ public class TMMoments {
 //                .setMomentData(momentData -> momentData
 //                        .addReward(
 //                                new EffectReward.Builder()
-//                                        .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED))
-////                                        .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,10),10)
-////                                        .addEffect(new MobEffectInstance(MobEffects.BAD_OMEN,10),40)
-////                                        .addEffect(new MobEffectInstance(MobEffects.GLOWING,10),5)
-//                                        .createReward(((reward, instance, player) -> {
-//                                            if (player.level().isClientSide()) {
-//                                                player.sendSystemMessage(Component.literal("test"));
-//                                            }
-//                                        }))
-//                                        .build()
-//                        )
-//                        .conditionGroup(conditionGroup -> conditionGroup
-//                                .victory(DifficultyCondition.EASY)
+//                                        .add(new MobEffectInstance(MobEffects.MOVEMENT_SPEED))
+//                                        .build(),
+//                                new AttributeReward.Builder()
+//                                        .add(Attributes.MOVEMENT_SPEED, new AttributeModifier(TerraMoment.asResource("test"), 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE))
+//                                        .build(),
+//                                new ItemReward.Builder()
+//                                        .add(Items.DIAMOND.getDefaultInstance())
+//                                        .build(),
+//                                new XpReward(100)
 //                        )
 //                )
 //        );
