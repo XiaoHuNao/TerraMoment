@@ -14,10 +14,7 @@
         "auto": true,
         "conditions": [
           {
-            "type": "heaven_destiny_moment:location",
-            "validMoonPhases": [
-              0
-            ]
+            "type": "heaven_destiny_moment:location"
           },
           {
             "type": "heaven_destiny_moment:auto_probability",
@@ -27,6 +24,12 @@
             "type": "heaven_destiny_moment:time",
             "max": 22000,
             "min": 14000
+          },
+          {
+            "type": "heaven_destiny_moment:level",
+            "validMoonPhases": [
+              0
+            ]
           },
           {
             "type": "heaven_destiny_moment:world_unique_moment"
