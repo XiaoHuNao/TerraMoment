@@ -10,6 +10,7 @@ import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,8 +18,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.NaturalSpawner;
 import org.confluence.terraentity.entity.boss.KingSlime;
 import org.confluence.terraentity.init.TEEntities;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
     public boolean canSpawnSlimeKing = false;
@@ -78,5 +84,26 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
         if (entity instanceof KingSlime) {
             setState(MomentState.VICTORY);
         }
+    }
+
+    @Override
+    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
+        if (runMoments == null || runMoments.isEmpty()) {
+            return true;
+        }
+
+        Set<Player> existingPlayers = getPlayers();
+        Set<Player> allRunPlayers = runMoments.values().stream()
+                .filter(Objects::nonNull)
+                .flatMap(value -> value.getPlayers().stream())
+                .collect(Collectors.toSet());
+
+        for (Player runPlayer : allRunPlayers) {
+            if (existingPlayers.contains(runPlayer)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
