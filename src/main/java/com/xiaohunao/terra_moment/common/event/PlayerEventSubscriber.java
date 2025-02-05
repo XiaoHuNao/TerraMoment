@@ -21,17 +21,17 @@ public class PlayerEventSubscriber {
         Player player = event.getEntity();
         if (hand != InteractionHand.MAIN_HAND) return;
 
-        if (level instanceof ServerLevel serverLevel) {
-            if (player.isShiftKeyDown()){
-                MomentInstance<?> momentInstance = MomentInstance.create(TMMoments.TEST, serverLevel, null, null);
-                if (momentInstance != null){
-                    momentInstance.setState(MomentState.VICTORY);
-                }
-
-            }
-        } else {
-            if (player.isShiftKeyDown()){
-            }
-        }
+//        if (level instanceof ServerLevel serverLevel) {
+//            if (player.isShiftKeyDown()){
+//                MomentInstance<?> momentInstance = MomentInstance.create(TMMoments.TEST, serverLevel, null, null);
+//                if (momentInstance != null){
+//                    momentInstance.setState(MomentState.VICTORY);
+//                }
+//
+//            }
+//        } else {
+//            if (player.isShiftKeyDown()){
+//            }
+//        }
     }
 }
