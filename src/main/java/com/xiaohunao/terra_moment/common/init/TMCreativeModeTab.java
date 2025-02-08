@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.confluence.terraentity.init.TEItems;
 
 public final class TMCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TerraMoment.MODID);
@@ -15,5 +16,5 @@ public final class TMCreativeModeTab {
                     .title(Component.translatable("creative_tab." + TerraMoment.MODID + ".tab"))
                     .displayItems((parameters, output) -> {
                         TMItems.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
-                    }).build());
+                    }).withTabsBefore(TEItems.NEO_TERRA.getId()).build());
 }
