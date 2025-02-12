@@ -1,6 +1,6 @@
 package com.xiaohunao.terra_moment.common.item;
 
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentManager;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.network.TimeSyncPayload;
 import net.minecraft.server.level.ServerLevel;
@@ -25,7 +25,7 @@ public class GelDelicaciesItem extends EventConsumableItem{
             long nextTime = dayTime + ((1000 - dayTime % 24000 + 24000) % 24000);
             serverLevel.setDayTime(nextTime);
             PacketDistributor.sendToPlayersInDimension(serverLevel, new TimeSyncPayload(nextTime));
-            MomentInstance.create(momentResourceKey, serverLevel,player.blockPosition(), (ServerPlayer) player);
+            MomentManager.of(level).createMomentInstance(momentResourceKey,player.blockPosition(), (ServerPlayer) player);
             return InteractionResultHolder.consume(itemStack);
         }
         return InteractionResultHolder.pass(itemStack);

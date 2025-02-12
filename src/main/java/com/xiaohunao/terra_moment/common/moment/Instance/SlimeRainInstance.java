@@ -87,7 +87,7 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
+    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
         if (runMoments == null || runMoments.isEmpty()) {
             return true;
         }

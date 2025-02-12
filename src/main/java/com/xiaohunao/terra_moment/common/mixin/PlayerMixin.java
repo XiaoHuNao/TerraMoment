@@ -19,7 +19,7 @@ public class PlayerMixin {
     public void startSleepInBed(BlockPos bedPos, CallbackInfoReturnable<Either<Player.BedSleepingProblem, Unit>> cir){
         ServerPlayer player = (ServerPlayer) (Object) this;
         MomentManager momentManager = MomentManager.of(player.level());
-        boolean isCanSleep = momentManager.getImmutableRunMoments().values().stream()
+        boolean isCanSleep = momentManager.getMomentInstances().stream()
                 .map(momentInstance -> momentInstance.moment().orElse(null))
                 .allMatch(moment -> !(moment instanceof BloodMoonMoment) || ((BloodMoonMoment) moment).isCanSleep());
 

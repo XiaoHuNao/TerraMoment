@@ -12,7 +12,6 @@ import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -182,7 +181,7 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, ServerLevel serverLevel, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
+    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
         return runMoments.values().stream().allMatch(instance -> {
             if (instance instanceof TorchGodInstance torchGodInstance) {
                 return !torchGodInstance.torchGroup.contains(pos);
