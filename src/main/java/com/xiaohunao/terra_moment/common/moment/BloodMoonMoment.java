@@ -11,10 +11,12 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.instance.DefaultInstance;
+import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BloodMoonMoment extends Moment<BloodMoonMoment> {
@@ -24,6 +26,7 @@ public class BloodMoonMoment extends Moment<BloodMoonMoment> {
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
             ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
+            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers),
             Codec.BOOL.fieldOf("isCanSleep").forGetter(BloodMoonMoment::isCanSleep)
     ).apply(instance, BloodMoonMoment::new));
 
@@ -33,8 +36,8 @@ public class BloodMoonMoment extends Moment<BloodMoonMoment> {
         this.isCanSleep = isCanSleep;
     }
 
-    public BloodMoonMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, boolean canSleep) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings);
+    public BloodMoonMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers, boolean canSleep) {
+        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings,trackers);
         this.isCanSleep = canSleep;
     }
 

@@ -10,11 +10,13 @@ import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
+import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Optional;
 
 public class SlimeRainMoment extends Moment<SlimeRainMoment> {
@@ -24,6 +26,7 @@ public class SlimeRainMoment extends Moment<SlimeRainMoment> {
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
             ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
+            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers),
             Codec.INT.fieldOf("requiredKills").forGetter(SlimeRainMoment::requiredKills)
     ).apply(instance, SlimeRainMoment::new));
 
@@ -35,8 +38,8 @@ public class SlimeRainMoment extends Moment<SlimeRainMoment> {
         this.requiredKills = requiredKills;
     }
 
-    public SlimeRainMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, int requiredKills) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings);
+    public SlimeRainMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers, int requiredKills) {
+        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings,trackers);
         this.requiredKills = requiredKills;
     }
 

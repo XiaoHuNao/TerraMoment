@@ -11,11 +11,13 @@ import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
+import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Optional;
 
 public class TorchGodMoment extends Moment<TorchGodMoment> {
@@ -25,6 +27,7 @@ public class TorchGodMoment extends Moment<TorchGodMoment> {
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
             ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
+            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers),
             Codec.INT.fieldOf("mixTorchCount").forGetter(TorchGodMoment::mixTorchCount),
             Codec.INT.fieldOf("totalAttacksNeeded").forGetter(TorchGodMoment::totalAttacksNeeded),
             RandomAmount.CODEC.fieldOf("multiAttackBarrage").forGetter(TorchGodMoment::multiAttackBarrage)
@@ -42,8 +45,8 @@ public class TorchGodMoment extends Moment<TorchGodMoment> {
         this.multiAttackBarrage = multiAttackBarrage;
     }
 
-    public TorchGodMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings);
+    public TorchGodMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers, int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
+        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings,trackers);
         this.mixTorchCount = mixTorchCount;
         this.totalAttacksNeeded = totalAttacksNeeded;
         this.multiAttackBarrage = multiAttackBarrage;
