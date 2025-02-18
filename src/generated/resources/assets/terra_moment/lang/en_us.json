@@ -2,6 +2,6 @@
   "creative_tab.terra_moment.tab": "TerraMoment",
   "item.terra_moment.blood_tear": "BloodTear",
   "item.terra_moment.slime_rain": "SlimeRain",
-  "translation{key='moment.tooltip.text.ready.terra_moment.blood_moon', args=[]}[style={color=#FF0000}]": "The Blood Moon is rising...",
-  "translation{key='moment.tooltip.text.ready.terra_moment.slime_rain', args=[]}[style={color=#6D99F9}]": "Slime is falling from the sky!"
+  "moment.tooltip.text.ready.terra_moment.blood_moon": "The Blood Moon is rising...",
+  "moment.tooltip.text.ready.terra_moment.slime_rain": "Slime is falling from the sky!"
 }
