@@ -152,9 +152,16 @@ dependencies {
     // Example project dependency using a sister or child project:
 //     implementation project(":HeavenDestinyMoment")
 //    implementation files("com.xiaohunao:heaven_destiny_moment:0.0.1")
+    var dev = true;
+
     implementation project(":HeavenDestinyMoment")
-    implementation jarJar(project(":TerraEntity"))
-    implementation jarJar(project(":ParticleStorm"))
+    if (dev) {
+        implementation project(":TerraEntity")
+        implementation project(":ParticleStorm")
+    } else {
+        implementation jarJar(project(":TerraEntity"))
+        implementation jarJar(project(":ParticleStorm"))
+    }
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
