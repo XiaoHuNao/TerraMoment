@@ -3,6 +3,8 @@ package com.xiaohunao.terra_moment.common.init;
 import com.xiaohunao.terra_moment.TerraMoment;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,5 +18,8 @@ public final class TMCreativeModeTab {
                     .title(Component.translatable("creative_tab." + TerraMoment.MODID + ".tab"))
                     .displayItems((parameters, output) -> {
                         TMItems.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
-                    }).withTabsBefore(TEItems.NEO_TERRA.getId()).build());
+                    })
+                    .withTabsAfter(ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("confluence", "developer")))
+                    .withTabsBefore(TEItems.NEO_TERRA.getId())
+                    .build());
 }
