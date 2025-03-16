@@ -14,13 +14,6 @@
         "auto": true,
         "conditions": [
           {
-            "type": "heaven_destiny_moment:location"
-          },
-          {
-            "type": "heaven_destiny_moment:auto_probability",
-            "probability": 6750000
-          },
-          {
             "type": "heaven_destiny_moment:time",
             "max": 22000,
             "min": 14000

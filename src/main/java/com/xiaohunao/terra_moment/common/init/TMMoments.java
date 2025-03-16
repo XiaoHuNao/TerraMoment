@@ -63,9 +63,6 @@ public class TMMoments {
                         )
                         .conditionGroup(conditionGroup -> conditionGroup
                                 .create(true,
-                                    new LocationCondition.Builder()
-                                        .build(),
-                                    new AutoProbabilityCondition(2250000 * 3),
                                     TimeCondition.between(14000,22000),
                                     new LevelCondition.Builder()
                                             .setValidMoonPhases(0)
@@ -119,7 +116,6 @@ public class TMMoments {
                         .conditionGroup(conditionGroup -> conditionGroup
                                 .create(true,
                                         TimeCondition.between(1000, 9000),
-                                        new AutoProbabilityCondition(2250000 * 3),
                                         WorldUniqueMomentCondition.DEFAULT
                                 )
                         )

@@ -66,6 +66,7 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
                     kingSlime.setPos(pos.getX(),pos.getY(),pos.getZ());
                     kingSlime.setData(HDMAttachments.MOMENT_ENTITY,kingSlime.getData(HDMAttachments.MOMENT_ENTITY).setUid(uuid));
                     level.addFreshEntity(kingSlime);
+                    addEnemy(kingSlime);
                     isSlimeKingExists = true;
                     canSpawnSlimeKing = false;
                 }
