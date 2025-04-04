@@ -5,8 +5,6 @@ import com.google.common.collect.HashBiMap;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LevelCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.AutoProbabilityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
@@ -23,7 +21,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import org.confluence.terraentity.init.TEEntities;
+import org.confluence.terraentity.init.entity.TEMonsterEntities;
 
 public class TMMoments {
     public static final BiMap<ResourceKey<Moment<?>>, Moment<?>> MOMENTS = HashBiMap.create();
@@ -51,8 +49,8 @@ public class TMMoments {
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.DRIPPLER.get(),240,1,2))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEEntities.BLOOD_ZOMBIE.get(),240,1,2))
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEMonsterEntities.DRIPPLER.get(),240,1,2))
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLOOD_ZOMBIE.get(),240,1,2))
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER,new SpawnCategoryMultiplierModifier(TerraMoment.asResource("blood_moon"),3.0, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
@@ -94,16 +92,16 @@ public class TMMoments {
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLUE_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.GREEN_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PINK_SLIME.get(), 1, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.DESERT_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.JUNGLE_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.PURPLE_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.RED_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.TROPIC_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.YELLOW_SLIME.get(), 20, 1, 1))
-                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEEntities.BLACK_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLUE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.GREEN_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PINK_SLIME.get(), 1, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.DESERT_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.JUNGLE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PURPLE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.RED_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.TROPIC_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.YELLOW_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLACK_SLIME.get(), 20, 1, 1))
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("slime_rain"),1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )

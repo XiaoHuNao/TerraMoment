@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.NaturalSpawner;
 import org.confluence.terraentity.entity.boss.KingSlime;
-import org.confluence.terraentity.init.TEEntities;
+import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -60,7 +60,7 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
         if (canSpawnSlimeKing){
             Player randomPlayer = getRandomPlayer();
             if (randomPlayer != null){
-                KingSlime kingSlime = TEEntities.KING_SLIME.get().create(level);
+                KingSlime kingSlime = TEBossEntities.KING_SLIME.get().create(level);
                 if (kingSlime != null) {
                     BlockPos pos = NaturalSpawner.getRandomPosWithin(level, level.getChunkAt(randomPlayer.blockPosition()));
                     kingSlime.setPos(pos.getX(),pos.getY(),pos.getZ());
