@@ -2,7 +2,8 @@ package com.xiaohunao.terra_moment.common.mixin;
 
 
 import com.mojang.datafixers.util.Either;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentManager;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,9 +19,9 @@ public class PlayerMixin {
     @Inject(method = "startSleepInBed",at = @At("HEAD"),cancellable = true)
     public void startSleepInBed(BlockPos bedPos, CallbackInfoReturnable<Either<Player.BedSleepingProblem, Unit>> cir){
         ServerPlayer player = (ServerPlayer) (Object) this;
-        MomentManager momentManager = MomentManager.of(player.level());
-        boolean isCanSleep = momentManager.getMomentInstances().stream()
-                .map(momentInstance -> momentInstance.moment().orElse(null))
+        MomentInstanceManager momentInstanceManager = MomentInstanceManager.of(player.level());
+        boolean isCanSleep = momentInstanceManager.getMomentInstances().stream()
+                .map(MomentInstance::getMoment)
                 .allMatch(moment -> !(moment instanceof BloodMoonMoment) || ((BloodMoonMoment) moment).isCanSleep());
 
         if (!isCanSleep) {

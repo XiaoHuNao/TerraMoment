@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
+public class TorchGodInstance extends MomentInstance {
     public final Map<BlockPos,Integer> attackMap = Maps.newHashMap();
 
     public int totalAttacksNeeded = 0;
@@ -36,12 +36,12 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
 
 
 
-    public TorchGodInstance(Level level, ResourceKey<Moment<?>> momentKey) {
-        super(TMMomentTypes.TORCH_GOD.get(), level, momentKey);
+    public TorchGodInstance(Level level, Moment moment) {
+        super(TMMomentTypes.TORCH_GOD.get(), level, moment);
     }
 
-    public TorchGodInstance(UUID uuid, Level level, ResourceKey<Moment<?>> momentKey) {
-        super(TMMomentTypes.TORCH_GOD.get(), uuid, level, momentKey);
+    public TorchGodInstance(UUID uuid, Level level, Moment moment) {
+        super(TMMomentTypes.TORCH_GOD.get(), uuid, level, moment);
     }
 
     @Override
@@ -80,46 +80,47 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
 
 
     public void attackPlayer(Player player){
-        moment().ifPresent(moment -> {
-            int multiAttack = moment.multiAttackBarrage().getAmount();
+        TorchGodMoment torchGodMoment = (TorchGodMoment)moment;
 
-            int totalAttacksNeeded = moment.totalAttacksNeeded();
+        int multiAttack = torchGodMoment.multiAttackBarrage().getAmount();
 
-            if (this.totalAttacksNeeded >= totalAttacksNeeded && unlit.size() == torchGroup.size()) {
-                setState(MomentState.VICTORY);
-                return;
-            }
+        int totalAttacksNeeded = torchGodMoment.totalAttacksNeeded();
 
-            int maxAttacksPerPos = totalAttacksNeeded / torchGroup.size();
-            int extraAttacksForLastPos = totalAttacksNeeded % torchGroup.size();
+        if (this.totalAttacksNeeded >= totalAttacksNeeded && unlit.size() == torchGroup.size()) {
+            setState(MomentState.VICTORY);
+            return;
+        }
+
+        int maxAttacksPerPos = totalAttacksNeeded / torchGroup.size();
+        int extraAttacksForLastPos = totalAttacksNeeded % torchGroup.size();
 
 
-            for (int i = 0; i < multiAttack; i++) {
-                if (!lit.isEmpty()){
-                    BlockPos blockPos = lit.get(level.random.nextInt(lit.size()));
+        for (int i = 0; i < multiAttack; i++) {
+            if (!lit.isEmpty()){
+                BlockPos blockPos = lit.get(level.random.nextInt(lit.size()));
 
-                    int attacksCount = attackMap.getOrDefault(blockPos, 0);
-                    attackMap.put(blockPos, ++attacksCount);
+                int attacksCount = attackMap.getOrDefault(blockPos, 0);
+                attackMap.put(blockPos, ++attacksCount);
 
-                    int maxAttacksForThisPos = maxAttacksPerPos;
-                    if (extraAttacksForLastPos > 0 && lit.indexOf(blockPos) == lit.size() - 1) {
-                        maxAttacksForThisPos += extraAttacksForLastPos;
-                    }
+                int maxAttacksForThisPos = maxAttacksPerPos;
+                if (extraAttacksForLastPos > 0 && lit.indexOf(blockPos) == lit.size() - 1) {
+                    maxAttacksForThisPos += extraAttacksForLastPos;
+                }
 
-                    TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos.getCenter(), level);
-                    Vec3 direction = player.getEyePosition().subtract(blockPos.getCenter()).normalize();
-                    torchGodProjectile.setDeltaMovement(direction);
-                    level.addFreshEntity(torchGodProjectile);
-                    this.totalAttacksNeeded++;
+                TorchGodProjectile torchGodProjectile = new TorchGodProjectile(blockPos.getCenter(), level);
+                Vec3 direction = player.getEyePosition().subtract(blockPos.getCenter()).normalize();
+                torchGodProjectile.setDeltaMovement(direction);
+                level.addFreshEntity(torchGodProjectile);
+                this.totalAttacksNeeded++;
 
-                    if (attacksCount >= maxAttacksForThisPos) {
-                        level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
-                        unlit.add(blockPos);
-                        lit.remove(blockPos);
-                    }
+                if (attacksCount >= maxAttacksForThisPos) {
+                    level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
+                    unlit.add(blockPos);
+                    lit.remove(blockPos);
                 }
             }
-        });
+        }
+
     }
 
 
@@ -181,7 +182,7 @@ public class TorchGodInstance extends MomentInstance<TorchGodMoment> {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
+    public boolean canCreate(Map<UUID, MomentInstance> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
         return runMoments.values().stream().allMatch(instance -> {
             if (instance instanceof TorchGodInstance torchGodInstance) {
                 return !torchGodInstance.torchGroup.contains(pos);

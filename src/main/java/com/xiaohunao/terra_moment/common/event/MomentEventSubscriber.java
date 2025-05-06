@@ -2,7 +2,7 @@ package com.xiaohunao.terra_moment.common.event;
 
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentManager;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
@@ -45,7 +45,7 @@ public class MomentEventSubscriber {
                         .filter(torchGodMoment -> torchGodMoment.mixTorchCount() <= torchGroup.size())
                         .findFirst()
                         .ifPresent(torchGodMoment ->  {
-                            MomentManager.of((Level) level).createMomentInstance(TMMoments.TORCH_GOD,startPos,serverPlayer, instance -> {
+                            MomentInstanceManager.of((Level) level).createMomentInstance(TMMoments.TORCH_GOD.get(),startPos,serverPlayer, instance -> {
                                 if (instance instanceof TorchGodInstance torchGodInstance) {
                                     torchGodInstance.bindTorchGroup(torchGroup);
                                 }

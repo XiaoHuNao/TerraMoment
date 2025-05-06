@@ -14,13 +14,12 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
 
-public class TorchGodMoment extends Moment<TorchGodMoment> {
+public class TorchGodMoment extends Moment {
     public static final MapCodec<TorchGodMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             IBarRenderType.CODEC.optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
@@ -53,7 +52,7 @@ public class TorchGodMoment extends Moment<TorchGodMoment> {
     }
 
     @Override
-    public MapCodec<? extends Moment<TorchGodMoment>> codec() {
+    public MapCodec<? extends Moment> codec() {
         return TMContextRegister.TORCH_GOD.get();
     }
 
@@ -70,7 +69,7 @@ public class TorchGodMoment extends Moment<TorchGodMoment> {
     }
 
     @Override
-    public MomentInstance<?> newMomentInstance(Level level, ResourceKey<Moment<?>> momentResourceKey) {
+    public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {
         return new TorchGodInstance(level,momentResourceKey);
     }
 }

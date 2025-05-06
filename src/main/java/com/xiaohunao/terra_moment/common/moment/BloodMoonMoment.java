@@ -13,13 +13,12 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.instance.DefaultInstance;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
 
-public class BloodMoonMoment extends Moment<BloodMoonMoment> {
+public class BloodMoonMoment extends Moment {
     public static final MapCodec<BloodMoonMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             IBarRenderType.CODEC.optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
@@ -47,12 +46,12 @@ public class BloodMoonMoment extends Moment<BloodMoonMoment> {
 
 
     @Override
-    public MapCodec<? extends Moment<BloodMoonMoment>> codec() {
+    public MapCodec<? extends Moment> codec() {
         return TMContextRegister.BLOOD_MOON.get();
     }
 
     @Override
-    public MomentInstance<?> newMomentInstance(Level level, ResourceKey<Moment<?>> momentResourceKey) {
+    public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {
         return new DefaultInstance(level, momentResourceKey);
     }
 }

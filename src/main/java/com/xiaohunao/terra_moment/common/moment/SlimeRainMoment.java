@@ -13,13 +13,12 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
 
-public class SlimeRainMoment extends Moment<SlimeRainMoment> {
+public class SlimeRainMoment extends Moment {
     public static final MapCodec<SlimeRainMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             IBarRenderType.CODEC.optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
             Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
@@ -53,7 +52,7 @@ public class SlimeRainMoment extends Moment<SlimeRainMoment> {
     }
 
     @Override
-    public MomentInstance<SlimeRainMoment> newMomentInstance(Level level, ResourceKey<Moment<?>> momentResourceKey) {
+    public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {
         return new SlimeRainInstance(level,momentResourceKey);
     }
 }

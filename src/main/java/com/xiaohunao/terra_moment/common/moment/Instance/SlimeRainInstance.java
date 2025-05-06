@@ -26,17 +26,17 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
+public class SlimeRainInstance extends MomentInstance {
     public boolean canSpawnSlimeKing = false;
     //-1 noExists  0 death  1 Exists
     private boolean isSlimeKingExists = false;
 
-    public SlimeRainInstance(Level level, ResourceKey<Moment<?>> momentKey) {
-        super(TMMomentTypes.SLIME_RAIN.get(), level, momentKey);
+    public SlimeRainInstance(Level level, Moment moment) {
+        super(TMMomentTypes.SLIME_RAIN.get(), level, moment);
     }
 
-    public SlimeRainInstance(UUID uuid, Level level, ResourceKey<Moment<?>> momentKey) {
-        super(TMMomentTypes.SLIME_RAIN.get(), uuid, level, momentKey);
+    public SlimeRainInstance(UUID uuid, Level level, Moment moment) {
+        super(TMMomentTypes.SLIME_RAIN.get(), uuid, level, moment);
     }
 
     @Override
@@ -73,11 +73,11 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
             }
         }
 
-        moment().ifPresent(slimeRainMoment -> {
-            if (getData(HDMAttachments.MOMENT_KILL_ENTITY).getCounter() >= slimeRainMoment.requiredKills() && !isSlimeKingExists) {
-                canSpawnSlimeKing = true;
-            }
-        });
+        SlimeRainMoment slimeRainMoment = (SlimeRainMoment)moment;
+
+        if (getData(HDMAttachments.MOMENT_KILL_ENTITY).getCounter() >= slimeRainMoment.requiredKills() && !isSlimeKingExists) {
+            canSpawnSlimeKing = true;
+        }
     }
 
     @Override
@@ -88,7 +88,7 @@ public class SlimeRainInstance extends MomentInstance<SlimeRainMoment> {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance<?>> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
+    public boolean canCreate(Map<UUID, MomentInstance> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
         if (runMoments == null || runMoments.isEmpty()) {
             return true;
         }
