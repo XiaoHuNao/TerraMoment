@@ -44,8 +44,6 @@ public class TMMoments {
 
 
 
-    public static final ResourceKey<Moment> TEST = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "test");
-
 //    public static void bootstrap(BootstrapContext<Moment> context) {
 //        register(context,BLOOD_MOON,new BloodMoonMoment(false)
 //                .setMomentData(momentData -> momentData
