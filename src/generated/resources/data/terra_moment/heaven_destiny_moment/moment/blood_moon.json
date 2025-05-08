@@ -9,34 +9,6 @@
   },
   "isCanSleep": false,
   "moment_data_context": {
-    "conditionGroup": {
-      "create": {
-        "auto": true,
-        "conditions": [
-          {
-            "type": "heaven_destiny_moment:time",
-            "max": 22000,
-            "min": 14000
-          },
-          {
-            "type": "heaven_destiny_moment:level",
-            "validMoonPhases": [
-              0
-            ]
-          },
-          {
-            "type": "heaven_destiny_moment:world_unique_moment"
-          }
-        ]
-      },
-      "end": [
-        {
-          "type": "heaven_destiny_moment:time",
-          "max": 11000,
-          "min": 23000
-        }
-      ]
-    },
     "entity_spawn_settings": {
       "biome_entity_Spawn_settings": {
         "biome_mob_spawn_settings": {
@@ -80,11 +52,58 @@
         "allow_original_biome_spawn_settings": true,
         "ignoreLightLevel": true
       }
+    },
+    "state_settings_group": {
+      "autoStates": [
+        {
+          "key": "end",
+          "values": [
+            {
+              "conditions": [
+                {
+                  "type": "heaven_destiny_moment:time",
+                  "max": 11000,
+                  "min": 23000
+                }
+              ],
+              "trigger": {
+                "type": "heaven_destiny_moment:level_tick"
+              }
+            }
+          ]
+        }
+      ],
+      "creates": [
+        {
+          "conditions": [
+            {
+              "type": "heaven_destiny_moment:world_unique_moment"
+            },
+            {
+              "type": "heaven_destiny_moment:time",
+              "max": 22000,
+              "min": 14000
+            },
+            {
+              "type": "heaven_destiny_moment:level",
+              "validMoonPhases": [
+                0
+              ]
+            }
+          ],
+          "trigger": {
+            "type": "heaven_destiny_moment:random_level_tick",
+            "probability": 0.5
+          }
+        }
+      ]
     }
   },
   "tips": {
     "soundEvents": {
-      "ready": "minecraft:item.goat_horn.sound.2"
+      "ready": {
+        "sound_id": "minecraft:item.goat_horn.sound.2"
+      }
     },
     "texts": {
       "ready": {
