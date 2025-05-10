@@ -32,6 +32,8 @@ public class TMMoments {
     public static final FlexibleHolder<Moment, ?> SLIME_RAIN = MOMENT.registerDynamic("slime_rain");
     public static final FlexibleHolder<Moment, ?> BLOOD_MOON = MOMENT.registerDynamic("blood_moon");
     public static final FlexibleHolder<Moment, ?> TORCH_GOD = MOMENT.registerDynamic( "torch_god");
+    public static final FlexibleHolder<Moment, ?> GOBLIN_ARMY = MOMENT.registerDynamic("goblin_army");
+
 //    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "sandstorm");
 //    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "goblin_army");
 //    public static final ResourceKey<Moment> FROST_LEGION = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "frost_legion");
