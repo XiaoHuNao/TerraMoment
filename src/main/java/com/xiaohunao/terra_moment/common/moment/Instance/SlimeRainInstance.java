@@ -75,7 +75,7 @@ public class SlimeRainInstance extends MomentInstance {
 
         SlimeRainMoment slimeRainMoment = (SlimeRainMoment)moment;
 
-        if (getData(HDMAttachments.MOMENT_KILL_ENTITY).getCounter() >= slimeRainMoment.requiredKills() && !isSlimeKingExists) {
+        if (getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalKills() >= slimeRainMoment.requiredKills() && !isSlimeKingExists) {
             canSpawnSlimeKing = true;
         }
     }

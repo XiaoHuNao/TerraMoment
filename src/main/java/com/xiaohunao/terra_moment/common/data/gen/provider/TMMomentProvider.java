@@ -6,6 +6,7 @@ import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.World
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.ConditionalTrigger;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.LevelTickTrigger;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.RandomLevelTickTrigger;
@@ -25,6 +26,19 @@ public class TMMomentProvider extends MomentProvider {
 
     @Override
     protected void addMoments() {
+        addMoment(TMMoments.GOBLIN_ARMY,new DefaultMoment()
+                .setMomentData(momentData -> momentData
+                        .stateSettingsGroup(stateSettingsGroup -> stateSettingsGroup
+                                .create(RandomLevelTickTrigger.of(0.5f),
+                                        WorldUniqueMomentCondition.DEFAULT,
+                                        TimeCondition.between(14000,22000)
+                                )
+
+                        )
+                )
+        );
+
+
         addMoment(TMMoments.BLOOD_MOON,new BloodMoonMoment(false)
                 .setMomentData(momentData -> momentData
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
@@ -50,18 +64,6 @@ public class TMMomentProvider extends MomentProvider {
                                 )
                                 .state(MomentState.END, LevelTickTrigger.INSTANCE,TimeCondition.between(23000,11000))
                         )
-//                        .conditionGroup(conditionGroup -> conditionGroup
-//                                .create(true,
-//                                    TimeCondition.between(14000,22000),
-//                                    new LevelCondition.Builder()
-//                                            .setValidMoonPhases(0)
-//                                            .build(),
-//                                    WorldUniqueMomentCondition.DEFAULT
-//                                )
-//                                .end(
-//                                     TimeCondition.between(23000,11000)
-//                                )
-//                        )
                 )
                 .setClientSettings(clientSettings -> clientSettings
                         .environmentColor(0xff0000)
