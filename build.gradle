@@ -164,7 +164,6 @@ var dev = false
 
 dependencies {
     implementation project(":HeavenDestinyMoment")
-    implementation jarJar(project(":XHN-Lib"))
     if (dev) {
         implementation project(":TerraEntity")
         implementation project(":ParticleStorm")
@@ -172,6 +171,10 @@ dependencies {
         implementation jarJar(project(":TerraEntity"))
         implementation jarJar(project(":ParticleStorm"))
     }
+
+//    implementation jarJar(project(":XHN-Lib"))
+    implementation(jarJar(group: 'com.xiaohunao.xhn_lib', name: 'xhn_lib', version: '1.21.1-0.0.1'))
+
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
