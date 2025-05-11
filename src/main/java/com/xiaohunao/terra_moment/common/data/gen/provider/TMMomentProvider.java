@@ -44,8 +44,8 @@ public class TMMomentProvider extends MomentProvider {
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEMonsterEntities.DRIPPLER.get(),240,1,2))
-                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLOOD_ZOMBIE.get(),240,1,2))
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEMonsterEntities.DRIPPLER.get(),200,1,2))
+                                                .addSpawn(MobCategory.MONSTER,new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLOOD_ZOMBIE.get(),360,2,3))
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER,new SpawnCategoryMultiplierModifier(TerraMoment.asResource("blood_moon"),3.0, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
