@@ -23,13 +23,13 @@
                 "type": "terra_entity:drippler",
                 "maxCount": 2,
                 "minCount": 1,
-                "weight": 240
+                "weight": 200
               },
               {
                 "type": "terra_entity:blood_zombie",
-                "maxCount": 2,
-                "minCount": 1,
-                "weight": 240
+                "maxCount": 3,
+                "minCount": 2,
+                "weight": 360
               }
             ],
             "underground_water_creature": [],
