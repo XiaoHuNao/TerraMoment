@@ -19,7 +19,7 @@ public final class TMCreativeModeTab {
                     .displayItems((parameters, output) -> {
                         TMItems.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
                     })
-                    .withTabsAfter(ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("confluence", "developer")))
+                    .withTabsAfter(ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath("enemybanner", "enemybanner_tab")))
                     .withTabsBefore(TEItems.NEO_TERRA.getId())
                     .build());
 }
