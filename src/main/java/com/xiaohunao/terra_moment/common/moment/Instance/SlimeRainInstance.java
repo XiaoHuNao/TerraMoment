@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -81,7 +82,7 @@ public class SlimeRainInstance extends MomentInstance {
     }
 
     @Override
-    public void livingDeath(LivingEntity entity) {
+    public void livingDeath(LivingEntity entity, DamageSource source) {
         if (entity instanceof KingSlime) {
             setState(MomentState.VICTORY);
         }
