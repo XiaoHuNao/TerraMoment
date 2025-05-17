@@ -39,7 +39,7 @@
         },
         "spawn_category_multiplier": {
           "monster": {
-            "amount": 3.0,
+            "amount": 1.5,
             "id": "terra_moment:blood_moon",
             "operation": "add_multiplied_base"
           }
@@ -54,49 +54,40 @@
       }
     },
     "state_settings_group": {
-      "autoStates": [
-        {
-          "key": "end",
-          "values": [
-            {
-              "conditions": [
-                {
-                  "type": "heaven_destiny_moment:time",
-                  "max": 11000,
-                  "min": 23000
-                }
-              ],
-              "trigger": {
-                "type": "heaven_destiny_moment:level_tick"
-              }
-            }
-          ]
-        }
-      ],
-      "creates": [
-        {
-          "conditions": [
-            {
-              "type": "heaven_destiny_moment:world_unique_moment"
-            },
-            {
-              "type": "heaven_destiny_moment:time",
-              "max": 22000,
-              "min": 14000
-            },
-            {
-              "type": "heaven_destiny_moment:level",
-              "validMoonPhases": [
-                0
-              ]
-            }
-          ],
-          "trigger": {
-            "type": "heaven_destiny_moment:random_level_tick",
-            "probability": 0.5
+      "create": {
+        "conditions": [
+          {
+            "type": "heaven_destiny_moment:world_unique_moment"
+          },
+          {
+            "type": "heaven_destiny_moment:time",
+            "max": 22000,
+            "min": 14000
+          },
+          {
+            "type": "heaven_destiny_moment:level",
+            "validMoonPhases": [
+              0
+            ]
           }
+        ],
+        "trigger": {
+          "type": "heaven_destiny_moment:random_level_tick",
+          "probability": 0.1
         }
-      ]
+      },
+      "end": {
+        "conditions": [
+          {
+            "type": "heaven_destiny_moment:time",
+            "max": 11000,
+            "min": 23000
+          }
+        ],
+        "trigger": {
+          "type": "heaven_destiny_moment:level_tick"
+        }
+      }
     }
   },
   "tips": {
