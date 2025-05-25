@@ -82,7 +82,7 @@ public class TMMomentProvider extends MomentProvider {
                                 )
                         )
                         .stateSettingsGroup(stateSettingsGroup -> stateSettingsGroup
-                                .state(MomentState.CREATE,RandomLevelTickTrigger.of(0.1f),
+                                .state(MomentState.CREATE,TimeProbabilityTrigger.exactly(14000,0.05f),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         TimeCondition.between(14000, 22000),
                                         new LevelCondition.Builder()
