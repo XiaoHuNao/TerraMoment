@@ -1,6 +1,7 @@
 package com.xiaohunao.terra_moment.common.data.gen;
 
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMMomentProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -28,7 +29,7 @@ public class ModDataGenerator {
 //        generator.addProvider(client, new TMItemModelProvider(output, existingFileHelper));
 //        generator.addProvider(server, new TMLanguageProvider(output, registryProvider,"en_us"));
 //        generator.addProvider(server, new TMLanguageProvider(output, registryProvider,"zh_cn"));
-//        generator.addProvider(server,new TMMomentProvider(output));
+        generator.addProvider(server,new TMMomentProvider(output));
     }
 
 }

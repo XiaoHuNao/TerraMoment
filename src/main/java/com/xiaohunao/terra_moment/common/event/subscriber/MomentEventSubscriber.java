@@ -1,4 +1,4 @@
-package com.xiaohunao.terra_moment.common.event;
+package com.xiaohunao.terra_moment.common.event.subscriber;
 
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;

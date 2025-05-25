@@ -180,21 +180,21 @@ boolean dev = true // 在本体中开发为true，单独开发为false
 
 dependencies {
     implementation project(":HeavenDestinyMoment")
+    implementation(jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.1'))
+
     if (dev) {
         implementation project(":TerraEntity")
         implementation("curse.maven:particle-storm-1124172:${particle_storm_version}")
-        implementation(group: 'com.xiaohunao.xhn_lib', name: 'xhn_lib', version: '1.21.1-0.0.1')
     } else {
         implementation jarJar(project(":TerraEntity"))
         implementation(jarJar("curse.maven:particle-storm-1124172:${particle_storm_version}"))
-        implementation(jarJar(group: 'com.xiaohunao.xhn_lib', name: 'xhn_lib', version: '1.21.1-0.0.1'))
     }
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 
-    api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
-    interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
+//    api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
+//    interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

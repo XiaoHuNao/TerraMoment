@@ -3,6 +3,7 @@ package com.xiaohunao.terra_moment.common.data.gen.provider;
 import com.xiaohunao.heaven_destiny_moment.common.attachment.KillEntityRecorderAttachment;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LevelCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.PlayerCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
@@ -10,17 +11,16 @@ import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvid
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMBarRenderTypes;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMScalingFunctions;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.SimpleKillEntityMoment;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.*;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
+import com.xiaohunao.terra_moment.common.moment.GoblinArmyMoment;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.block.Blocks;
 import org.confluence.terraentity.init.entity.TEMonsterEntities;
 
 public class TMMomentProvider extends MomentProvider {
@@ -30,11 +30,17 @@ public class TMMomentProvider extends MomentProvider {
 
     @Override
     protected void addMoments() {
-        addMoment(TMMoments.GOBLIN_ARMY, new SimpleKillEntityMoment()
+        addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
                 .setBarRenderType(HDMBarRenderTypes.TERRA_BAR_RENDER_TYPE.get())
                 .setMomentData(momentData -> momentData
                         .stateSettingsGroup(stateSettingsGroup -> stateSettingsGroup
-                                .state(MomentState.CREATE,RandomLevelTickTrigger.of(0.1f)
+                                .state(MomentState.CREATE,
+                                        PlayerCondition.builder(PlayerCondition.Type.ANY)
+                                                .playerPredicate(playerPredicate -> playerPredicate
+                                                        .checkAdvancementDone(ResourceLocation.withDefaultNamespace("adventure/hero_of_the_village"), true)
+                                                )
+                                                .build(),
+                                        WorldUniqueMomentCondition.DEFAULT
                                 )
                                 .state(MomentState.VICTORY,KillAnyEntityTrigger.Moment.INSTANCE,
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
