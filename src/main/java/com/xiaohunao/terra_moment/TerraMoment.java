@@ -1,6 +1,5 @@
 package com.xiaohunao.terra_moment;
 
-import com.mojang.logging.LogUtils;
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.terra_moment.client.render.entity.TorchGodProjectileRenderer;
 import com.xiaohunao.terra_moment.common.init.*;
@@ -18,11 +17,12 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Mod(TerraMoment.MODID)
 public class TerraMoment {
     public static final String MODID = "terra_moment";
-    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LoggerFactory.getLogger("TerraMoment");
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
 //        NeoForge.EVENT_BUS.register(this);
         TMItems.ITEMS.register(modEventBus);

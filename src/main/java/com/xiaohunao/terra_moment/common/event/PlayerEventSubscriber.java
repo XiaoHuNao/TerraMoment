@@ -26,9 +26,9 @@ public class PlayerEventSubscriber {
                 FlexibleHolder<Moment, ?> bloodMoon = TMMoments.BLOOD_MOON;
                 FlexibleHolder<Moment, ?> slimeRain = TMMoments.SLIME_RAIN;
                 FlexibleHolder<Moment, ?> torchGod = TMMoments.TORCH_GOD;
-                System.out.println(bloodMoon.get());
-                System.out.println(slimeRain.get());
-                System.out.println(torchGod.get());
+                TerraMoment.LOGGER.debug("{}", bloodMoon.get());
+                TerraMoment.LOGGER.debug("{}", slimeRain.get());
+                TerraMoment.LOGGER.debug("{}", torchGod.get());
 
             }
         } else {
