@@ -55,39 +55,6 @@ public class SlimeRainInstance extends MomentInstance {
         }
     }
 
-
-    @Override
-    protected void ongoing() {
-        if (canSpawnSlimeKing){
-            Player randomPlayer = getRandomPlayer();
-            if (randomPlayer != null){
-                KingSlime kingSlime = TEBossEntities.KING_SLIME.get().create(level);
-                if (kingSlime != null) {
-                    BlockPos pos = NaturalSpawner.getRandomPosWithin(level, level.getChunkAt(randomPlayer.blockPosition()));
-                    kingSlime.setPos(pos.getX(),pos.getY(),pos.getZ());
-                    kingSlime.setData(HDMAttachments.MOMENT_ENTITY,kingSlime.getData(HDMAttachments.MOMENT_ENTITY).setUid(uuid));
-                    level.addFreshEntity(kingSlime);
-                    addEnemy(kingSlime);
-                    isSlimeKingExists = true;
-                    canSpawnSlimeKing = false;
-                }
-            }
-        }
-
-        SlimeRainMoment slimeRainMoment = (SlimeRainMoment)moment;
-
-        if (getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalKills() >= slimeRainMoment.requiredKills() && !isSlimeKingExists) {
-            canSpawnSlimeKing = true;
-        }
-    }
-
-    @Override
-    public void livingDeath(LivingEntity entity, DamageSource source) {
-        if (entity instanceof KingSlime) {
-            setState(MomentState.VICTORY);
-        }
-    }
-
     @Override
     public boolean canCreate(Map<UUID, MomentInstance> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
         if (runMoments == null || runMoments.isEmpty()) {

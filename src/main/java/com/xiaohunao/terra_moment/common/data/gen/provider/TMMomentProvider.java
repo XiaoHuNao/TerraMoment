@@ -1,5 +1,6 @@
 package com.xiaohunao.terra_moment.common.data.gen.provider;
 
+import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActuator;
 import com.xiaohunao.heaven_destiny_moment.common.attachment.KillEntityRecorderAttachment;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LevelCondition;
@@ -7,20 +8,25 @@ import com.xiaohunao.heaven_destiny_moment.common.context.condition.PlayerCondit
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.entity_info.EntityInfo;
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMBarRenderTypes;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMScalingFunctions;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.heaven_destiny_moment.common.spawn_algorithm.RandomPlayerPosImitationVanillaNaturalSpawner;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.*;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.GoblinArmyMoment;
+import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.block.Blocks;
+import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.confluence.terraentity.init.entity.TEMonsterEntities;
 
 public class TMMomentProvider extends MomentProvider {
@@ -33,7 +39,7 @@ public class TMMomentProvider extends MomentProvider {
         addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
                 .setBarRenderType(HDMBarRenderTypes.TERRA_BAR_RENDER_TYPE.get())
                 .setMomentData(momentData -> momentData
-                        .stateSettingsGroup(stateSettingsGroup -> stateSettingsGroup
+                        .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .state(MomentState.CREATE,
                                         PlayerCondition.builder(PlayerCondition.Type.ANY)
                                                 .playerPredicate(playerPredicate -> playerPredicate
@@ -87,7 +93,7 @@ public class TMMomentProvider extends MomentProvider {
                                         .ignoreLightLevel()
                                 )
                         )
-                        .stateSettingsGroup(stateSettingsGroup -> stateSettingsGroup
+                        .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .state(MomentState.CREATE,TimeProbabilityTrigger.exactly(14000,0.05f),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         TimeCondition.between(14000, 22000),
@@ -109,5 +115,51 @@ public class TMMomentProvider extends MomentProvider {
                         .tooltip(MomentState.READY, TerraMoment.asDescriptionId("blood_moon"), 0xff0000)
                         .tooltip(MomentState.READY, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(2))
                 ));
+
+
+        addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment(150)
+                        .setMomentData(momentData -> momentData
+                                        .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
+                                                .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
+                                                        .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLUE_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.GREEN_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PINK_SLIME.get(), 1, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.DESERT_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.JUNGLE_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PURPLE_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.RED_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.TROPIC_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.YELLOW_SLIME.get(), 20, 1, 1))
+                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLACK_SLIME.get(), 20, 1, 1))
+                                                        )
+                                                        .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("slime_rain"),1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
+                                                )
+                                                .rule(rule -> rule
+                                                        .allowOriginalBiomeSpawnSettings(false)
+                                                        .slimesSpawnEverywhere()
+                                                        .ignoreDistance()
+                                                )
+                                                .afterEndClearMonster()
+                                        )
+                                        .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
+                                                .state(MomentState.CREATE,
+                                                        TimeProbabilityTrigger.between(1000, 9000,0.0000133f),
+                                                        TimeCondition.between(1000, 9000),
+                                                        WorldUniqueMomentCondition.DEFAULT
+                                                )
+                                                .state(MomentState.ONGOING,KillEntityTrigger.Moment.of(TEMonsterEntities.BLUE_SLIME.get()),
+                                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE)
+                                                )
+                                                .state(MomentState.VICTORY,KillEntityTrigger.Moment.of(TEBossEntities.KING_SLIME.get()))
+                                        )
+                        )
+                        .setTipSettings(tipSettings -> tipSettings
+                                .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain"), 0x6d99f9)
+                        )
+        );
+
     }
+
+
 }
