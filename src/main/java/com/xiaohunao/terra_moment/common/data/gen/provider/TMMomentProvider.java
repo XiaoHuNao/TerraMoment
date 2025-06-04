@@ -40,7 +40,7 @@ public class TMMomentProvider extends MomentProvider {
                 .setBarRenderType(HDMBarRenderTypes.TERRA_BAR_RENDER_TYPE.get())
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
-                                .state(MomentState.CREATE,
+                                .create(
                                         PlayerCondition.builder(PlayerCondition.Type.ANY)
                                                 .playerPredicate(playerPredicate -> playerPredicate
                                                         .checkAdvancementDone(ResourceLocation.withDefaultNamespace("adventure/hero_of_the_village"), true)
@@ -94,7 +94,8 @@ public class TMMomentProvider extends MomentProvider {
                                 )
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
-                                .state(MomentState.CREATE,TimeProbabilityTrigger.exactly(14000,0.05f),
+                                .create(
+                                        TimeProbabilityTrigger.exactly(14000,0.05f),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         TimeCondition.between(14000, 22000),
                                         new LevelCondition.Builder()
@@ -143,7 +144,7 @@ public class TMMomentProvider extends MomentProvider {
                                                 .afterEndClearMonster()
                                         )
                                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
-                                                .state(MomentState.CREATE,
+                                                .create(
                                                         TimeProbabilityTrigger.between(1000, 9000,0.0000133f),
                                                         TimeCondition.between(1000, 9000),
                                                         WorldUniqueMomentCondition.DEFAULT
