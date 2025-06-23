@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "terra_moment.refmap.json",
   "mixins": [
+    "PatrolSpawnerCooldownMixin",
+    "PatrolSpawnerMixin",
     "PlayerMixin"
   ],
   "client": [
