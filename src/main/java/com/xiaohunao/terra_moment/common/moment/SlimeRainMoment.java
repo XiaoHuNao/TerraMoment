@@ -26,21 +26,17 @@ public class SlimeRainMoment extends Moment {
             MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
             TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
             ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
-            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers),
-            Codec.INT.fieldOf("requiredKills").forGetter(SlimeRainMoment::requiredKills)
+            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers)
     ).apply(instance, SlimeRainMoment::new));
 
 
-    private final int requiredKills;
 
-    public SlimeRainMoment(int requiredKills) {
+    public SlimeRainMoment() {
         super();
-        this.requiredKills = requiredKills;
     }
 
-    public SlimeRainMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers, int requiredKills) {
+    public SlimeRainMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers) {
         super(renderType, area, momentDataContext, tipSettingsContext, clientSettings,trackers);
-        this.requiredKills = requiredKills;
     }
 
     @Override
@@ -48,9 +44,6 @@ public class SlimeRainMoment extends Moment {
         return TMContextRegister.SLIME_RAIN.get();
     }
 
-    public int requiredKills() {
-        return requiredKills;
-    }
 
     @Override
     public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {

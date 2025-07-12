@@ -4,9 +4,11 @@ import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActu
 import com.xiaohunao.heaven_destiny_moment.common.attachment.KillEntityRecorderAttachment;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.LevelCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.MomentHistoryCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.PlayerCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelRunningTimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.entity_info.EntityInfo;
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
@@ -16,6 +18,7 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.spawn_algorithm.RandomPlayerPosImitationVanillaNaturalSpawner;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.*;
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.GoblinArmyMoment;
@@ -118,7 +121,7 @@ public class TMMomentProvider extends MomentProvider {
                 ));
 
 
-        addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment(150)
+        addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment()
                         .setMomentData(momentData -> momentData
                                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
@@ -146,11 +149,16 @@ public class TMMomentProvider extends MomentProvider {
                                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                                 .create(
                                                         TimeProbabilityTrigger.between(1000, 9000,0.0000133f),
-                                                        TimeCondition.between(1000, 9000),
+                                                        LevelRunningTimeCondition.atLeast(30 * 60 * 20),
+                                                        MomentHistoryCondition.randomTicks(85 * 60 * 20,180 * 60 * 20, TMMomentTypes.SLIME_RAIN.get()),
                                                         WorldUniqueMomentCondition.DEFAULT
                                                 )
-                                                .state(MomentState.ONGOING,KillEntityTrigger.Moment.of(TEMonsterEntities.BLUE_SLIME.get()),
-                                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE)
+                                                .actuator(SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
+                                                        KillAnyEntityTrigger.Moment.INSTANCE,
+                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
+                                                                .withRequiredTotalScore(150)
+                                                                .withDifficultyScaling(HDMScalingFunctions.COMMON.get())
+                                                                .build()
                                                 )
                                                 .state(MomentState.VICTORY,KillEntityTrigger.Moment.of(TEBossEntities.KING_SLIME.get()))
                                         )

@@ -75,4 +75,14 @@ public class SlimeRainInstance extends MomentInstance {
 
         return true;
     }
+
+    @Override
+    protected void ongoing() {
+        super.ongoing();
+
+        //当超过15分钟还没胜利代表失败
+        if (tick >= 15 * 60 * 20){
+            setState(MomentState.LOSE);
+        }
+    }
 }
