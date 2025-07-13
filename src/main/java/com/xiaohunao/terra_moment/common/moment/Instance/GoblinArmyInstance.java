@@ -1,5 +1,6 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
+import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActuator;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
@@ -41,9 +42,16 @@ public class GoblinArmyInstance extends MomentInstance {
     @Override
     public void addKillCount(LivingEntity livingEntity, DamageSource source) {
         super.addKillCount(livingEntity, source);
-        KillEntityCondition.RequiredKill requiredKill = tryModifyStateRequiredKill.get(MomentState.VICTORY);
-        int totalScore = getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalScore();
-        updateBarProgress((float) totalScore / requiredKill.totalScore());
+        tryRequiredKill.forEach((actuator, requiredKill) -> {
+            if (actuator instanceof SimpleEntitySpawnActuator){
+                int totalScore = getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalScore();
+                updateBarProgress((float) totalScore / requiredKill.totalScore());
+            }
+        });
+
+//        KillEntityCondition.RequiredKill requiredKill = tryRequiredKill.get(MomentState.VICTORY);
+//        int totalScore = getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalScore();
+//        updateBarProgress((float) totalScore / requiredKill.totalScore());
     }
 
     @Override

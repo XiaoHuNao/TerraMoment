@@ -28,7 +28,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.block.Blocks;
 import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.confluence.terraentity.init.entity.TEMonsterEntities;
 
@@ -40,7 +39,7 @@ public class TMMomentProvider extends MomentProvider {
     @Override
     protected void addMoments() {
         addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
-                .setBarRenderType(HDMBarRenderTypes.TERRA_BAR_RENDER_TYPE.get())
+                .setBarRenderType(HDMBarRenderTypes.SLIME_BAR_RENDER_TYPE.get())
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
@@ -51,9 +50,9 @@ public class TMMomentProvider extends MomentProvider {
                                                 .build(),
                                         WorldUniqueMomentCondition.DEFAULT
                                 )
-                                .state(MomentState.VICTORY,KillAnyEntityTrigger.Moment.INSTANCE,
+                                .state(MomentState.VICTORY,KillEntityTrigger.Moment.INSTANCE,
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
-                                                .withRequiredTotalScore(2)
+                                                .withRequiredTotalScore(150)
                                                 .withDifficultyScaling(HDMScalingFunctions.COMMON.get())
                                                 .build()
                                 )
@@ -122,6 +121,7 @@ public class TMMomentProvider extends MomentProvider {
 
 
         addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment()
+                .setBarRenderType(HDMBarRenderTypes.SLIME_BAR_RENDER_TYPE.get())
                         .setMomentData(momentData -> momentData
                                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
@@ -154,13 +154,17 @@ public class TMMomentProvider extends MomentProvider {
                                                         WorldUniqueMomentCondition.DEFAULT
                                                 )
                                                 .actuator(SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
-                                                        KillAnyEntityTrigger.Moment.INSTANCE,
+                                                        KillEntityTrigger.Moment.INSTANCE,
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                                 .withRequiredTotalScore(150)
                                                                 .withDifficultyScaling(HDMScalingFunctions.COMMON.get())
                                                                 .build()
                                                 )
-                                                .state(MomentState.VICTORY,KillEntityTrigger.Moment.of(TEBossEntities.KING_SLIME.get()))
+                                                .state(MomentState.VICTORY, KillEntityTrigger.Moment.INSTANCE,
+                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
+                                                                .withRequiredKillCount(TEBossEntities.KING_SLIME.get(),1)
+                                                                .build()
+                                                )
                                         )
                         )
                         .setTipSettings(tipSettings -> tipSettings
