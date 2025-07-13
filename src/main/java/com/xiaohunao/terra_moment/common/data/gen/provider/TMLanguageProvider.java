@@ -25,6 +25,7 @@ public class TMLanguageProvider extends MomentLanguageProvider {
 
         addItem(TMItems.SLIME_RAIN,"SlimeRain","史莱姆雨");
         addItem(TMItems.BLOOD_TEAR,"BloodTear","血泪");
+        addItem(TMItems.GOBLIN_BATTLE_STANDARD,"Goblin Battle Standard","哥布林战旗");
 
         addMomentTooltip(TMMoments.BLOOD_MOON,
                 Map.of(MomentState.READY,"The Blood Moon is rising..."),
@@ -33,6 +34,22 @@ public class TMLanguageProvider extends MomentLanguageProvider {
         addMomentTooltip(TMMoments.SLIME_RAIN,
                 Map.of(MomentState.READY,"Slime is falling from the sky!"),
                 Map.of(MomentState.READY,"史莱姆从天而降!")
+        );
+        addMomentTooltip(TMMoments.SLIME_RAIN,
+                Map.of(MomentState.END,"Slime has stopped falling from the sky."),
+                Map.of(MomentState.END,"史莱姆已停止从天而降。")
+        );
+        addMomentTooltip(TMMoments.GOBLIN_ARMY,
+                Map.of(MomentState.READY,"A goblin army is approaching"),
+                Map.of(MomentState.READY,"一支哥布林军队正在逼近！")
+        );
+        addMomentTooltip(TMMoments.GOBLIN_ARMY,
+                Map.of(MomentState.START,"A goblin army has arrived!"),
+                Map.of(MomentState.START,"哥布林军队来了！")
+        );
+        addMomentTooltip(TMMoments.GOBLIN_ARMY,
+                Map.of(MomentState.VICTORY, "The Goblin Army has been defeated!"),
+                Map.of(MomentState.VICTORY, "哥布林军队已被击败！")
         );
     }
 

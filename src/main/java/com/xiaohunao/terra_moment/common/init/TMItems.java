@@ -13,7 +13,7 @@ public class TMItems {
 
     public static final DeferredHolder<Item,GelDelicaciesItem> SLIME_RAIN = ITEMS.register("slime_rain", GelDelicaciesItem::new);
     public static final DeferredHolder<Item,BloodyTearItem> BLOOD_TEAR = ITEMS.register("blood_tear", BloodyTearItem::new);
-    public static final DeferredHolder<Item,Item> goblin_army = ITEMS.register("goblin_army", () -> new EventConsumableItem(TMMoments.GOBLIN_ARMY));
+    public static final DeferredHolder<Item,Item> GOBLIN_BATTLE_STANDARD = ITEMS.register("goblin_battle_standard", () -> new EventConsumableItem(TMMoments.GOBLIN_ARMY));
 //    public static final DeferredHolder<Item,Item> GOBLIN_ARMY = ITEMS.register("goblin_army", () -> new EventConsumableItem(ModMoments.GOBLIN_ARMY));
 //    public static final DeferredHolder<Item,Item> FROST_LEGION = ITEMS.register("frost_legion", () -> new EventConsumableItem(ModMoments.FROST_LEGION));
 //    public static final DeferredHolder<Item,Item> SOLAR_ECLIPSE = ITEMS.register("solar_eclipse", () -> new EventConsumableItem(ModMoments.SOLAR_ECLIPSE));
