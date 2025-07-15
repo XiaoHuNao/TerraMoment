@@ -1,6 +1,8 @@
 package com.xiaohunao.terra_moment.common.data.gen;
 
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMItemModelProvider;
+import com.xiaohunao.terra_moment.common.data.gen.provider.TMLanguageProvider;
 import com.xiaohunao.terra_moment.common.data.gen.provider.TMMomentProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -26,9 +28,9 @@ public class ModDataGenerator {
 
 
 //        CompletableFuture<HolderLookup.Provider> registryProvider = generator.addProvider(server, new TMRegistryProvider(output, lookupProvider)).getRegistryProvider();
-//        generator.addProvider(client, new TMItemModelProvider(output, existingFileHelper));
-//        generator.addProvider(server, new TMLanguageProvider(output, registryProvider,"en_us"));
-//        generator.addProvider(server, new TMLanguageProvider(output, registryProvider,"zh_cn"));
+        generator.addProvider(client, new TMItemModelProvider(output, existingFileHelper));
+        generator.addProvider(server, new TMLanguageProvider(output, lookupProvider,"en_us"));
+        generator.addProvider(server, new TMLanguageProvider(output, lookupProvider,"zh_cn"));
         generator.addProvider(server,new TMMomentProvider(output));
     }
 

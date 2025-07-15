@@ -17,6 +17,7 @@ public class TMItemModelProvider extends ItemModelProvider  {
     protected void registerModels() {
         simpleItem(TMItems.SLIME_RAIN.get());
         simpleItem(TMItems.BLOOD_TEAR.get());
+        simpleItem(TMItems.GOBLIN_BATTLE_STANDARD.get());
     }
 
     private void simpleItem(Item item) {

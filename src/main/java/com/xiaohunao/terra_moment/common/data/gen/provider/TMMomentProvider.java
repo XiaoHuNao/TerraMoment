@@ -3,21 +3,22 @@ package com.xiaohunao.terra_moment.common.data.gen.provider;
 import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActuator;
 import com.xiaohunao.heaven_destiny_moment.common.attachment.KillEntityRecorderAttachment;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LevelCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.MomentHistoryCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.PlayerCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.MomentHistoryCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.MomentRunningTimeCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.player.PlayerCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelRunningTimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.entity_info.EntityInfo;
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
-import com.xiaohunao.heaven_destiny_moment.common.init.HDMBarRenderTypes;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMScalingFunctions;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.spawn_algorithm.RandomPlayerPosImitationVanillaNaturalSpawner;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.*;
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.init.TMBarRenderTypes;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
@@ -25,7 +26,6 @@ import com.xiaohunao.terra_moment.common.moment.GoblinArmyMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.entity.TEBossEntities;
@@ -39,7 +39,7 @@ public class TMMomentProvider extends MomentProvider {
     @Override
     protected void addMoments() {
         addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
-                .setBarRenderType(HDMBarRenderTypes.SLIME_BAR_RENDER_TYPE.get())
+                .setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY_BAR_RENDER_TYPE.get())
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
@@ -52,8 +52,8 @@ public class TMMomentProvider extends MomentProvider {
                                 )
                                 .state(MomentState.VICTORY,KillEntityTrigger.Moment.INSTANCE,
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
-                                                .withRequiredTotalScore(150)
-                                                .withDifficultyScaling(HDMScalingFunctions.COMMON.get())
+                                                .withRequiredTotalScore(80 + 40)
+                                                .withPlayerCountScaling(HDMScalingFunctions.MULTIPLY.get())
                                                 .build()
                                 )
 
@@ -70,16 +70,13 @@ public class TMMomentProvider extends MomentProvider {
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("goblin_army"), 1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
-                                .rule(rule -> rule
-                                        .allowOriginalBiomeSpawnSettings(false)
-                                )
                                 .afterEndClearMonster()
                         )
                 )
                 .setTipSettings(tipSettings -> tipSettings
-                        .tooltip(MomentState.READY, TerraMoment.asDescriptionId("goblin_army_ready"), 0xaf4bff)
-                        .tooltip(MomentState.START, TerraMoment.asDescriptionId("goblin_army_start"), 0xaf4bff)
-                        .tooltip(MomentState.VICTORY, TerraMoment.asDescriptionId("goblin_army_victory"), 0xaf4bff)
+                        .tooltip(MomentState.READY, TerraMoment.asDescriptionId("goblin_army"), 0xaf4bff)
+                        .tooltip(MomentState.START, TerraMoment.asDescriptionId("goblin_army"), 0xaf4bff)
+                        .tooltip(MomentState.VICTORY, TerraMoment.asDescriptionId("goblin_army"), 0xaf4bff)
                 )
         );
 
@@ -95,7 +92,6 @@ public class TMMomentProvider extends MomentProvider {
                                         .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("blood_moon"), 1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
                                 .rule(rule -> rule
-                                        .allowOriginalBiomeSpawnSettings(true)
                                         .ignoreLightLevel()
                                 )
                         )
@@ -119,12 +115,11 @@ public class TMMomentProvider extends MomentProvider {
                         )
                 )
                 .setTipSettings(tipSettings -> tipSettings
-                        .tooltip(MomentState.READY, TerraMoment.asDescriptionId("blood_moon"), 0x32ff82)
+                        .tooltip(MomentState.START, TerraMoment.asDescriptionId("blood_moon"), 0xff0000)
                 ));
 
 
         addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment()
-                .setBarRenderType(HDMBarRenderTypes.SLIME_BAR_RENDER_TYPE.get())
                         .setMomentData(momentData -> momentData
                                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
@@ -143,7 +138,6 @@ public class TMMomentProvider extends MomentProvider {
                                                         .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("slime_rain"),1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                                 )
                                                 .rule(rule -> rule
-                                                        .allowOriginalBiomeSpawnSettings(false)
                                                         .slimesSpawnEverywhere()
                                                         .ignoreDistance()
                                                 )
@@ -168,11 +162,14 @@ public class TMMomentProvider extends MomentProvider {
                                                                 .withRequiredKillCount(TEBossEntities.KING_SLIME.get(),1)
                                                                 .build()
                                                 )
+                                                .state(MomentState.LOSE,LevelTickTrigger.INSTANCE,
+                                                        MomentRunningTimeCondition.atMost(15 * 60 * 20)
+                                                )
                                         )
                         )
                         .setTipSettings(tipSettings -> tipSettings
-                                .tooltip(MomentState.START, TerraMoment.asDescriptionId("slime_rain_start"), 0x32ff82)
-                                .tooltip(MomentState.READY, TerraMoment.asDescriptionId("slime_rain_ready"), 0x32ff82)
+                                .tooltip(MomentState.START, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
+                                .tooltip(MomentState.END, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
                         )
         );
 

@@ -1,24 +1,15 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.LocationCondition;
-import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
-import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.NaturalSpawner;
-import org.confluence.terraentity.entity.boss.KingSlime;
-import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -28,10 +19,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class SlimeRainInstance extends MomentInstance {
-    public boolean canSpawnSlimeKing = false;
-    //-1 noExists  0 death  1 Exists
-    private boolean isSlimeKingExists = false;
-
     public SlimeRainInstance(Level level, Moment moment) {
         super(TMMomentTypes.SLIME_RAIN.get(), level, moment);
     }
@@ -48,7 +35,7 @@ public class SlimeRainInstance extends MomentInstance {
         LocationCondition locationCondition = LocationCondition.Builder.isCanSeeSky(true).build();
 
         for (int i = 0; i < 10; i++) {
-            BlockPos pos = blockPos.offset(0, 20, 0);
+            BlockPos pos = blockPos.offset(0, 50, 0);
             if (locationCondition.matches((ServerLevel) entity.level(),pos)) {
                 entity.setPos(pos.getX(),pos.getY(),pos.getZ());
             }
@@ -74,15 +61,5 @@ public class SlimeRainInstance extends MomentInstance {
         }
 
         return true;
-    }
-
-    @Override
-    protected void ongoing() {
-        super.ongoing();
-
-        //当超过15分钟还没胜利代表失败
-        if (tick >= 15 * 60 * 20){
-            setState(MomentState.LOSE);
-        }
     }
 }

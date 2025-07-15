@@ -33,6 +33,7 @@ public class TerraMoment {
         TMEntities.ENTITY_TYPE.register(modEventBus);
         TMParticleTypes.PARTICLE_TYPE.register(modEventBus);
         TMCreativeModeTab.TABS.register(modEventBus);
+        TMBarRenderTypes.BAR_RENDER_TYPE.register(modEventBus);
 
         NeoForge.EVENT_BUS.addListener(GoblinArmyInstance::onPatrolSpawn);
     }

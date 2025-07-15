@@ -1,0 +1,14 @@
+{
+  "creative_tab.terra_moment.tab": "泰拉时刻",
+  "item.terra_moment.blood_tear": "血泪",
+  "item.terra_moment.goblin_battle_standard": "哥布林战旗",
+  "item.terra_moment.slime_rain": "史莱姆雨",
+  "terra_moment.goblin_army": "哥布林军团",
+  "terra_moment.goblin_army.bar_kill_description": "已清理 %d%% 波",
+  "moment.tooltip.text.ready.terra_moment.goblin_army": "一支哥布林军队正在逼近！",
+  "moment.tooltip.text.start.terra_moment.goblin_army": "哥布林军队来了！",
+  "moment.tooltip.text.victory.terra_moment.goblin_army": "哥布林军队已被击败！",
+  "moment.tooltip.text.start.terra_moment.blood_moon": "血月正在升起……",
+  "moment.tooltip.text.start.terra_moment.slime_rain": "史莱姆从天而降!",
+  "moment.tooltip.text.end.terra_moment.slime_rain": "史莱姆已停止从天而降。"
+}
