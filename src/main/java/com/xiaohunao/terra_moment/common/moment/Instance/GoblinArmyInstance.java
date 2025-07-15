@@ -1,6 +1,7 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
 import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActuator;
+import com.xiaohunao.heaven_destiny_moment.common.actuator.StateSettingActuator;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
@@ -43,7 +44,7 @@ public class GoblinArmyInstance extends MomentInstance {
     public void addKillCount(LivingEntity livingEntity, DamageSource source) {
         super.addKillCount(livingEntity, source);
         tryRequiredKill.forEach((actuator, requiredKill) -> {
-            if (actuator instanceof SimpleEntitySpawnActuator){
+            if (actuator instanceof StateSettingActuator(MomentState momentState) && momentState == MomentState.VICTORY){
                 int totalScore = getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalScore();
                 updateBarProgress((float) totalScore / requiredKill.totalScore());
             }
