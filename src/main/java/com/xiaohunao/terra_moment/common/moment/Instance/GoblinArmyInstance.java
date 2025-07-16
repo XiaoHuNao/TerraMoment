@@ -57,6 +57,14 @@ public class GoblinArmyInstance extends MomentInstance {
         return true;
     }
 
+    @Override
+    public boolean checkGeneralConditions(@Nullable BlockPos pos, @Nullable ServerPlayer serverPlayer) {
+        return super.checkGeneralConditions(pos, serverPlayer);
+    }
+
+
+
+
 
 
     public static void onPatrolSpawn(PatrolSpawnEvent event) {
