@@ -1,7 +1,9 @@
 package com.xiaohunao.terra_moment.common.item;
 
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
+import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.xhn_lib.api.register.FlexibleHolder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +26,7 @@ public class EventConsumableItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
         if (level instanceof ServerLevel serverLevel){
-            MomentInstanceManager.of(level).createMomentInstance(holder.get(),player.blockPosition(), (ServerPlayer) player);
+            MomentInstanceBuilder.create(serverLevel,holder.get(),player.blockPosition());
             return InteractionResultHolder.consume(itemStack);
         }
         return InteractionResultHolder.pass(itemStack);

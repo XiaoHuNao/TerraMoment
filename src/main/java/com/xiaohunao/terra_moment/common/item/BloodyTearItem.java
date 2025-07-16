@@ -1,8 +1,10 @@
 package com.xiaohunao.terra_moment.common.item;
 
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.network.TimeSyncPayload;
+import com.xiaohunao.terra_moment.common.utils.time.MinecraftTimeUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -20,16 +22,15 @@ public class BloodyTearItem extends EventConsumableItem{
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
-        if (level instanceof ServerLevel serverLevel){
-            long dayTime = serverLevel.getDayTime();
-            int currentMoonPhase = level.getMoonPhase();
-            long cyclesToNextFullMoon = (8 - currentMoonPhase) % 8;
-            long nextFullMoonTime = (dayTime / 24000L) * 24000L + cyclesToNextFullMoon * 24000L + 14000L;
-            serverLevel.setDayTime(nextFullMoonTime);
-            PacketDistributor.sendToPlayersInDimension(serverLevel, new TimeSyncPayload(nextFullMoonTime));
-            MomentInstanceManager.of(level).createMomentInstance(holder.get(),player.blockPosition(), (ServerPlayer) player);
+
+        if (level instanceof ServerLevel serverLevel) {
+            MinecraftTimeUtils.jumpToNextFullMoon(serverLevel);
+
+            MomentInstanceBuilder.create(level, holder.get(), player.blockPosition(), (ServerPlayer) player);
+
             return InteractionResultHolder.consume(itemStack);
         }
+
         return InteractionResultHolder.pass(itemStack);
     }
 }

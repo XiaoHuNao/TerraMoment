@@ -2,9 +2,7 @@ package com.xiaohunao.terra_moment.common.item;
 
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
-import com.xiaohunao.terra_moment.common.network.TimeSyncPayload;
 import com.xiaohunao.terra_moment.common.utils.time.MinecraftTimeNode;
 import com.xiaohunao.terra_moment.common.utils.time.MinecraftTimeUtils;
 import net.minecraft.server.level.ServerLevel;
@@ -14,11 +12,10 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 
-public class GelDelicaciesItem extends EventConsumableItem{
-    public GelDelicaciesItem() {
-        super(TMMoments.SLIME_RAIN);
+public class GoblinBattleStandard extends EventConsumableItem{
+    public GoblinBattleStandard() {
+        super(TMMoments.GOBLIN_ARMY);
     }
 
     @Override

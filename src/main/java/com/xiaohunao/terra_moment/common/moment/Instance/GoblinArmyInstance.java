@@ -4,10 +4,7 @@ import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActu
 import com.xiaohunao.heaven_destiny_moment.common.actuator.StateSettingActuator;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
-import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.heaven_destiny_moment.common.moment.*;
 import com.xiaohunao.terra_moment.common.event.PatrolSpawnEvent;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
@@ -67,7 +64,7 @@ public class GoblinArmyInstance extends MomentInstance {
         if (level.random.nextFloat() < 0.1F) {
             event.setCanceled(true);
             BlockPos spawnPos = event.getInitialSpawnPos();
-            MomentInstanceManager.of(level).createMomentInstance(TMMoments.GOBLIN_ARMY.get(),spawnPos, (ServerPlayer) event.getTargetPlayer());
+            MomentInstanceBuilder.create(level,TMMoments.GOBLIN_ARMY.get(),spawnPos, (ServerPlayer) event.getTargetPlayer());
         }
     }
 

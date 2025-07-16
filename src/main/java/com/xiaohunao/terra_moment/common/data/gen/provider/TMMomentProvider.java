@@ -97,14 +97,15 @@ public class TMMomentProvider extends MomentProvider {
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .create(
-                                        TimeProbabilityTrigger.exactly(14000,0.05f),
+                                        TimeProbabilityTrigger.exactly(13800,0.05f),
                                         WorldUniqueMomentCondition.DEFAULT,
-                                        TimeCondition.between(14000, 22000),
+                                        TimeCondition.between(13800, 22000),
                                         new LevelCondition.Builder()
                                                 .setValidMoonPhases(0)
                                                 .build()
                                 )
-                                .state(MomentState.END, LevelTickTrigger.INSTANCE, TimeCondition.between(23000, 11000))
+                                .state(MomentState.END, LevelTickTrigger.INSTANCE,
+                                        TimeCondition.between(23000, 11000))
                         )
                 )
                 .setClientSettings(clientSettings -> clientSettings
@@ -145,7 +146,7 @@ public class TMMomentProvider extends MomentProvider {
                                         )
                                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                                 .create(
-                                                        TimeProbabilityTrigger.between(1000, 9000,0.0000133f),
+                                                        TimeProbabilityTrigger.between(22500, 6000,0.0000133f),
                                                         LevelRunningTimeCondition.atLeast(30 * 60 * 20),
                                                         MomentHistoryCondition.randomTicks(85 * 60 * 20,180 * 60 * 20, TMMomentTypes.SLIME_RAIN.get()),
                                                         WorldUniqueMomentCondition.DEFAULT
@@ -163,7 +164,7 @@ public class TMMomentProvider extends MomentProvider {
                                                                 .build()
                                                 )
                                                 .state(MomentState.LOSE,LevelTickTrigger.INSTANCE,
-                                                        MomentRunningTimeCondition.atMost(15 * 60 * 20)
+                                                        MomentRunningTimeCondition.atLeast(15 * 60 * 20)
                                                 )
                                         )
                         )
