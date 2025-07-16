@@ -237,3 +237,5 @@ tasks.withType(Copy).configureEach { duplicatesStrategy = DuplicatesStrategy.EXC
 
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+
+tasks.withType(Copy).configureEach { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
