@@ -40,6 +40,8 @@ public class SlimeRainInstance extends MomentInstance {
                 entity.setPos(pos.getX(),pos.getY(),pos.getZ());
             }
         }
+
+        mandatoryAttackRandomPlayer(entity);
     }
 
     @Override

@@ -94,6 +94,7 @@ public class TMMomentProvider extends MomentProvider {
                                 .rule(rule -> rule
                                         .ignoreLightLevel()
                                 )
+                                .afterEndClearMonster()
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .create(

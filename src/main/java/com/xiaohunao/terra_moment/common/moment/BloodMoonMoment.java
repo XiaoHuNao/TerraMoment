@@ -14,6 +14,7 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.instance.DefaultInstance;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
+import com.xiaohunao.terra_moment.common.moment.Instance.BloodMoonInstance;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
@@ -53,6 +54,6 @@ public class BloodMoonMoment extends Moment {
 
     @Override
     public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {
-        return new DefaultInstance(level, momentResourceKey);
+        return new BloodMoonInstance(level, momentResourceKey);
     }
 }

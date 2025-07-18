@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -62,10 +63,10 @@ public class GoblinArmyInstance extends MomentInstance {
         return super.checkGeneralConditions(pos, serverPlayer);
     }
 
-
-
-
-
+    @Override
+    public void finalizeSpawn(Entity entity) {
+        mandatoryAttackRandomPlayer(entity);
+    }
 
     public static void onPatrolSpawn(PatrolSpawnEvent event) {
         ServerLevel level = event.getLevel();
