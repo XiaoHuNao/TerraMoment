@@ -51,8 +51,7 @@ public class TorchGodInstance extends MomentInstance {
                 setState(MomentState.LOSE);
             }
             Player randomPlayer = getRandomPlayer();
-
-            if(tick % 20 == 0) {
+            if (randomPlayer != null && tick % 20 == 0){
                 attackPlayer(randomPlayer);
             }
 
