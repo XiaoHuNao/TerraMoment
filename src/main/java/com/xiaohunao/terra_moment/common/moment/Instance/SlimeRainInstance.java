@@ -46,22 +46,6 @@ public class SlimeRainInstance extends MomentInstance {
 
     @Override
     public boolean canCreate(Map<UUID, MomentInstance> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
-        if (runMoments == null || runMoments.isEmpty()) {
-            return true;
-        }
-
-        Set<Player> existingPlayers = getPlayers();
-        Set<Player> allRunPlayers = runMoments.values().stream()
-                .filter(Objects::nonNull)
-                .flatMap(value -> value.getPlayers().stream())
-                .collect(Collectors.toSet());
-
-        for (Player runPlayer : allRunPlayers) {
-            if (existingPlayers.contains(runPlayer)) {
-                return false;
-            }
-        }
-
         return true;
     }
 }

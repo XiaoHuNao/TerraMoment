@@ -3,6 +3,9 @@ package com.xiaohunao.terra_moment.common.data.gen.provider;
 import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActuator;
 import com.xiaohunao.heaven_destiny_moment.common.attachment.KillEntityRecorderAttachment;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.InvertCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.LocationCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.DifficultyCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.MomentHistoryCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.MomentRunningTimeCondition;
@@ -15,6 +18,7 @@ import com.xiaohunao.heaven_destiny_moment.common.context.entity_info.EntityInfo
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMScalingFunctions;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.heaven_destiny_moment.common.predicate.AttributePredicate;
 import com.xiaohunao.heaven_destiny_moment.common.spawn_algorithm.RandomPlayerPosImitationVanillaNaturalSpawner;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.*;
 import com.xiaohunao.terra_moment.TerraMoment;
@@ -24,9 +28,12 @@ import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.GoblinArmyMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import org.confluence.terraentity.init.entity.TEBossEntities;
 import org.confluence.terraentity.init.entity.TEMonsterEntities;
@@ -43,14 +50,18 @@ public class TMMomentProvider extends MomentProvider {
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
+                                        TimeProbabilityTrigger.exactly(1000,0.33f),
                                         PlayerCondition.builder(PlayerCondition.Type.ANY)
                                                 .playerPredicate(playerPredicate -> playerPredicate
                                                         .checkAdvancementDone(ResourceLocation.withDefaultNamespace("adventure/hero_of_the_village"), true)
                                                 )
+                                                .attributePredicate(Attributes.ARMOR, AttributePredicate.ValueType.CURRENT, MinMaxBounds.Doubles.atLeast(8.0D))
                                                 .build(),
-                                        WorldUniqueMomentCondition.DEFAULT
+                                        WorldUniqueMomentCondition.DEFAULT,
+                                        LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
+                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
                                 )
-                                .state(MomentState.VICTORY,KillEntityTrigger.Moment.INSTANCE,
+                                .state(MomentState.VICTORY,KillEntityTrigger.INSTANCE,
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                 .withRequiredTotalScore(80 + 40)
                                                 .withPlayerCountScaling(HDMScalingFunctions.MULTIPLY.get())
@@ -98,12 +109,11 @@ public class TMMomentProvider extends MomentProvider {
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .create(
-                                        TimeProbabilityTrigger.exactly(13800,0.05f),
+                                        TimeProbabilityTrigger.exactly(13800,0.11f),
                                         WorldUniqueMomentCondition.DEFAULT,
-                                        TimeCondition.between(13800, 22000),
-                                        new LevelCondition.Builder()
-                                                .setValidMoonPhases(0)
-                                                .build()
+                                        InvertCondition.of(LevelCondition.validMoonPhases(4)),
+                                        LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
+                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
                                 )
                                 .state(MomentState.END, LevelTickTrigger.INSTANCE,
                                         TimeCondition.between(23000, 11000))
@@ -150,16 +160,18 @@ public class TMMomentProvider extends MomentProvider {
                                                         TimeProbabilityTrigger.between(22500, 6000,0.0000133f),
                                                         LevelRunningTimeCondition.atLeast(30 * 60 * 20),
                                                         MomentHistoryCondition.randomTicks(85 * 60 * 20,180 * 60 * 20, TMMomentTypes.SLIME_RAIN.get()),
-                                                        WorldUniqueMomentCondition.DEFAULT
+                                                        WorldUniqueMomentCondition.DEFAULT,
+                                                        LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
+                                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
                                                 )
                                                 .actuator(SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
-                                                        KillEntityTrigger.Moment.INSTANCE,
+                                                        KillEntityTrigger.INSTANCE,
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                                 .withRequiredTotalScore(150)
-                                                                .withDifficultyScaling(HDMScalingFunctions.COMMON.get())
+                                                                .withDifficultyScaling(HDMScalingFunctions.EASY.get())
                                                                 .build()
                                                 )
-                                                .state(MomentState.VICTORY, KillEntityTrigger.Moment.INSTANCE,
+                                                .state(MomentState.VICTORY, KillEntityTrigger.INSTANCE,
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                                 .withRequiredKillCount(TEBossEntities.KING_SLIME.get(),1)
                                                                 .build()

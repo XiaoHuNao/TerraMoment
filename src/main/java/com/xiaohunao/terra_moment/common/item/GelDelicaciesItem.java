@@ -1,6 +1,9 @@
 package com.xiaohunao.terra_moment.common.item;
 
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.InvertCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.LocationCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.DifficultyCondition;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceManager;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
@@ -28,7 +31,11 @@ public class GelDelicaciesItem extends EventConsumableItem{
         if (level instanceof ServerLevel serverLevel) {
             MinecraftTimeUtils.jumpToNextTimeNode(serverLevel, MinecraftTimeNode.CMD_DAY);
 
-            MomentInstanceBuilder.skipConditionsExcept(level,holder.get(), player.blockPosition(), (ServerPlayer) player, WorldUniqueMomentCondition.DEFAULT);
+            MomentInstanceBuilder.skipConditionsExcept(level,holder.get(), player.blockPosition(), (ServerPlayer) player,
+                    WorldUniqueMomentCondition.DEFAULT,
+                    LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
+                    InvertCondition.of(DifficultyCondition.PEACEFUL)
+            );
 
             return InteractionResultHolder.consume(itemStack);
         }
