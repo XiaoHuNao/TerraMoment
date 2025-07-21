@@ -34,8 +34,6 @@ public class TerraMoment {
         TMParticleTypes.PARTICLE_TYPE.register(modEventBus);
         TMCreativeModeTab.TABS.register(modEventBus);
         TMBarRenderTypes.BAR_RENDER_TYPE.register(modEventBus);
-
-        NeoForge.EVENT_BUS.addListener(GoblinArmyInstance::onPatrolSpawn);
     }
 
     public static ResourceLocation asResource(String path) {
