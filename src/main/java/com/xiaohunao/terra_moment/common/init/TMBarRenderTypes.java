@@ -1,6 +1,5 @@
 package com.xiaohunao.terra_moment.common.init;
 
-import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.heaven_destiny_moment.client.gui.bar.render.IBarRenderType;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.client.gui.bar.render.GoblinArmyBarRenderType;
@@ -12,5 +11,4 @@ public class TMBarRenderTypes {
     public static final FlexibleRegister<IBarRenderType> BAR_RENDER_TYPE = FlexibleRegister.create(HDMRegistries.BAR_RENDER_TYPE, TerraMoment.MODID);
 
     public static final FlexibleHolder<IBarRenderType, ?> GOBLIN_ARMY = BAR_RENDER_TYPE.registerStatic("goblin_army", GoblinArmyBarRenderType::new);
-    public static final FlexibleHolder<IBarRenderType, ?> SLIME_RAIN = BAR_RENDER_TYPE.registerStatic("slime_rain", SlimeRainBarRenderType::new);
-}
+    }
