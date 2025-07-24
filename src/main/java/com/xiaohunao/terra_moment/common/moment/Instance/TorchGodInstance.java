@@ -50,7 +50,7 @@ public class TorchGodInstance extends MomentInstance {
             if (!checkTorchGroup()) {
                 setState(MomentState.LOSE);
             }
-            Player randomPlayer = getRandomPlayer();
+            Player randomPlayer = getPlayerListManager().getRandomPlayer();
             if (randomPlayer != null && tick % 20 == 0){
                 attackPlayer(randomPlayer);
             }

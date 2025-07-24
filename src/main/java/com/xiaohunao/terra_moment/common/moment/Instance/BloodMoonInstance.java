@@ -23,7 +23,7 @@ public class BloodMoonInstance extends MomentInstance {
 
     @Override
     public void finalizeSpawn(Entity entity) {
-        mandatoryAttackRandomPlayer(entity);
+        playerListManager.mandatoryAttackRandomPlayer(entity);
     }
 
     @Override

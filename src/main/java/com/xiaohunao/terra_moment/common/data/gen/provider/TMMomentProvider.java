@@ -46,7 +46,7 @@ public class TMMomentProvider extends MomentProvider {
     @Override
     protected void addMoments() {
         addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
-                .setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY_BAR_RENDER_TYPE.get())
+                .setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
@@ -61,7 +61,7 @@ public class TMMomentProvider extends MomentProvider {
                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
                                         InvertCondition.of(DifficultyCondition.PEACEFUL)
                                 )
-                                .state(MomentState.VICTORY,KillEntityTrigger.INSTANCE,
+                                .state(MomentState.VICTORY,KillEntityTrigger.any(),
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                 .withRequiredTotalScore(80 + 40)
                                                 .withPlayerCountScaling(HDMScalingFunctions.MULTIPLY.get())
@@ -132,6 +132,7 @@ public class TMMomentProvider extends MomentProvider {
 
 
         addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment()
+                .setBarRenderType(TMBarRenderTypes.SLIME_RAIN.get())
                         .setMomentData(momentData -> momentData
                                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
@@ -165,17 +166,13 @@ public class TMMomentProvider extends MomentProvider {
                                                         InvertCondition.of(DifficultyCondition.PEACEFUL)
                                                 )
                                                 .actuator(SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
-                                                        KillEntityTrigger.INSTANCE,
-                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
+                                                        KillEntityTrigger.any(),
+                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT_PLAYER_ANY)
                                                                 .withRequiredTotalScore(150)
                                                                 .withDifficultyScaling(HDMScalingFunctions.EASY.get())
                                                                 .build()
                                                 )
-                                                .state(MomentState.VICTORY, KillEntityTrigger.INSTANCE,
-                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
-                                                                .withRequiredKillCount(TEBossEntities.KING_SLIME.get(),1)
-                                                                .build()
-                                                )
+                                                .state(MomentState.VICTORY, KillEntityTrigger.of(TEBossEntities.KING_SLIME.get()))
                                                 .state(MomentState.LOSE,LevelTickTrigger.INSTANCE,
                                                         MomentRunningTimeCondition.atLeast(15 * 60 * 20)
                                                 )

@@ -41,7 +41,7 @@ public class SlimeRainInstance extends MomentInstance {
             }
         }
 
-        mandatoryAttackRandomPlayer(entity);
+        playerListManager.mandatoryAttackRandomPlayer(entity);
     }
 
     @Override
