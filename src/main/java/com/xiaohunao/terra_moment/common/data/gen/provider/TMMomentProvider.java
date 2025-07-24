@@ -4,25 +4,26 @@ import com.xiaohunao.heaven_destiny_moment.common.actuator.SimpleEntitySpawnActu
 import com.xiaohunao.heaven_destiny_moment.common.attachment.KillEntityRecorderAttachment;
 import com.xiaohunao.heaven_destiny_moment.common.context.SpawnCategoryMultiplierModifier;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.InvertCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.LocationCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.DifficultyCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelRunningTimeCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.MomentHistoryCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.MomentRunningTimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.player.PlayerCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.WorldUniqueMomentCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.LevelRunningTimeCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.TimeCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.entity_info.EntityInfo;
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMScalingFunctions;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.predicate.AttributePredicate;
 import com.xiaohunao.heaven_destiny_moment.common.spawn_algorithm.RandomPlayerPosImitationVanillaNaturalSpawner;
-import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.*;
+import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.KillEntityTrigger;
+import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.LevelTickTrigger;
+import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.TimeProbabilityTrigger;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.terra_moment.common.init.TMBarRenderTypes;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
@@ -46,7 +47,7 @@ public class TMMomentProvider extends MomentProvider {
     @Override
     protected void addMoments() {
         addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
-                .setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
+                //.setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
@@ -132,7 +133,7 @@ public class TMMomentProvider extends MomentProvider {
 
 
         addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment()
-                .setBarRenderType(TMBarRenderTypes.SLIME_RAIN.get())
+                //.setBarRenderType(TMBarRenderTypes.SLIME_RAIN.get())
                         .setMomentData(momentData -> momentData
                                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
