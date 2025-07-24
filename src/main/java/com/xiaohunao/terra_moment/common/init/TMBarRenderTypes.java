@@ -11,5 +11,6 @@ import com.xiaohunao.xhn_lib.api.register.FlexibleRegister;
 public class TMBarRenderTypes {
     public static final FlexibleRegister<IBarRenderType> BAR_RENDER_TYPE = FlexibleRegister.create(HDMRegistries.BAR_RENDER_TYPE, TerraMoment.MODID);
 
-    public static final FlexibleHolder<IBarRenderType, ?> GOBLIN_ARMY_BAR_RENDER_TYPE = BAR_RENDER_TYPE.registerStatic("goblin_army", GoblinArmyBarRenderType::new);
+    public static final FlexibleHolder<IBarRenderType, ?> GOBLIN_ARMY = BAR_RENDER_TYPE.registerStatic("goblin_army", GoblinArmyBarRenderType::new);
+    public static final FlexibleHolder<IBarRenderType, ?> SLIME_RAIN = BAR_RENDER_TYPE.registerStatic("slime_rain", SlimeRainBarRenderType::new);
 }
