@@ -34,6 +34,7 @@ public class GoblinArmyInstance extends MomentInstance {
 
     @Override
     public void addKillCount(LivingEntity livingEntity, DamageSource source) {
+        if (source == null) return;
         super.addKillCount(livingEntity, source);
         tryRequiredKill.forEach((actuator, requiredKill) -> {
             if (actuator instanceof StateSettingActuator(MomentState momentState) && momentState == MomentState.VICTORY){
