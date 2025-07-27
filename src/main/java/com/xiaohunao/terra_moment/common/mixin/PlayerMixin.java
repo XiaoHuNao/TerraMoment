@@ -25,6 +25,7 @@ public class PlayerMixin {
                 .allMatch(moment -> !(moment instanceof BloodMoonMoment) || ((BloodMoonMoment) moment).isCanSleep());
 
         if (!isCanSleep) {
+            player.setRespawnPosition(player.level().dimension(), bedPos, player.getYRot(), false, true);
             cir.setReturnValue(Either.right(Unit.INSTANCE));
         }
 
