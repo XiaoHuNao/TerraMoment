@@ -24,6 +24,7 @@ import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.KillEntityTri
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.LevelTickTrigger;
 import com.xiaohunao.heaven_destiny_moment.common.trigger.triggers.TimeProbabilityTrigger;
 import com.xiaohunao.terra_moment.TerraMoment;
+import com.xiaohunao.terra_moment.common.init.TMBarRenderTypes;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
@@ -47,7 +48,7 @@ public class TMMomentProvider extends MomentProvider {
     @Override
     protected void addMoments() {
         addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
-                //.setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
+                .setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
                 .setMomentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
