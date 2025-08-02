@@ -77,6 +77,20 @@ neoForge {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
+        client1 {
+            client()
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            //玩家名字
+            programArguments = ["--username", "XiaoHuNao"]
+        }
+        client2 {
+            client()
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            //玩家名字
+            programArguments = ["--username", "HuNao"]
+        }
 
         server {
             server()
@@ -176,7 +190,7 @@ repositories {
 }
 
 
-boolean dev = true // 在本体中开发为true，单独开发为false
+boolean dev = false // 在本体中开发为true，单独开发为false
 
 dependencies {
     implementation project(":HeavenDestinyMoment")

@@ -27,13 +27,16 @@ public class TerraMoment {
     public static final Logger LOGGER = LoggerFactory.getLogger("TerraMoment");
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
 //        NeoForge.EVENT_BUS.register(this);
-        TMItems.ITEMS.register(modEventBus);
+        TMBarRenderTypes.BAR_RENDER_TYPE.register(modEventBus);
         TMContextRegister.MOMENT_CODEC.register(modEventBus);
-        TMMomentTypes.MOMENT_TYPE.register(modEventBus);
         TMEntities.ENTITY_TYPE.register(modEventBus);
+        TMItems.ITEMS.register(modEventBus);
+        TMMoments.MOMENT.register(modEventBus);
+        TMMomentTypes.MOMENT_TYPE.register(modEventBus);
         TMParticleTypes.PARTICLE_TYPE.register(modEventBus);
         TMCreativeModeTab.TABS.register(modEventBus);
-        TMBarRenderTypes.BAR_RENDER_TYPE.register(modEventBus);
+
+
     }
 
     public static ResourceLocation asResource(String path) {
