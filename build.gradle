@@ -193,16 +193,20 @@ repositories {
 boolean dev = false // 在本体中开发为true，单独开发为false
 
 dependencies {
+    implementation "curse.maven:lithium-360438:6290413"
+
+
     implementation project(":HeavenDestinyMoment")
+//    implementation jarJar(project(":XHN-Lib"))
+    implementation(jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2'))
 
     if (dev) {
         implementation project(":TerraEntity")
         implementation("curse.maven:particle-storm-1124172:${particle_storm_version}")
-        implementation(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.1')
     } else {
         implementation jarJar(project(":TerraEntity"))
         implementation(jarJar("curse.maven:particle-storm-1124172:${particle_storm_version}"))
-        implementation(jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.1'))
+
     }
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
