@@ -190,7 +190,7 @@ repositories {
 }
 
 
-boolean dev = false // 在本体中开发为true，单独开发为false
+boolean dev = true // 在本体中开发为true，单独开发为false
 
 dependencies {
     implementation project(":HeavenDestinyMoment")
