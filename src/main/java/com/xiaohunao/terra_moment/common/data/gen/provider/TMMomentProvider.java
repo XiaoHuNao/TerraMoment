@@ -57,7 +57,7 @@ public class TMMomentProvider extends MomentProvider {
                                                 .playerPredicate(playerPredicate -> playerPredicate
                                                         .checkAdvancementDone(ResourceLocation.withDefaultNamespace("adventure/hero_of_the_village"), true)
                                                 )
-                                                .attributePredicate(Attributes.ARMOR, AttributePredicate.ValueType.CURRENT, MinMaxBounds.Doubles.atLeast(8.0D))
+                                                .attributePredicate(Attributes.ARMOR, AttributePredicate.ValueType.CURRENT, MinMaxBounds.Doubles.atLeast(18.0D))
                                                 .build(),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
@@ -119,7 +119,7 @@ public class TMMomentProvider extends MomentProvider {
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .create(
-                                        TimeProbabilityTrigger.exactly(13800,0.11f),
+                                        TimeProbabilityTrigger.exactly(13800,0.06f),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         InvertCondition.of(LevelCondition.validMoonPhases(4)),
                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
