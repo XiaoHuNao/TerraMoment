@@ -71,6 +71,14 @@ public class TMMomentProvider extends MomentProvider {
                                 )
 
                         )
+                        .entityTypeScoreTable(entityTypeScoreTable -> entityTypeScoreTable
+                                .addType(TEMonsterEntities.GOBLIN_ARCHER.get(), 1)
+                                .addType(TEMonsterEntities.GOBLIN_PEON.get(), 1)
+                                .addType(TEMonsterEntities.GOBLIN_WARRIOR.get(), 1)
+                                .addType(TEMonsterEntities.GOBLIN_SORCERER.get(), 1)
+                                .addType(TEMonsterEntities.GOBLIN_THIEF.get(), 1)
+                                .addType(TEMonsterEntities.ANGER_GOBLIN.get(), 1)
+                        )
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
