@@ -193,9 +193,6 @@ repositories {
 boolean dev = true // 在本体中开发为true，单独开发为false
 
 dependencies {
-    implementation "curse.maven:lithium-360438:6290413"
-
-
     implementation project(":HeavenDestinyMoment")
 //    implementation jarJar(project(":XHN-Lib"))
     implementation(jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2'))
@@ -211,6 +208,9 @@ dependencies {
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    runtimeOnly "curse.maven:lithium-360438:6290413"
+    runtimeOnly "curse.maven:spark-361579:6225208"
 
 //    api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
 //    interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version")

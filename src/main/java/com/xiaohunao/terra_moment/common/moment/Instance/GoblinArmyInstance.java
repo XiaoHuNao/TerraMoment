@@ -37,7 +37,7 @@ public class GoblinArmyInstance extends MomentInstance {
         if (source == null) return;
         super.addKillCount(livingEntity, source);
         tryRequiredKill.forEach((actuator, requiredKill) -> {
-            if (actuator instanceof StateSettingActuator(MomentState momentState) && momentState == MomentState.VICTORY){
+            if (actuator instanceof StateSettingActuator stateSettingActuator && stateSettingActuator.state() == MomentState.VICTORY){
                 int totalScore = getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalScore();
                 updateBarProgress((float) totalScore / requiredKill.totalScore());
             }

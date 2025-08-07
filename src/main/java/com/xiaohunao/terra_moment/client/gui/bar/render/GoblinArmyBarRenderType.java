@@ -117,7 +117,7 @@ public class GoblinArmyBarRenderType implements IBarRenderType {
 
         int totalScore = momentInstance.getData(HDMAttachments.MOMENT_KILL_ENTITY_RECORDER).getTotalScore();
         momentInstance.getTryRequiredKill().forEach((actuator, requiredKill) -> {
-            if (actuator instanceof StateSettingActuator(MomentState momentState) && momentState == MomentState.VICTORY) {
+            if (actuator instanceof StateSettingActuator stateSettingActuator  && stateSettingActuator.state() == MomentState.VICTORY) {
                 int percent = Math.min(100, Math.max(0, (int) ((float) totalScore / requiredKill.totalScore() * 100)));
                 Component momentKillDescription = Component.translatable(momentInstance.getMomentResource().toLanguageKey() + ".bar_kill_description",percent);
 
