@@ -34,6 +34,10 @@ public class GelDelicaciesItem extends EventConsumableItem{
                     InvertCondition.of(DifficultyCondition.PEACEFUL)
             );
 
+            if (!player.getAbilities().instabuild) {
+                itemStack.shrink(1);
+            }
+
             return InteractionResultHolder.consume(itemStack);
         }
 

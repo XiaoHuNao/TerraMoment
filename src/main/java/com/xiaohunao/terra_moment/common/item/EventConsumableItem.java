@@ -27,6 +27,9 @@ public class EventConsumableItem extends Item {
         ItemStack itemStack = player.getItemInHand(usedHand);
         if (level instanceof ServerLevel serverLevel){
             MomentInstanceBuilder.create(serverLevel,holder.get(),player.blockPosition());
+            if (!player.getAbilities().instabuild) {
+                itemStack.shrink(1);
+            }
             return InteractionResultHolder.consume(itemStack);
         }
         return InteractionResultHolder.pass(itemStack);
