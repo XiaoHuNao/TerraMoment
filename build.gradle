@@ -178,7 +178,14 @@ repositories {
         url = "https://www.cursemaven.com"
     }
     maven { url "https://maven.architectury.dev/" }
-
+    maven {
+        name = "Iron's Maven - Release" // Iron's Spell n Spellbooks
+        url = "https://code.redspace.io/releases"
+    }
+    maven {
+        name "KosmX's maven" // Player Animator
+        url 'https://maven.kosmx.dev/'
+    }
     maven {
         name = "LatvianMaven"
         url = "https://maven.latvian.dev/releases"
