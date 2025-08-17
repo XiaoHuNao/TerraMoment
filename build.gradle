@@ -194,6 +194,14 @@ repositories {
             includeGroup "dev.latvian.apps"
         }
     }
+    maven {
+        name "org.confluenceReleases"
+        url "https://maven.confluence.ink/releases"
+    }
+    maven {
+        name "org.confluenceSnapshots"
+        url "https://maven.confluence.ink/snapshots"
+    }
 }
 
 
