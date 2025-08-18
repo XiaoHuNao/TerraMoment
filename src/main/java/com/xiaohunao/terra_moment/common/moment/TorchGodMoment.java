@@ -3,57 +3,42 @@ package com.xiaohunao.terra_moment.common.moment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.xiaohunao.heaven_destiny_moment.client.gui.bar.render.IBarRenderType;
-import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
-import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
-import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.amount.RandomAmount;
-import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
-import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
-import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
-import java.util.Optional;
-
-public class TorchGodMoment extends Moment {
+public class TorchGodMoment extends DefaultMoment {
     public static final MapCodec<TorchGodMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            HDMRegistries.BAR_RENDER_TYPE.byNameCodec().optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
-            Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
-            MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
-            TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
-            ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
-            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers),
+            DefaultMoment.CODEC.forGetter(moment -> moment),
             Codec.INT.fieldOf("mixTorchCount").forGetter(TorchGodMoment::mixTorchCount),
             Codec.INT.fieldOf("totalAttacksNeeded").forGetter(TorchGodMoment::totalAttacksNeeded),
             RandomAmount.CODEC.fieldOf("multiAttackBarrage").forGetter(TorchGodMoment::multiAttackBarrage)
     ).apply(instance, TorchGodMoment::new));
 
-
     private final int mixTorchCount;
     private final int totalAttacksNeeded;
     private final RandomAmount multiAttackBarrage;
 
-    public TorchGodMoment(int mixTorchCount,int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
+    public TorchGodMoment(int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
         super();
         this.mixTorchCount = mixTorchCount;
         this.totalAttacksNeeded = totalAttacksNeeded;
         this.multiAttackBarrage = multiAttackBarrage;
     }
 
-    public TorchGodMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers, int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings,trackers);
+    public TorchGodMoment(DefaultMoment moment, int mixTorchCount, int totalAttacksNeeded, RandomAmount multiAttackBarrage) {
+        super(moment.barRenderType, moment.area, moment.momentData, moment.tipSettings, moment.clientSettings, moment.trackers);
         this.mixTorchCount = mixTorchCount;
         this.totalAttacksNeeded = totalAttacksNeeded;
         this.multiAttackBarrage = multiAttackBarrage;
     }
 
     @Override
-    public MapCodec<? extends Moment> codec() {
+    public MapCodec<? extends DefaultMoment> codec() {
         return TMContextRegister.TORCH_GOD.get();
     }
 
@@ -71,6 +56,6 @@ public class TorchGodMoment extends Moment {
 
     @Override
     public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {
-        return new TorchGodInstance(level,momentResourceKey);
+        return new TorchGodInstance(level, momentResourceKey);
     }
 }

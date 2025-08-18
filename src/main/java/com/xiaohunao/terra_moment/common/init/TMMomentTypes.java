@@ -2,12 +2,8 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentType;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.instance.DefaultInstance;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.terra_moment.common.moment.Instance.BloodMoonInstance;
-import com.xiaohunao.terra_moment.common.moment.Instance.GoblinArmyInstance;
-import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
-import com.xiaohunao.terra_moment.common.moment.Instance.TorchGodInstance;
+import com.xiaohunao.terra_moment.common.moment.Instance.*;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -27,4 +23,6 @@ public class TMMomentTypes {
     public static final DeferredHolder<MomentType<?>, MomentType<GoblinArmyInstance>> GOBLIN_ARMY = MOMENT_TYPE.register("goblin_army",
             () -> new MomentType.Builder<>(GoblinArmyInstance::new).build());
 
+    public static final DeferredHolder<MomentType<?>, MomentType<PartyInstance>> PARTY = MOMENT_TYPE.register("party",
+            () -> new MomentType.Builder<>(PartyInstance::new).build());
 }

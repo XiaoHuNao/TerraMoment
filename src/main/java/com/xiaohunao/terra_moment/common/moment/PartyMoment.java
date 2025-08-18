@@ -8,33 +8,31 @@ import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
-import com.xiaohunao.terra_moment.common.init.TMContextRegister;
-import com.xiaohunao.terra_moment.common.moment.Instance.GoblinArmyInstance;
+import com.xiaohunao.terra_moment.common.moment.Instance.PartyInstance;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
 
-public class GoblinArmyMoment extends DefaultMoment {
-    public static final MapCodec<GoblinArmyMoment> CODEC = simpleCodec(GoblinArmyMoment::new);
+public class PartyMoment extends Moment {
+    public static final MapCodec<PartyMoment> CODEC = simpleCodec(PartyMoment::new);
 
-    public GoblinArmyMoment() {
+    public PartyMoment() {
         super();
     }
 
-    public GoblinArmyMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers) {
+    public PartyMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers) {
         super(renderType, area, momentDataContext, tipSettingsContext, clientSettings, trackers);
     }
 
     @Override
     public MomentInstance newMomentInstance(Level level, Moment moment) {
-        return new GoblinArmyInstance(level, moment);
+        return new PartyInstance(level, moment);
     }
 
     @Override
-    public MapCodec<? extends GoblinArmyMoment> codec() {
-        return TMContextRegister.GOBLIN_ARMY.get();
+    public MapCodec<? extends PartyMoment> codec() {
+        return CODEC;
     }
 }
