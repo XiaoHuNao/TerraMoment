@@ -11,7 +11,6 @@ import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
-import com.xiaohunao.heaven_destiny_moment.common.moment.moment.instance.DefaultInstance;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.BloodMoonInstance;

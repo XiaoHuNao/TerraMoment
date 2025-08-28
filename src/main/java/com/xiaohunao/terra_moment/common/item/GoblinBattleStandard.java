@@ -6,7 +6,6 @@ import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.World
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.DifficultyCondition;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
-
 import com.xiaohunao.xhn_lib.common.util.MinecraftTimeUtils;
 import com.xiaohunao.xhn_lib.common.util.data.MinecraftTimeNode;
 import net.minecraft.server.level.ServerLevel;

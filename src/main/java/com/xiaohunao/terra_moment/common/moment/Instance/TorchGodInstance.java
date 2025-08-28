@@ -11,7 +11,6 @@ import com.xiaohunao.terra_moment.common.entity.projectile.TorchGodProjectile;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

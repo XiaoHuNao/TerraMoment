@@ -3,7 +3,6 @@ package com.xiaohunao.terra_moment;
 import com.xiaohunao.heaven_destiny_moment.HeavenDestinyMoment;
 import com.xiaohunao.terra_moment.client.render.entity.TorchGodProjectileRenderer;
 import com.xiaohunao.terra_moment.common.init.*;
-import com.xiaohunao.terra_moment.common.moment.Instance.GoblinArmyInstance;
 import com.xiaohunao.terra_moment.common.particle.TorchGodParticle;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -17,7 +16,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

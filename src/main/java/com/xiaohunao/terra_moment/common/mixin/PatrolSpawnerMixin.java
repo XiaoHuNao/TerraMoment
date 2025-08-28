@@ -3,18 +3,15 @@ package com.xiaohunao.terra_moment.common.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.xiaohunao.terra_moment.common.event.PatrolSpawnEvent;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.levelgen.PatrolSpawner;
+import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import net.neoforged.neoforge.common.NeoForge;
 
 @Mixin(PatrolSpawner.class)
 public class PatrolSpawnerMixin {

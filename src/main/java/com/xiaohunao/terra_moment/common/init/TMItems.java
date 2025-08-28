@@ -2,7 +2,6 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.item.BloodyTearItem;
-import com.xiaohunao.terra_moment.common.item.EventConsumableItem;
 import com.xiaohunao.terra_moment.common.item.GelDelicaciesItem;
 import com.xiaohunao.terra_moment.common.item.GoblinBattleStandard;
 import net.minecraft.world.item.Item;
