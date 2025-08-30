@@ -16,7 +16,9 @@ import com.xiaohunao.heaven_destiny_moment.common.context.condition.moment.Momen
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.player.PlayerCondition;
 import com.xiaohunao.heaven_destiny_moment.common.context.entity_info.EntityInfo;
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentProvider;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMMapCodecRegisters;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMScalingFunctions;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
 import com.xiaohunao.heaven_destiny_moment.common.predicate.AttributePredicate;
 import com.xiaohunao.heaven_destiny_moment.common.spawn_algorithm.RandomPlayerPosImitationVanillaNaturalSpawner;
@@ -47,11 +49,12 @@ public class TMMomentProvider extends MomentProvider {
 
     @Override
     protected void addMoments() {
-        addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment()
-                .setBarRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
-                .setMomentData(momentData -> momentData
+        addMoment(TMMoments.GOBLIN_ARMY, new GoblinArmyMoment.Builder()
+                .barRenderType(TMBarRenderTypes.GOBLIN_ARMY.get())
+                .momentData(momentData -> momentData
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
+                                        TerraMoment.asResource("goblin_army_create"),
                                         TimeProbabilityTrigger.exactly(1000,0.33f),
                                         PlayerCondition.builder(PlayerCondition.Type.ANY)
                                                 .playerPredicate(playerPredicate -> playerPredicate
@@ -61,12 +64,15 @@ public class TMMomentProvider extends MomentProvider {
                                                 .build(),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
-                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
+                                        InvertCondition.of(DifficultyCondition.PEACEFUL),
+                                        LevelRunningTimeCondition.atLeast(24000 + 1000)
                                 )
-                                .state(MomentState.VICTORY,KillEntityTrigger.any(),
+                                .state(
+                                        TerraMoment.asResource("goblin_army_victory"),
+                                        MomentState.VICTORY,KillEntityTrigger.any(),
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                 .withRequiredTotalScore(80 + 40)
-                                                .withPlayerCountScaling(HDMScalingFunctions.MULTIPLY.get())
+                                                .withDifficultyScaling(HDMScalingFunctions.PLAYER_COUNT_MULTIPLY.get())
                                                 .build()
                                 )
 
@@ -94,16 +100,17 @@ public class TMMomentProvider extends MomentProvider {
                                 .afterEndClearMonster()
                         )
                 )
-                .setTipSettings(tipSettings -> tipSettings
+                .tipSettings(tipSettings -> tipSettings
                         .tooltip(MomentState.READY, TerraMoment.asDescriptionId("goblin_army"), 0xaf4bff)
                         .tooltip(MomentState.START, TerraMoment.asDescriptionId("goblin_army"), 0xaf4bff)
                         .tooltip(MomentState.VICTORY, TerraMoment.asDescriptionId("goblin_army"), 0xaf4bff)
                 )
+                .build()
         );
 
 
-        addMoment(TMMoments.BLOOD_MOON, new BloodMoonMoment(false)
-                .setMomentData(momentData -> momentData
+        addMoment(TMMoments.BLOOD_MOON, new BloodMoonMoment.Builder()
+                .momentData(momentData -> momentData
                         .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
                                 .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
                                         .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
@@ -119,31 +126,38 @@ public class TMMomentProvider extends MomentProvider {
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .create(
+                                        TerraMoment.asResource("blood_moon_create"),
                                         TimeProbabilityTrigger.exactly(13800,0.06f),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         InvertCondition.of(LevelCondition.validMoonPhases(4)),
                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
-                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
+                                        InvertCondition.of(DifficultyCondition.PEACEFUL),
+                                        LevelRunningTimeCondition.atLeast(24000 + 1000)
                                 )
-                                .state(MomentState.END, LevelTickTrigger.INSTANCE,
-                                        TimeCondition.between(23000, 11000))
+                                .state(
+                                        TerraMoment.asResource("blood_moon_end"),
+                                        MomentState.END, LevelTickTrigger.INSTANCE,
+                                        TimeCondition.between(23000, 11000)
+                                )
                         )
                 )
-                .setClientSettings(clientSettings -> clientSettings
+                .clientSettings(clientSettings -> clientSettings
                         .environmentColor(0xff0000)
                         .clientMoonSettings(clientMoonSettings -> clientMoonSettings
                                 .moonSize(25)
                                 .moonTexture(TerraMoment.asResource("textures/gui/blood_moon.png"))
                         )
                 )
-                .setTipSettings(tipSettings -> tipSettings
+                .tipSettings(tipSettings -> tipSettings
                         .tooltip(MomentState.START, TerraMoment.asDescriptionId("blood_moon"), 0xff0000)
-                ));
+                )
+                .build()
+        );
 
 
-        addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment()
+        addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment.Builder()
                 //.setBarRenderType(TMBarRenderTypes.SLIME_RAIN.get())
-                        .setMomentData(momentData -> momentData
+                        .momentData(momentData -> momentData
                                         .entityTypeScoreTable(entityTypeScoreTable ->
                                                 entityTypeScoreTable
                                                         .addType(TEMonsterEntities.BLUE_SLIME.get(),1)
@@ -180,34 +194,48 @@ public class TMMomentProvider extends MomentProvider {
                                         )
                                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                                 .create(
-                                                        TimeProbabilityTrigger.between(22500, 6000,0.0000133f),
+                                                        TerraMoment.asResource("slime_rain_create"),
+                                                        TimeProbabilityTrigger.between(22500, 6000,SlimeRainMoment.CHANCE_NORMAL),
                                                         LevelRunningTimeCondition.atLeast(30 * 60 * 20),
                                                         MomentHistoryCondition.randomTicks(85 * 60 * 20,180 * 60 * 20, TMMomentTypes.SLIME_RAIN.get()),
                                                         WorldUniqueMomentCondition.DEFAULT,
                                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
                                                         InvertCondition.of(DifficultyCondition.PEACEFUL)
                                                 )
-                                                .actuator(SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
+                                                .actuator(
+                                                        TerraMoment.asResource("slime_rain_kill_king_slime"),
+                                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
                                                         KillEntityTrigger.any(),
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                                 .withRequiredTotalScore(150)
-                                                                .withDifficultyScaling(HDMScalingFunctions.EASY.get())
+                                                                .withDifficultyScaling(HDMScalingFunctions.DIFFICULTY_EASY.get())
                                                                 .build()
                                                 )
-                                                .state(MomentState.VICTORY, KillEntityTrigger.of(TEBossEntities.KING_SLIME.get()),
+                                                .actuator(
+                                                        TerraMoment.asResource("slime_rain_kill_king_slime_two"),
+                                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
+                                                        KillEntityTrigger.any(),
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
-                                                                .withRequiredKillCount(TEBossEntities.KING_SLIME.get(),1)
+                                                                .withRequiredTotalScore(225)
+                                                                .withDifficultyScaling(HDMScalingFunctions.DIFFICULTY_EASY.get())
                                                                 .build()
                                                 )
-                                                .state(MomentState.LOSE,LevelTickTrigger.INSTANCE,
+                                                .state(
+                                                        TerraMoment.asResource("slime_rain_victory"),
+                                                        MomentState.VICTORY, KillEntityTrigger.of(TEBossEntities.KING_SLIME.get())
+                                                )
+                                                .state(
+                                                        TerraMoment.asResource("slime_rain_lose"),
+                                                        MomentState.LOSE,LevelTickTrigger.INSTANCE,
                                                         MomentRunningTimeCondition.atLeast(15 * 60 * 20)
                                                 )
                                         )
                         )
-                        .setTipSettings(tipSettings -> tipSettings
+                        .tipSettings(tipSettings -> tipSettings
                                 .tooltip(MomentState.START, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
                                 .tooltip(MomentState.END, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
                         )
+                        .build()
         );
 
     }

@@ -1,8 +1,9 @@
 package com.xiaohunao.terra_moment.common.item;
 
-import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
+import com.xiaohunao.heaven_destiny_moment.common.automation.AutomationContext;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
-import com.xiaohunao.xhn_lib.api.register.FlexibleHolder;
+import com.xiaohunao.xhn_lib.api.register.holder.FlexibleHolder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -12,8 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class EventConsumableItem extends Item {
-    protected FlexibleHolder<Moment,?> holder;
-    public EventConsumableItem(FlexibleHolder<Moment,?> holder) {
+    protected FlexibleHolder<IMoment,?> holder;
+    public EventConsumableItem(FlexibleHolder<IMoment,?> holder) {
         super(new Properties());
         this.holder = holder;
     }
@@ -22,7 +23,15 @@ public class EventConsumableItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
         if (level instanceof ServerLevel serverLevel){
-            MomentInstanceBuilder.create(serverLevel,holder.get(),player.blockPosition());
+
+            MomentInstanceBuilder.createRun(holder.get(),
+                    new AutomationContext.Builder(serverLevel)
+                            .addPlayer(player)
+                            .addBlockPos(player.blockPosition())
+                            .build()
+            );
+
+
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
             }
