@@ -1,11 +1,16 @@
 package com.xiaohunao.terra_moment.common.moment;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.xiaohunao.heaven_destiny_moment.client.gui.bar.render.IBarRenderType;
 import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
@@ -17,24 +22,34 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Optional;
 
-public class GoblinArmyMoment extends DefaultMoment {
-    public static final MapCodec<GoblinArmyMoment> CODEC = simpleCodec(GoblinArmyMoment::new);
+public class GoblinArmyMoment extends DefaultMoment{
+    public static final MapCodec<GoblinArmyMoment> CODEC = Moment.simpleCodec(GoblinArmyMoment::new);
 
-    public GoblinArmyMoment() {
-        super();
+    public GoblinArmyMoment(Optional<IBarRenderType> iBarRenderType, Optional<MomentData> momentData, Optional<TipSettings> tipSettings, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> iTrackers) {
+        super(iBarRenderType, momentData, tipSettings, clientSettings, iTrackers);
     }
 
-    public GoblinArmyMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings, trackers);
-    }
 
     @Override
-    public MomentInstance newMomentInstance(Level level, Moment moment) {
+    public MomentInstance newMomentInstance(Level level, IMoment moment) {
         return new GoblinArmyInstance(level, moment);
     }
 
     @Override
-    public MapCodec<? extends GoblinArmyMoment> codec() {
-        return TMContextRegister.GOBLIN_ARMY.get();
+    public MapCodec<GoblinArmyMoment> codec() {
+        return CODEC;
+    }
+
+    public static class Builder extends MomentBuilder<GoblinArmyMoment> {
+        @Override
+        public GoblinArmyMoment build() {
+            return new GoblinArmyMoment(
+                    Optional.ofNullable(barRenderType),
+                    Optional.ofNullable(momentData),
+                    Optional.ofNullable(tipSettings),
+                    Optional.ofNullable(clientSettings),
+                    Optional.ofNullable(trackers)
+            );
+        }
     }
 }

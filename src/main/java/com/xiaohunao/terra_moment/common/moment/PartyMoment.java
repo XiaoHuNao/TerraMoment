@@ -1,13 +1,16 @@
 package com.xiaohunao.terra_moment.common.moment;
 
+
 import com.mojang.serialization.MapCodec;
 import com.xiaohunao.heaven_destiny_moment.client.gui.bar.render.IBarRenderType;
 import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
-import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.moment.Instance.PartyInstance;
 import net.minecraft.world.level.Level;
@@ -15,24 +18,33 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Optional;
 
-public class PartyMoment extends Moment {
-    public static final MapCodec<PartyMoment> CODEC = simpleCodec(PartyMoment::new);
+public class PartyMoment extends DefaultMoment {
+    public static final MapCodec<PartyMoment> CODEC = Moment.simpleCodec(PartyMoment::new);
 
-    public PartyMoment() {
-        super();
-    }
-
-    public PartyMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings, trackers);
+    public PartyMoment(Optional<IBarRenderType> iBarRenderType, Optional<MomentData> momentData, Optional<TipSettings> tipSettings, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> iTrackers) {
+        super(iBarRenderType, momentData, tipSettings, clientSettings, iTrackers);
     }
 
     @Override
-    public MomentInstance newMomentInstance(Level level, Moment moment) {
+    public MapCodec<PartyMoment> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public MomentInstance newMomentInstance(Level level, IMoment moment) {
         return new PartyInstance(level, moment);
     }
 
-    @Override
-    public MapCodec<? extends PartyMoment> codec() {
-        return CODEC;
+    public static class Builder extends MomentBuilder<PartyMoment> {
+        @Override
+        public PartyMoment build() {
+            return new PartyMoment(
+                    Optional.ofNullable(barRenderType),
+                    Optional.ofNullable(momentData),
+                    Optional.ofNullable(tipSettings),
+                    Optional.ofNullable(clientSettings),
+                    Optional.ofNullable(trackers)
+            );
+        }
     }
 }

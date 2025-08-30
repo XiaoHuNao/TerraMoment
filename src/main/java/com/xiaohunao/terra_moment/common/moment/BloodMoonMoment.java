@@ -8,9 +8,13 @@ import com.xiaohunao.heaven_destiny_moment.common.context.ClientSettings;
 import com.xiaohunao.heaven_destiny_moment.common.context.MomentData;
 import com.xiaohunao.heaven_destiny_moment.common.context.TipSettings;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentBuilder;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.area.Area;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
+import com.xiaohunao.heaven_destiny_moment.common.moment.moment.instance.DefaultInstance;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.init.TMContextRegister;
 import com.xiaohunao.terra_moment.common.moment.Instance.BloodMoonInstance;
@@ -19,26 +23,17 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Optional;
 
-public class BloodMoonMoment extends Moment {
+public class BloodMoonMoment extends DefaultMoment  {
     public static final MapCodec<BloodMoonMoment> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            HDMRegistries.BAR_RENDER_TYPE.byNameCodec().optionalFieldOf("bar_render_type").forGetter(Moment::barRenderType),
-            Area.CODEC.optionalFieldOf("area").forGetter(Moment::area),
-            MomentData.CODEC.optionalFieldOf("moment_data_context").forGetter(Moment::momentData),
-            TipSettings.CODEC.optionalFieldOf("tips").forGetter(Moment::tipSettings),
-            ClientSettings.CODEC.optionalFieldOf("clientSettings").forGetter(Moment::clientSettings),
-            Codec.list(ITracker.CODEC).optionalFieldOf("trackers").forGetter(Moment::trackers),
+            DefaultMoment.CODEC.forGetter(moment -> moment),
             Codec.BOOL.fieldOf("isCanSleep").forGetter(BloodMoonMoment::isCanSleep)
     ).apply(instance, BloodMoonMoment::new));
 
-    private final boolean isCanSleep;
+    private boolean isCanSleep;
 
-    public BloodMoonMoment(boolean isCanSleep) {
+    public BloodMoonMoment(DefaultMoment moment, boolean isCanSleep) {
+        super(moment.barRenderType, moment.momentData, moment.tipSettings, moment.clientSettings, moment.trackers);
         this.isCanSleep = isCanSleep;
-    }
-
-    public BloodMoonMoment(Optional<IBarRenderType> renderType, Optional<Area> area, Optional<MomentData> momentDataContext, Optional<TipSettings> tipSettingsContext, Optional<ClientSettings> clientSettings, Optional<List<ITracker>> trackers, boolean canSleep) {
-        super(renderType, area, momentDataContext, tipSettingsContext, clientSettings,trackers);
-        this.isCanSleep = canSleep;
     }
 
     public boolean isCanSleep() {
@@ -47,12 +42,30 @@ public class BloodMoonMoment extends Moment {
 
 
     @Override
-    public MapCodec<? extends Moment> codec() {
-        return TMContextRegister.BLOOD_MOON.get();
+    public MapCodec<BloodMoonMoment> codec() {
+        return CODEC;
     }
 
     @Override
-    public MomentInstance newMomentInstance(Level level, Moment momentResourceKey) {
+    public MomentInstance newMomentInstance(Level level, IMoment momentResourceKey) {
         return new BloodMoonInstance(level, momentResourceKey);
+    }
+
+    public static class Builder extends MomentBuilder<BloodMoonMoment> {
+        protected boolean isCanSleep = false;
+
+        @Override
+        public BloodMoonMoment build() {
+            return new BloodMoonMoment(
+                    new DefaultMoment(
+                            Optional.ofNullable(barRenderType),
+                            Optional.ofNullable(momentData),
+                            Optional.ofNullable(tipSettings),
+                            Optional.ofNullable(clientSettings),
+                            Optional.ofNullable(trackers)
+                    ),
+                    isCanSleep
+            );
+        }
     }
 }
