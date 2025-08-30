@@ -26,7 +26,7 @@ public class TerraMoment {
     public TerraMoment(IEventBus modEventBus, ModContainer modContainer) {
 //        NeoForge.EVENT_BUS.register(this);
         TMBarRenderTypes.BAR_RENDER_TYPE.register(modEventBus);
-        TMContextRegister.MOMENT_CODEC.register(modEventBus);
+        TMMapCodecRegisters.MOMENT_CODEC.register(modEventBus);
         TMEntities.ENTITY_TYPE.register(modEventBus);
         TMItems.ITEMS.register(modEventBus);
         TMMoments.MOMENT.register(modEventBus);
