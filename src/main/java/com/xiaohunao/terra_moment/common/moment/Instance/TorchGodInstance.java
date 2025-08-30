@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
-import com.xiaohunao.heaven_destiny_moment.common.moment.MomentState;
+import com.xiaohunao.heaven_destiny_moment.common.automation.AutomationContext;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMMomentTypes;
+import com.xiaohunao.heaven_destiny_moment.common.moment.*;
 import com.xiaohunao.terra_moment.common.entity.projectile.TorchGodProjectile;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.moment.TorchGodMoment;
@@ -35,11 +35,11 @@ public class TorchGodInstance extends MomentInstance {
 
 
 
-    public TorchGodInstance(Level level, Moment moment) {
+    public TorchGodInstance(Level level, IMoment moment) {
         super(TMMomentTypes.TORCH_GOD.get(), level, moment);
     }
 
-    public TorchGodInstance(UUID uuid, Level level, Moment moment) {
+    public TorchGodInstance(UUID uuid, Level level, IMoment moment) {
         super(TMMomentTypes.TORCH_GOD.get(), uuid, level, moment);
     }
 
@@ -180,10 +180,18 @@ public class TorchGodInstance extends MomentInstance {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
-        return runMoments.values().stream().allMatch(instance -> {
+    public boolean canCreate(AutomationContext context) {
+        Level level = context.getLevel();
+
+        MomentInstanceManager momentInstanceManager = MomentInstanceManager.of(level);
+        Collection<MomentInstance> momentInstances = momentInstanceManager.getMomentInstances(TMMomentTypes.TORCH_GOD.get());
+        return momentInstances.stream().allMatch(instance -> {
             if (instance instanceof TorchGodInstance torchGodInstance) {
-                return !torchGodInstance.torchGroup.contains(pos);
+                if (context.getBlockPos().isEmpty()){
+                    return false;
+                }
+
+                return !torchGodInstance.torchGroup.contains(context.getBlockPos().get());
             }
             return true;
         });

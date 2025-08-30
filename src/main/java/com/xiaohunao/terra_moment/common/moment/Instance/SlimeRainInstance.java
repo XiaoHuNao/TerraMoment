@@ -1,6 +1,8 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
+import com.xiaohunao.heaven_destiny_moment.common.automation.AutomationContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.LocationCondition;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
@@ -15,11 +17,11 @@ import java.util.Map;
 import java.util.UUID;
 
 public class SlimeRainInstance extends MomentInstance {
-    public SlimeRainInstance(Level level, Moment moment) {
+    public SlimeRainInstance(Level level, IMoment moment) {
         super(TMMomentTypes.SLIME_RAIN.get(), level, moment);
     }
 
-    public SlimeRainInstance(UUID uuid, Level level, Moment moment) {
+    public SlimeRainInstance(UUID uuid, Level level, IMoment moment) {
         super(TMMomentTypes.SLIME_RAIN.get(), uuid, level, moment);
     }
 
@@ -41,7 +43,7 @@ public class SlimeRainInstance extends MomentInstance {
     }
 
     @Override
-    public boolean canCreate(Map<UUID, MomentInstance> runMoments, Level level, @Nullable BlockPos pos, @Nullable ServerPlayer player) {
+    public boolean canCreate(AutomationContext context) {
         return true;
     }
 }

@@ -50,7 +50,7 @@ public class SlimeRainBarRenderType implements IBarRenderType {
         guiGraphics.blit(SLIME_RAIN_BAR_TEXTURE, x + 14, y + 8, 14, 37, 170, 4, 256, 64);
 
 
-        Map<IActuator, KillEntityCondition.RequiredKill> tryRequiredKill = momentInstance.getTryRequiredKill();
+//        Map<IActuator, KillEntityCondition.RequiredKill> tryRequiredKill = momentInstance.getTryRequiredKill();
 
 
 

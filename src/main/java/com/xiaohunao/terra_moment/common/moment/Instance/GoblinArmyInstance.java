@@ -51,8 +51,8 @@ public class GoblinArmyInstance extends MomentInstance {
     }
 
     @Override
-    public boolean checkGeneralConditions(@Nullable BlockPos pos, @Nullable ServerPlayer serverPlayer) {
-        return super.checkGeneralConditions(pos, serverPlayer);
+    public boolean checkGeneralConditions(AutomationContext context) {
+        return super.checkGeneralConditions(context);
     }
 
     @Override

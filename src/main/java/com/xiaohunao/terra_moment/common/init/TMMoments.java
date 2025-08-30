@@ -2,18 +2,19 @@ package com.xiaohunao.terra_moment.common.init;
 
 import com.xiaohunao.heaven_destiny_moment.api.MomentManager;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
 import com.xiaohunao.heaven_destiny_moment.common.moment.Moment;
 import com.xiaohunao.terra_moment.TerraMoment;
-import com.xiaohunao.xhn_lib.api.register.FlexibleHolder;
-import com.xiaohunao.xhn_lib.api.register.FlexibleRegister;
+import com.xiaohunao.xhn_lib.api.register.holder.FlexibleHolder;
+import com.xiaohunao.xhn_lib.api.register.register.FlexibleRegister;
 
 public class TMMoments {
-    public static final FlexibleRegister<Moment> MOMENT = FlexibleRegister.create(HDMRegistries.MOMENT,TerraMoment.MODID, MomentManager.getInstance());
+    public static final FlexibleRegister<IMoment> MOMENT = FlexibleRegister.create(HDMRegistries.MOMENT,TerraMoment.MODID, MomentManager.getInstance());
 
-    public static final FlexibleHolder<Moment, ?> SLIME_RAIN = MOMENT.registerDynamic("slime_rain");
-    public static final FlexibleHolder<Moment, ?> BLOOD_MOON = MOMENT.registerDynamic("blood_moon");
+    public static final FlexibleHolder<IMoment, ?> SLIME_RAIN = MOMENT.registerDynamic("slime_rain");
+    public static final FlexibleHolder<IMoment, ?> BLOOD_MOON = MOMENT.registerDynamic("blood_moon");
 //    public static final FlexibleHolder<Moment, ?> TORCH_GOD = MOMENT.registerDynamic( "torch_god");
-    public static final FlexibleHolder<Moment, ?> GOBLIN_ARMY = MOMENT.registerDynamic("goblin_army");
+    public static final FlexibleHolder<IMoment, ?> GOBLIN_ARMY = MOMENT.registerDynamic("goblin_army");
 
 //    public static final ResourceKey<Moment> SANDSTORM = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "sandstorm");
 //    public static final ResourceKey<Moment> GOBLIN_ARMY = TerraMoment.asResourceKey(HDMRegistries.Keys.MOMENT, "goblin_army");
