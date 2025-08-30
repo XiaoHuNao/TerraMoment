@@ -29,6 +29,7 @@ import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.init.TMBarRenderTypes;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
+import com.xiaohunao.terra_moment.common.init.TMScalingFunctions;
 import com.xiaohunao.terra_moment.common.moment.BloodMoonMoment;
 import com.xiaohunao.terra_moment.common.moment.GoblinArmyMoment;
 import com.xiaohunao.terra_moment.common.moment.SlimeRainMoment;
@@ -208,7 +209,7 @@ public class TMMomentProvider extends MomentProvider {
                                                         KillEntityTrigger.any(),
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                                 .withRequiredTotalScore(150)
-                                                                .withDifficultyScaling(HDMScalingFunctions.DIFFICULTY_EASY.get())
+                                                                .withDifficultyScaling(TMScalingFunctions.SLIME_RAIN.get())
                                                                 .build()
                                                 )
                                                 .actuator(
@@ -217,7 +218,7 @@ public class TMMomentProvider extends MomentProvider {
                                                         KillEntityTrigger.any(),
                                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                                 .withRequiredTotalScore(225)
-                                                                .withDifficultyScaling(HDMScalingFunctions.DIFFICULTY_EASY.get())
+                                                                .withDifficultyScaling(TMScalingFunctions.SLIME_RAIN.get())
                                                                 .build()
                                                 )
                                                 .state(

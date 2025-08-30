@@ -33,6 +33,7 @@ public class TerraMoment {
         TMMomentTypes.MOMENT_TYPE.register(modEventBus);
         TMParticleTypes.PARTICLE_TYPE.register(modEventBus);
         TMCreativeModeTab.TABS.register(modEventBus);
+        TMScalingFunctions.MOMENT_KILL_ENTITY_CONDITION_DIFFICULTY_SCALING_FUNCTION.register(modEventBus);
 
 
     }
