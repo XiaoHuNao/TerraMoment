@@ -120,9 +120,6 @@ public class TMMomentProvider extends MomentProvider {
                                         )
                                         .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("blood_moon"), 1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
                                 )
-                                .rule(rule -> rule
-                                        .ignoreLightLevel()
-                                )
                                 .afterEndClearMonster()
                         )
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
