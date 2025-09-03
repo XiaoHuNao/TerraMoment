@@ -1,10 +1,7 @@
 package com.xiaohunao.terra_moment.common.item;
 
 import com.xiaohunao.heaven_destiny_moment.common.automation.AutomationContext;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.InvertCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.LocationCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.ModLoadedCondition;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.OrCondition;
+import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.*;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.level.DifficultyCondition;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstanceBuilder;
 import com.xiaohunao.terra_moment.common.init.TMMoments;
@@ -44,7 +41,8 @@ public class GoblinBattleStandard extends EventConsumableItem{
                             List.of(LocationCondition.Builder.inDimension(Level.OVERWORLD).build())
                     ),
                     LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
-                    InvertCondition.of(DifficultyCondition.PEACEFUL)
+                    InvertCondition.of(DifficultyCondition.PEACEFUL),
+                    WorldUniqueMomentCondition.DEFAULT
             );
 
             if (!player.getAbilities().instabuild) {

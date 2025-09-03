@@ -41,7 +41,8 @@ public class BloodyTearItem extends EventConsumableItem{
                             List.of(LocationCondition.Builder.inDimension(Level.OVERWORLD).build())
                     ),
                     LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
-                    InvertCondition.of(DifficultyCondition.PEACEFUL)
+                    InvertCondition.of(DifficultyCondition.PEACEFUL),
+                    WorldUniqueMomentCondition.DEFAULT
             );
 
             if (!player.getAbilities().instabuild) {
