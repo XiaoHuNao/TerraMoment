@@ -187,11 +187,11 @@ public class TorchGodInstance extends MomentInstance {
         Collection<MomentInstance> momentInstances = momentInstanceManager.getMomentInstances(TMMomentTypes.TORCH_GOD.get());
         return momentInstances.stream().allMatch(instance -> {
             if (instance instanceof TorchGodInstance torchGodInstance) {
-                if (context.getBlockPos().isEmpty()){
+                if (context.blockPos().isEmpty()){
                     return false;
                 }
 
-                return !torchGodInstance.torchGroup.contains(context.getBlockPos().get());
+                return !torchGodInstance.torchGroup.contains(context.blockPos().get());
             }
             return true;
         });

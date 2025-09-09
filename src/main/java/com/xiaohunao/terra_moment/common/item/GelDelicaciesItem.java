@@ -32,15 +32,13 @@ public class GelDelicaciesItem extends EventConsumableItem{
             MinecraftTimeUtils.jumpToNextTimeNode(serverLevel, MinecraftTimeNode.CMD_DAY);
 
             MomentInstanceBuilder.skipConditionsExceptRun(holder.get(),
-                    new AutomationContext.Builder(level)
-                            .addPlayer(player)
-                            .addBlockPos(player.blockPosition())
-                            .build(),
+                    AutomationContext.of(level)
+                            .player(player)
+                            .blockPos(player.blockPosition()),
                     OrCondition.of(ModLoadedCondition.of("confluence_dimension_patch"),
                             List.of(LocationCondition.Builder.inDimension(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("confluence_dimension_patch:otherworld"))).build()),
                             List.of(LocationCondition.Builder.inDimension(Level.OVERWORLD).build())
                     ),
-                    LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
                     InvertCondition.of(DifficultyCondition.PEACEFUL),
                     WorldUniqueMomentCondition.DEFAULT
             );

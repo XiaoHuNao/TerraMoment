@@ -25,10 +25,10 @@ public class EventConsumableItem extends Item {
         if (level instanceof ServerLevel serverLevel){
 
             MomentInstanceBuilder.createRun(holder.get(),
-                    new AutomationContext.Builder(serverLevel)
-                            .addPlayer(player)
-                            .addBlockPos(player.blockPosition())
-                            .build()
+                    AutomationContext.of(serverLevel)
+                            .player(player)
+                            .blockPos(player.blockPosition())
+
             );
 
 
