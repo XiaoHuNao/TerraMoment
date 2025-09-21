@@ -66,7 +66,7 @@ public class TorchGodProjectile extends AbstractHurtingProjectile {
 
         if (level().isClientSide && emitter == null) {
             ParticleEmitter particleEmitter = new ParticleEmitter(level(), position(), TerraMoment.asResource("torch_god"));
-            particleEmitter.attached = this;
+            particleEmitter.attachEntity(this);
             this.emitter = particleEmitter;
             PSGameClient.LOADER.addEmitter(emitter, false);
         }
