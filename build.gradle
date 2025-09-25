@@ -214,11 +214,11 @@ dependencies {
 
     if (shouldJarJar) {
         implementation jarJar(project(":TerraEntity"))
-        implementation(jarJar("curse.maven:particle-storm-1124172:${particle_storm_version}"))
+        implementation(jarJar("org.mesdag:ParticleStorm:${particle_storm_version}"))
         implementation(jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2'))
     } else {
         implementation project(":TerraEntity")
-        implementation("curse.maven:particle-storm-1124172:${particle_storm_version}")
+        implementation("org.mesdag:ParticleStorm:${particle_storm_version}")
         implementation(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2')
     }
 
