@@ -2,12 +2,13 @@ package com.xiaohunao.terra_moment.compat.phase_journey.event;
 
 import com.xiaohunao.heaven_destiny_moment.common.event.MomentEvent;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
+import com.xiaohunao.phase_journey.common.util.PhaseUtils;
 import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import org.confluence.phase_journey.common.util.PhaseUtils;
+
 
 @EventBusSubscriber
 public class MomentEventSubscriber {
