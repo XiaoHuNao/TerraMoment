@@ -2,16 +2,12 @@ package com.xiaohunao.terra_moment.client.gui.bar.render;
 
 import com.xiaohunao.heaven_destiny_moment.client.gui.bar.MomentBar;
 import com.xiaohunao.heaven_destiny_moment.client.gui.bar.render.IBarRenderType;
-import com.xiaohunao.heaven_destiny_moment.common.actuator.IActuator;
-import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.Map;
 
 public class SlimeRainBarRenderType implements IBarRenderType {
     public static final ResourceLocation SLIME_RAIN_BAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(TerraMoment.MODID,"textures/gui/bars/slime_rain_bar.png");

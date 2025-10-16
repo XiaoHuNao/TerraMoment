@@ -1,23 +1,17 @@
 package com.xiaohunao.terra_moment.common.moment.Instance;
 
-import com.xiaohunao.heaven_destiny_moment.common.actuator.StateSettingActuator;
 import com.xiaohunao.heaven_destiny_moment.common.automation.AutomationContext;
 import com.xiaohunao.heaven_destiny_moment.common.context.condition.common.KillEntityCondition;
-import com.xiaohunao.heaven_destiny_moment.common.function.MomentProbabilityFunction;
 import com.xiaohunao.heaven_destiny_moment.common.init.HDMAttachments;
-import com.xiaohunao.heaven_destiny_moment.common.moment.*;
+import com.xiaohunao.heaven_destiny_moment.common.moment.IMoment;
+import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.init.TMMomentTypes;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
-
-import java.util.Map;
 import java.util.UUID;
 
 public class GoblinArmyInstance extends MomentInstance {

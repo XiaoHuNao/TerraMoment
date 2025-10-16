@@ -6,7 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@EventBusSubscriber(modid = TerraMoment.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = TerraMoment.MODID)
 public class TMNetworkRegister {
     public static final String VERSION = "0.0.1";
 

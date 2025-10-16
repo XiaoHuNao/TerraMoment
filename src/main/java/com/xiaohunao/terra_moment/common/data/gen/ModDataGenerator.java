@@ -14,7 +14,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = TerraMoment.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = TerraMoment.MODID)
 public class ModDataGenerator {
 
     @SubscribeEvent

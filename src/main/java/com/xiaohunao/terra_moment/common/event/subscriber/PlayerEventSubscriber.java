@@ -9,7 +9,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, modid = TerraMoment.MODID)
+@EventBusSubscriber(modid = TerraMoment.MODID)
 public class PlayerEventSubscriber {
     @SubscribeEvent
     public static void onPlayerInteractRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
