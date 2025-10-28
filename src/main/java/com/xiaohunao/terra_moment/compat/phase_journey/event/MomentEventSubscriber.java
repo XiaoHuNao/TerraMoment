@@ -2,6 +2,7 @@ package com.xiaohunao.terra_moment.compat.phase_journey.event;
 
 import com.xiaohunao.heaven_destiny_moment.common.event.MomentEvent;
 import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
+import com.xiaohunao.phase_journey.common.phase.PhaseType;
 import com.xiaohunao.phase_journey.common.util.PhaseUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -16,9 +17,7 @@ public class MomentEventSubscriber {
         MomentInstance momentInstance = event.getMomentInstance();
         String victoryPath = momentInstance.getRegistryName().getPath() + "_victory";
 
-        if (momentInstance.getLevel() instanceof ServerLevel serverLevel) {
-            PhaseUtils.achieveLevelPhase(serverLevel, ResourceLocation.tryBuild("confluence", victoryPath), true);
-        }
+        PhaseType.LEVEL.applyOrRevokePhase(momentInstance.getLevel(),ResourceLocation.tryBuild("confluence", victoryPath), true);
     }
 
 }
