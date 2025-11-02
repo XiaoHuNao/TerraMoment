@@ -12,15 +12,12 @@ import com.xiaohunao.heaven_destiny_moment.common.moment.MomentInstance;
 import com.xiaohunao.heaven_destiny_moment.common.moment.moment.DefaultMoment;
 import com.xiaohunao.heaven_destiny_moment.common.tracker.ITracker;
 import com.xiaohunao.terra_moment.common.moment.Instance.SlimeRainInstance;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
 
 public class SlimeRainMoment extends DefaultMoment {
-    public static final ResourceLocation SLIME_RAIN_VICTORY = ResourceLocation.tryBuild("confluence","slime_rain_victory");
-
     public static final double CHANCE_NORMAL = 1.0f / 90000.0f;
     public static final double CHANCE_NORMAL_DEFEATED = 1.0f / 180000.0f;
     public static final double CHANCE_NORMAL_NOCONDITION = 1.0f / 450000.0f;

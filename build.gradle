@@ -210,7 +210,7 @@ boolean shouldJarJar = false
 dependencies {
     implementation project(":HeavenDestinyMoment")
 
-    compileOnly(project(":PhaseJourney"))
+    compileOnly("curse.maven:phase-journey-1373480:7156403")
 
     if (shouldJarJar) {
         implementation jarJar(project(":TerraEntity"))
