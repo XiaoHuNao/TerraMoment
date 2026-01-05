@@ -1,6 +1,7 @@
 package com.xiaohunao.terra_moment.common.data.gen.provider;
 
 import com.xiaohunao.heaven_destiny_moment.common.data.gen.provider.MomentLanguageProvider;
+import com.xiaohunao.heaven_destiny_moment.common.init.HDMRegistries;
 import com.xiaohunao.terra_moment.TerraMoment;
 import com.xiaohunao.terra_moment.common.init.TMItems;
 import net.minecraft.core.HolderLookup;
@@ -18,6 +19,11 @@ public class TMLanguageProvider extends MomentLanguageProvider {
 
     @Override
     protected void addTranslations() {
+        this.addTranslation(HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".slime_rain", "Slime Rain", HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".slime_rain");
+        this.addTranslation(HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".blood_moon", "Blood Moon", HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".blood_moon");
+        this.addTranslation(HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".goblin_army", "Goblin Army", HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".goblin_army");
+//        this.addTranslation(HDMRegistries.Keys.MOMENT.location().getPath() + "."+ TerraMoment.MODID + ".torch_god", "Torch God", "moment."+ TerraMoment.MODID + ".torch_god");
+
         this.addTranslation("creative_tab." + TerraMoment.MODID + ".tab", "TerraMoment", "泰拉时刻");
 
         addItem(TMItems.SLIME_RAIN,"SlimeRain","史莱姆雨");

@@ -10,5 +10,8 @@
   "moment.tooltip.text.victory.terra_moment.goblin_army": "The Goblin Army has been defeated!",
   "moment.tooltip.text.start.terra_moment.blood_moon": "The Blood Moon is rising...",
   "moment.tooltip.text.start.terra_moment.slime_rain": "Slime is falling from the sky!",
-  "moment.tooltip.text.end.terra_moment.slime_rain": "Slime has stopped falling from the sky."
+  "moment.tooltip.text.end.terra_moment.slime_rain": "Slime has stopped falling from the sky.",
+  "moment.terra_moment.blood_moon": "Blood Moon",
+  "moment.terra_moment.goblin_army": "Goblin Army",
+  "moment.terra_moment.slime_rain": "Slime Rain"
 }
