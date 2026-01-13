@@ -202,6 +202,10 @@ repositories {
         name "org.confluenceSnapshots"
         url "https://maven.confluence.ink/snapshots"
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 
@@ -212,13 +216,14 @@ dependencies {
 
     if (shouldJarJar) {
         implementation jarJar(project(":TerraEntity"))
-        implementation(jarJar("org.mesdag:ParticleStorm:${particle_storm_version}"))
-        implementation(jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2'))
+        implementation jarJar("org.mesdag:ParticleStorm:${particle_storm_version}")
+        implementation jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2')
     } else {
         implementation project(":TerraEntity")
-        implementation("org.mesdag:ParticleStorm:${particle_storm_version}")
-        implementation(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2')
+        compileOnly "org.mesdag:ParticleStorm:${particle_storm_version}"
+        implementation group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2'
     }
+    compileOnly "org.mesdag.thr_dim_particle:ThreeDimensionParticle-core:${thr_dim_particle_version}"
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
