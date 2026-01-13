@@ -215,15 +215,16 @@ dependencies {
     implementation project(":HeavenDestinyMoment")
 
     if (shouldJarJar) {
+        implementation jarJar("org.confluence.lib:Confluence-Magic-Lib:${confluence_lib_version}")
         implementation jarJar(project(":TerraEntity"))
         implementation jarJar("org.mesdag:ParticleStorm:${particle_storm_version}")
         implementation jarJar(group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2')
     } else {
+        compileOnly project(":Confluence-Magic-Lib")
         implementation project(":TerraEntity")
         compileOnly "org.mesdag:ParticleStorm:${particle_storm_version}"
         implementation group: 'com.xiaohunao', name: 'xhn_lib', version: '1.21.1-0.0.2'
     }
-    compileOnly "org.mesdag.thr_dim_particle:ThreeDimensionParticle-core:${thr_dim_particle_version}"
 
     compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     runtimeOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"

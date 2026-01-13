@@ -54,7 +54,7 @@ public class TMMomentProvider extends MomentProvider {
                         .autoActuatorGroupSettings(stateSettingsGroup -> stateSettingsGroup
                                 .create(
                                         TerraMoment.asResource("goblin_army_create"),
-                                        TimeProbabilityTrigger.exactly(1000,0.33f),
+                                        TimeProbabilityTrigger.exactly(1000, 0.33f),
                                         PlayerCondition.builder(PlayerCondition.Type.ANY)
                                                 .playerPredicate(playerPredicate -> playerPredicate
                                                         .checkAdvancementDone(ResourceLocation.withDefaultNamespace("adventure/hero_of_the_village"), true)
@@ -68,7 +68,7 @@ public class TMMomentProvider extends MomentProvider {
                                 )
                                 .state(
                                         TerraMoment.asResource("goblin_army_victory"),
-                                        MomentState.VICTORY,KillEntityTrigger.any(),
+                                        MomentState.VICTORY, KillEntityTrigger.any(),
                                         KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
                                                 .withRequiredTotalScore(80 + 40)
                                                 .withDifficultyScaling(HDMScalingFunctions.PLAYER_COUNT_MULTIPLY.get())
@@ -123,7 +123,7 @@ public class TMMomentProvider extends MomentProvider {
                         .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
                                 .create(
                                         TerraMoment.asResource("blood_moon_create"),
-                                        TimeProbabilityTrigger.exactly(13800,0.06f),
+                                        TimeProbabilityTrigger.exactly(13800, 0.06f),
                                         WorldUniqueMomentCondition.DEFAULT,
                                         InvertCondition.of(LevelCondition.validMoonPhases(4)),
                                         LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
@@ -153,85 +153,85 @@ public class TMMomentProvider extends MomentProvider {
 
         addMoment(TMMoments.SLIME_RAIN, new SlimeRainMoment.Builder()
                 //.setBarRenderType(TMBarRenderTypes.SLIME_RAIN.get())
-                        .momentData(momentData -> momentData
-                                        .entityTypeScoreTable(entityTypeScoreTable ->
-                                                entityTypeScoreTable
-                                                        .addType(TEMonsterEntities.BLUE_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.GREEN_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.PINK_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.DESERT_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.JUNGLE_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.PURPLE_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.RED_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.TROPIC_SLIME.get(),1)
-                                                        .addType(TEMonsterEntities.BLACK_SLIME.get(),1)
-                                        )
-                                        .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
-                                                .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
-                                                        .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLUE_SLIME.get(), 200, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.GREEN_SLIME.get(), 300, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PINK_SLIME.get(), 1, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.DESERT_SLIME.get(), 20, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.JUNGLE_SLIME.get(), 20, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PURPLE_SLIME.get(), 100, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.RED_SLIME.get(), 20, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.TROPIC_SLIME.get(), 20, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.YELLOW_SLIME.get(), 20, 1, 1))
-                                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLACK_SLIME.get(), 20, 1, 1))
-                                                        )
-                                                        .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("slime_rain"),1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
-                                                )
-                                                .rule(rule -> rule
-                                                        .slimesSpawnEverywhere()
-                                                        .ignoreDistance()
-                                                )
-                                                .afterEndClearMonster()
-                                        )
-                                        .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
-                                                .create(
-                                                        TerraMoment.asResource("slime_rain_create"),
-                                                        TimeProbabilityTrigger.between(22500, 6000,SlimeRainMoment.CHANCE_NORMAL),
-                                                        LevelRunningTimeCondition.atLeast(30 * 60 * 20),
-                                                        MomentHistoryCondition.randomTicks(85 * 60 * 20,180 * 60 * 20, TMMomentTypes.SLIME_RAIN.get()),
-                                                        WorldUniqueMomentCondition.DEFAULT,
-                                                        LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
-                                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
-                                                )
-                                                .actuator(
-                                                        TerraMoment.asResource("slime_rain_kill_king_slime"),
-                                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
-                                                        KillEntityTrigger.any(),
-                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
-                                                                .withRequiredTotalScore(150)
-                                                                .withDifficultyScaling(TMScalingFunctions.SLIME_RAIN.get())
-                                                                .build()
-                                                )
-                                                .actuator(
-                                                        TerraMoment.asResource("slime_rain_kill_king_slime_two"),
-                                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
-                                                        KillEntityTrigger.any(),
-                                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
-                                                                .withRequiredTotalScore(225)
-                                                                .withDifficultyScaling(TMScalingFunctions.SLIME_RAIN.get())
-                                                                .build()
-                                                )
-                                                .state(
-                                                        TerraMoment.asResource("slime_rain_victory"),
-                                                        MomentState.VICTORY, KillEntityTrigger.of(TEBossEntities.KING_SLIME.get())
-                                                )
-                                                .state(
-                                                        TerraMoment.asResource("slime_rain_lose"),
-                                                        MomentState.LOSE,LevelTickTrigger.INSTANCE,
-                                                        MomentRunningTimeCondition.atLeast(15 * 60 * 20)
-                                                )
-                                        )
+                .momentData(momentData -> momentData
+                        .entityTypeScoreTable(entityTypeScoreTable ->
+                                entityTypeScoreTable
+                                        .addType(TEMonsterEntities.BLUE_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.GREEN_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.PINK_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.DESERT_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.JUNGLE_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.PURPLE_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.RED_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.TROPIC_SLIME.get(), 1)
+                                        .addType(TEMonsterEntities.BLACK_SLIME.get(), 1)
                         )
-                        .tipSettings(tipSettings -> tipSettings
-                                .tooltip(MomentState.START, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
-                                .tooltip(MomentState.END, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
+                        .entitySpawnSettings(entitySpawnSettings -> entitySpawnSettings
+                                .biomeEntitySpawnSettings(biomeEntitySpawnSettings -> biomeEntitySpawnSettings
+                                        .biomeMobSpawnSettings(biomeMobSpawnSettings -> biomeMobSpawnSettings
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLUE_SLIME.get(), 200, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.GREEN_SLIME.get(), 300, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PINK_SLIME.get(), 1, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.DESERT_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.JUNGLE_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.PURPLE_SLIME.get(), 100, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.RED_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.TROPIC_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.YELLOW_SLIME.get(), 20, 1, 1))
+                                                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(TEMonsterEntities.BLACK_SLIME.get(), 20, 1, 1))
+                                        )
+                                        .spawnCategoryMultiplier(MobCategory.MONSTER, new SpawnCategoryMultiplierModifier(TerraMoment.asResource("slime_rain"), 1.5, SpawnCategoryMultiplierModifier.Operation.ADD_MULTIPLIED_BASE))
+                                )
+                                .rule(rule -> rule
+                                        .slimesSpawnEverywhere()
+                                        .ignoreDistance()
+                                )
+                                .afterEndClearMonster()
                         )
-                        .build()
+                        .autoActuatorGroupSettings(autoActuatorGroupSettings -> autoActuatorGroupSettings
+                                .create(
+                                        TerraMoment.asResource("slime_rain_create"),
+                                        TimeProbabilityTrigger.between(22500, 6000, SlimeRainMoment.CHANCE_NORMAL),
+                                        LevelRunningTimeCondition.atLeast(30 * 60 * 20),
+                                        MomentHistoryCondition.randomTicks(85 * 60 * 20, 180 * 60 * 20, TMMomentTypes.SLIME_RAIN.get()),
+                                        WorldUniqueMomentCondition.DEFAULT,
+                                        LocationCondition.Builder.inDimension(Level.OVERWORLD).build(),
+                                        InvertCondition.of(DifficultyCondition.PEACEFUL)
+                                )
+                                .actuator(
+                                        TerraMoment.asResource("slime_rain_kill_king_slime"),
+                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
+                                        KillEntityTrigger.any(),
+                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
+                                                .withRequiredTotalScore(150)
+                                                .withDifficultyScaling(TMScalingFunctions.SLIME_RAIN.get())
+                                                .build()
+                                )
+                                .actuator(
+                                        TerraMoment.asResource("slime_rain_kill_king_slime_two"),
+                                        SimpleEntitySpawnActuator.of(new EntityInfo.Builder(TEBossEntities.KING_SLIME.get()).build(), RandomPlayerPosImitationVanillaNaturalSpawner.INSTANCE),
+                                        KillEntityTrigger.any(),
+                                        KillEntityCondition.builder(KillEntityRecorderAttachment.KillType.MOMENT)
+                                                .withRequiredTotalScore(225)
+                                                .withDifficultyScaling(TMScalingFunctions.SLIME_RAIN.get())
+                                                .build()
+                                )
+                                .state(
+                                        TerraMoment.asResource("slime_rain_victory"),
+                                        MomentState.VICTORY, KillEntityTrigger.of(TEBossEntities.KING_SLIME.get())
+                                )
+                                .state(
+                                        TerraMoment.asResource("slime_rain_lose"),
+                                        MomentState.LOSE, LevelTickTrigger.INSTANCE,
+                                        MomentRunningTimeCondition.atLeast(15 * 60 * 20)
+                                )
+                        )
+                )
+                .tipSettings(tipSettings -> tipSettings
+                        .tooltip(MomentState.START, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
+                        .tooltip(MomentState.END, TerraMoment.asDescriptionId("slime_rain"), 0x32ff82)
+                )
+                .build()
         );
 
     }
